@@ -19,7 +19,7 @@ const KNOWLEDGE_BASE: Record<string, string> = {
 
 export const AiAssistant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [mode, setMode] = useState<'chat' | 'call'>('chat');
+  const [mode, setMode] = useState<'chat' | 'call'>('call');
   const [isCalling, setIsCalling] = useState(false);
   const [callDuration, setCallDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
@@ -72,7 +72,7 @@ export const AiAssistant: React.FC = () => {
   const handleStartCall = () => {
     setMode('call');
     setIsCalling(true);
-    setCallTranscript('Namaste sir! Main Pooja, Agarwal Real Estate Group ki senior property advisor bol rahi hoon. Bhankrota me aap kis budget me property dekh rahe hain?');
+    setCallTranscript('Namaste sir! Main Pooja, Agarwal Real Estate Group se bol rahi hoon. Bhankrota me aap kis budget me property dekh rahe hain?');
     speakText('Namaste sir! Main Pooja, Agarwal Real Estate Group se bol rahi hoon. Bhankrota me aap kis budget me property dekh rahe hain?');
   };
 
@@ -131,7 +131,7 @@ export const AiAssistant: React.FC = () => {
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
       setMessages((prev) => [...prev, aiMsg]);
-    }, 600);
+    }, 500);
   };
 
   const formatTimer = (sec: number) => {
@@ -142,26 +142,26 @@ export const AiAssistant: React.FC = () => {
 
   return (
     <>
-      {/* Floating Trigger Button */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+      {/* Floating Trigger Button (Hidden on small mobile since MobileBottomBar handles it, visible on md+) */}
+      <div className="hidden sm:flex fixed bottom-6 right-6 z-40 flex-col items-end gap-2.5">
         <button
           onClick={() => {
             setIsOpen(true);
             setMode('call');
             if (!isCalling) handleStartCall();
           }}
-          className="group relative flex items-center gap-3 bg-gradient-to-r from-emerald-600 to-teal-700 text-white px-5 py-3.5 rounded-full shadow-2xl hover:scale-105 transition-all duration-300 border-2 border-emerald-400/30 cursor-pointer"
+          className="group relative flex items-center gap-3 bg-gradient-to-r from-emerald-600 to-teal-700 text-white px-5 py-3 rounded-full shadow-2xl hover:scale-105 transition-all duration-300 border-2 border-emerald-400/30 cursor-pointer"
         >
           <div className="relative">
             <PhoneCall className="w-5 h-5 animate-bounce" />
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-amber-400 rounded-full animate-ping" />
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-400 rounded-full animate-ping" />
           </div>
           <div className="text-left">
-            <div className="text-xs font-semibold text-emerald-100 flex items-center gap-1.5">
+            <div className="text-[10px] font-semibold text-emerald-100 flex items-center gap-1">
               <span>LIVE AI ASSISTANT</span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             </div>
-            <div className="text-sm font-bold tracking-wide">Call Pooja (AI Agent)</div>
+            <div className="text-xs font-bold tracking-wide">Call Pooja (AI Agent)</div>
           </div>
         </button>
 
@@ -170,50 +170,52 @@ export const AiAssistant: React.FC = () => {
             setIsOpen(true);
             setMode('chat');
           }}
-          className="flex items-center gap-2 bg-slate-900/90 backdrop-blur text-slate-200 hover:text-white px-4 py-2 rounded-full text-xs font-medium border border-slate-700 shadow-lg hover:bg-slate-800 transition cursor-pointer"
+          className="flex items-center gap-1.5 bg-slate-900/90 backdrop-blur text-slate-200 hover:text-white px-3.5 py-1.5 rounded-full text-xs font-medium border border-slate-700 shadow-lg hover:bg-slate-800 transition cursor-pointer"
         >
-          <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
+          <MessageSquare className="w-3 h-3 text-emerald-400" />
           <span>Chat in Hindi / English</span>
         </button>
       </div>
 
-      {/* Main AI Modal / Panel */}
+      {/* Main AI Modal / Bottom Sheet */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-lg bg-slate-900 text-slate-100 rounded-3xl shadow-2xl border border-slate-700 overflow-hidden flex flex-col max-h-[85vh]">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full max-w-lg bg-slate-900 text-slate-100 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-700 overflow-hidden flex flex-col max-h-[90vh] sm:max-h-[85vh]">
             {/* Modal Header */}
-            <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-emerald-950 p-4 border-b border-slate-800 flex items-center justify-between">
-              <div className="flex items-center gap-3">
+            <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-emerald-950 p-3.5 sm:p-4 border-b border-slate-800 flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
                 <div className="relative">
-                  <div className="w-11 h-11 rounded-full bg-gradient-to-br from-emerald-500 to-teal-700 p-0.5 shadow-md flex items-center justify-center text-white font-bold text-lg">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-700 p-0.5 shadow-md flex items-center justify-center text-white font-bold text-base">
                     P
                   </div>
-                  <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-slate-900 rounded-full" />
+                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-slate-900 rounded-full" />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-bold text-white text-base">Pooja (AI Property Advisor)</h3>
-                    <span className="bg-emerald-500/20 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-emerald-500/30">
-                      24x7 Active
+                  <div className="flex items-center gap-1.5">
+                    <h3 className="font-bold text-white text-sm sm:text-base">Pooja (AI Advisor)</h3>
+                    <span className="bg-emerald-500/20 text-emerald-400 text-[9px] font-semibold px-2 py-0.5 rounded-full border border-emerald-500/30">
+                      Live
                     </span>
                   </div>
-                  <p className="text-xs text-slate-400">Agarwal Real Estate Group • Bhankrota Specialist</p>
+                  <p className="text-[10px] sm:text-xs text-slate-400 truncate max-w-[180px] sm:max-w-none">
+                    Agarwal Group • Bhankrota Specialist
+                  </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <button
                   onClick={() => setMode(mode === 'call' ? 'chat' : 'call')}
-                  className="px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition cursor-pointer"
+                  className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition cursor-pointer"
                 >
-                  {mode === 'call' ? 'Switch to Chat' : 'Switch to Voice Call'}
+                  {mode === 'call' ? 'Chat' : 'Voice Call'}
                 </button>
                 <button
                   onClick={() => {
                     handleEndCall();
                     setIsOpen(false);
                   }}
-                  className="p-2 text-slate-400 hover:text-white rounded-full hover:bg-slate-800 transition cursor-pointer"
+                  className="p-1.5 text-slate-400 hover:text-white rounded-full hover:bg-slate-800 transition cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -222,10 +224,10 @@ export const AiAssistant: React.FC = () => {
 
             {/* CALL MODE INTERFACE */}
             {mode === 'call' && (
-              <div className="flex-1 p-6 flex flex-col items-center justify-between bg-gradient-to-b from-slate-900 to-slate-950 min-h-[380px]">
-                <div className="flex flex-col items-center text-center mt-4">
-                  <div className={`relative w-28 h-28 rounded-full flex items-center justify-center border-4 ${aiSpeaking ? 'border-emerald-400 shadow-[0_0_40px_rgba(16,185,129,0.5)]' : 'border-slate-700'}`}>
-                    <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-emerald-600 to-teal-800 flex items-center justify-center text-white text-3xl font-extrabold shadow-inner">
+              <div className="flex-1 p-4 sm:p-6 flex flex-col items-center justify-between bg-gradient-to-b from-slate-900 to-slate-950 min-h-[350px]">
+                <div className="flex flex-col items-center text-center mt-2">
+                  <div className={`relative w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center border-4 ${aiSpeaking ? 'border-emerald-400 shadow-[0_0_35px_rgba(16,185,129,0.5)]' : 'border-slate-700'}`}>
+                    <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-emerald-600 to-teal-800 flex items-center justify-center text-white text-2xl sm:text-3xl font-extrabold shadow-inner">
                       P
                     </div>
                     {aiSpeaking && (
@@ -233,76 +235,76 @@ export const AiAssistant: React.FC = () => {
                     )}
                   </div>
 
-                  <h4 className="mt-4 text-lg font-bold text-white">Pooja (AI Calling Agent)</h4>
-                  <p className="text-xs text-emerald-400 font-mono mt-1">
+                  <h4 className="mt-3 text-base sm:text-lg font-bold text-white">Pooja (AI Calling Agent)</h4>
+                  <p className="text-xs text-emerald-400 font-mono mt-0.5">
                     {isCalling ? `Active Call • ${formatTimer(callDuration)}` : 'Call Disconnected'}
                   </p>
-                  <span className="text-[11px] text-slate-400 mt-1">
+                  <span className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5">
                     {aiSpeaking ? 'Pooja is speaking...' : 'Pooja is listening...'}
                   </span>
                 </div>
 
                 {/* Subtitle / Live Transcript Display */}
-                <div className="w-full my-4 p-4 rounded-2xl bg-slate-800/80 border border-slate-700/80 text-sm text-slate-200 text-center leading-relaxed max-h-32 overflow-y-auto">
-                  <div className="flex items-center justify-center gap-1.5 text-xs text-emerald-400 mb-1 font-semibold">
-                    <Sparkles className="w-3.5 h-3.5" /> Live Voice Transcript
+                <div className="w-full my-3 p-3 sm:p-4 rounded-2xl bg-slate-800/80 border border-slate-700/80 text-xs sm:text-sm text-slate-200 text-center leading-relaxed max-h-24 sm:max-h-32 overflow-y-auto">
+                  <div className="flex items-center justify-center gap-1 text-[11px] text-emerald-400 mb-1 font-semibold">
+                    <Sparkles className="w-3 h-3" /> Live Voice Transcript
                   </div>
                   {callTranscript}
                 </div>
 
                 {/* Quick Interactive Prompt Buttons for Call */}
-                <div className="w-full grid grid-cols-2 gap-2 mb-4">
+                <div className="w-full grid grid-cols-2 gap-1.5 sm:gap-2 mb-3">
                   <button
                     onClick={() => handleUserResponseInCall('plot_rate', 'Bhankrota me plot rate kya hai?')}
-                    className="p-2.5 text-left text-xs bg-slate-800/90 hover:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
+                    className="p-2 sm:p-2.5 text-left text-[11px] sm:text-xs bg-slate-800/90 active:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
                   >
-                    💬 "Bhankrota me plot rate kya hai?"
+                    💬 "Plot rate kya hai?"
                   </button>
                   <button
                     onClick={() => handleUserResponseInCall('loan', 'Bank loan kitna milega?')}
-                    className="p-2.5 text-left text-xs bg-slate-800/90 hover:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
+                    className="p-2 sm:p-2.5 text-left text-[11px] sm:text-xs bg-slate-800/90 active:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
                   >
-                    💬 "SBI/HDFC loan kitna milega?"
+                    💬 "SBI/HDFC loan kitna?"
                   </button>
                   <button
                     onClick={() => handleUserResponseInCall('registry', 'JDA patta aur registry clear hai?')}
-                    className="p-2.5 text-left text-xs bg-slate-800/90 hover:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
+                    className="p-2 sm:p-2.5 text-left text-[11px] sm:text-xs bg-slate-800/90 active:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
                   >
-                    💬 "JDA patta aur registry pakki hai?"
+                    💬 "JDA patta pakka hai?"
                   </button>
                   <button
                     onClick={() => handleUserResponseInCall('site_visit', 'Kal site visit book kar do')}
-                    className="p-2.5 text-left text-xs bg-slate-800/90 hover:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
+                    className="p-2 sm:p-2.5 text-left text-[11px] sm:text-xs bg-slate-800/90 active:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
                   >
-                    💬 "Kal site visit book kar do"
+                    💬 "Site visit book karo"
                   </button>
                 </div>
 
                 {/* Call Control Buttons */}
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-5 pb-1">
                   <button
                     onClick={() => setIsMuted(!isMuted)}
-                    className={`p-4 rounded-full border transition cursor-pointer ${isMuted ? 'bg-amber-600/30 border-amber-500 text-amber-400' : 'bg-slate-800 border-slate-700 text-slate-300'}`}
+                    className={`p-3.5 sm:p-4 rounded-full border transition cursor-pointer ${isMuted ? 'bg-amber-600/30 border-amber-500 text-amber-400' : 'bg-slate-800 border-slate-700 text-slate-300'}`}
                     title={isMuted ? 'Unmute' : 'Mute'}
                   >
-                    {isMuted ? <MicOff className="w-6 h-6" /> : <Mic className="w-6 h-6" />}
+                    {isMuted ? <MicOff className="w-5 h-5 sm:w-6 sm:h-6" /> : <Mic className="w-5 h-5 sm:w-6 sm:h-6" />}
                   </button>
 
                   {isCalling ? (
                     <button
                       onClick={handleEndCall}
-                      className="p-4 rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-600/40 transition hover:scale-110 cursor-pointer"
+                      className="p-3.5 sm:p-4 rounded-full bg-red-600 active:bg-red-700 text-white shadow-lg shadow-red-600/40 transition active:scale-105 cursor-pointer"
                       title="End Call"
                     >
-                      <PhoneOff className="w-7 h-7" />
+                      <PhoneOff className="w-6 h-6 sm:w-7 sm:h-7" />
                     </button>
                   ) : (
                     <button
                       onClick={handleStartCall}
-                      className="p-4 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-600/40 transition hover:scale-110 cursor-pointer"
+                      className="p-3.5 sm:p-4 rounded-full bg-emerald-600 active:bg-emerald-700 text-white shadow-lg shadow-emerald-600/40 transition active:scale-105 cursor-pointer"
                       title="Start Call"
                     >
-                      <Phone className="w-7 h-7" />
+                      <Phone className="w-6 h-6 sm:w-7 sm:h-7" />
                     </button>
                   )}
                 </div>
@@ -311,22 +313,22 @@ export const AiAssistant: React.FC = () => {
 
             {/* CHAT MODE INTERFACE */}
             {mode === 'chat' && (
-              <div className="flex-1 flex flex-col bg-slate-950 overflow-hidden h-[420px]">
+              <div className="flex-1 flex flex-col bg-slate-950 overflow-hidden h-[380px] sm:h-[420px]">
                 {/* Messages Container */}
-                <div className="flex-1 p-4 overflow-y-auto space-y-3">
+                <div className="flex-1 p-3 sm:p-4 overflow-y-auto space-y-2.5">
                   {messages.map((msg) => (
                     <div
                       key={msg.id}
                       className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
                       <div
-                        className={`max-w-[85%] rounded-2xl px-4 py-3 text-xs leading-relaxed shadow-sm ${
+                        className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 text-xs leading-relaxed shadow-sm ${
                           msg.sender === 'user'
                             ? 'bg-emerald-600 text-white rounded-br-none'
                             : 'bg-slate-800 text-slate-200 rounded-bl-none border border-slate-700/80'
                         }`}
                       >
-                        <div className="flex items-center gap-1.5 font-semibold text-[10px] mb-1 opacity-80">
+                        <div className="flex items-center gap-1 font-semibold text-[10px] mb-0.5 opacity-80">
                           {msg.sender === 'ai' && <Bot className="w-3 h-3 text-emerald-400" />}
                           <span>{msg.sender === 'ai' ? 'Pooja (AI)' : 'Aap'}</span>
                           <span>• {msg.time}</span>
@@ -339,46 +341,40 @@ export const AiAssistant: React.FC = () => {
                 </div>
 
                 {/* Preset Chips */}
-                <div className="px-3 py-2 bg-slate-900 border-t border-slate-800/80 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+                <div className="px-2.5 py-2 bg-slate-900 border-t border-slate-800/80 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
                   <button
                     onClick={() => handleSendMessage('Bhankrota 200ft road pe JDA plot rate kya hai?')}
-                    className="whitespace-nowrap px-2.5 py-1 text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full border border-slate-700 cursor-pointer"
+                    className="whitespace-nowrap px-2.5 py-1 text-[10px] sm:text-[11px] bg-slate-800 active:bg-slate-700 text-slate-300 rounded-full border border-slate-700 cursor-pointer"
                   >
                     Plot Rate Bhankrota?
                   </button>
                   <button
                     onClick={() => handleSendMessage('Kya 80% bank loan SBI se mil jayega?')}
-                    className="whitespace-nowrap px-2.5 py-1 text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full border border-slate-700 cursor-pointer"
+                    className="whitespace-nowrap px-2.5 py-1 text-[10px] sm:text-[11px] bg-slate-800 active:bg-slate-700 text-slate-300 rounded-full border border-slate-700 cursor-pointer"
                   >
-                    Bank Loan Eligibility?
+                    Bank Loan?
                   </button>
                   <button
                     onClick={() => handleSendMessage('Mujhe kal site visit karni hai')}
-                    className="whitespace-nowrap px-2.5 py-1 text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full border border-slate-700 cursor-pointer"
+                    className="whitespace-nowrap px-2.5 py-1 text-[10px] sm:text-[11px] bg-slate-800 active:bg-slate-700 text-slate-300 rounded-full border border-slate-700 cursor-pointer"
                   >
-                    Schedule Site Visit
-                  </button>
-                  <button
-                    onClick={() => handleSendMessage('Farmhouse plots ki details do')}
-                    className="whitespace-nowrap px-2.5 py-1 text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full border border-slate-700 cursor-pointer"
-                  >
-                    Farmhouse Projects
+                    Site Visit
                   </button>
                 </div>
 
                 {/* Input Bar */}
-                <div className="p-3 bg-slate-900 border-t border-slate-800 flex items-center gap-2">
+                <div className="p-2.5 bg-slate-900 border-t border-slate-800 flex items-center gap-2">
                   <input
                     type="text"
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                     placeholder="Pooja se Bhankrota property ke baare me puchiye..."
-                    className="flex-1 bg-slate-950 border border-slate-700 text-slate-200 placeholder:text-slate-500 rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-emerald-500"
+                    className="flex-1 bg-slate-950 border border-slate-700 text-slate-200 placeholder:text-slate-500 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500"
                   />
                   <button
                     onClick={() => handleSendMessage()}
-                    className="p-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl transition cursor-pointer"
+                    className="p-2 bg-emerald-600 active:bg-emerald-500 text-white rounded-xl transition cursor-pointer"
                   >
                     <Send className="w-4 h-4" />
                   </button>
@@ -387,9 +383,9 @@ export const AiAssistant: React.FC = () => {
             )}
 
             {/* Footer Trust Note */}
-            <div className="bg-slate-950 py-2.5 px-4 text-center text-[10px] text-slate-500 border-t border-slate-800/80 flex items-center justify-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-              <span>Agarwal Real Estate Group • 100% Verified Legal Titles • Bhankrota, Jaipur</span>
+            <div className="bg-slate-950 py-2 px-3 text-center text-[10px] text-slate-500 border-t border-slate-800/80 flex items-center justify-center gap-1">
+              <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+              <span>Agarwal Group • 100% Verified Legal Titles • Bhankrota</span>
             </div>
           </div>
         </div>
