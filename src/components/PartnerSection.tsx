@@ -32,7 +32,7 @@ export const PartnerSection: React.FC<PartnerSectionProps> = ({ onClose }) => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-white">Colonizers, Builders & Land Owners Partner Desk</h3>
-            <p className="text-xs text-slate-400">Apni zameen ya plotted township ko Agarwal Real Estate Group ke sath sale karwayein</p>
+            <p className="text-xs text-slate-400">Apni zameen ya plotted township ko Ajarwal Real Estate Group ke sath sale karwayein</p>
           </div>
         </div>
         {onClose && (
@@ -50,7 +50,7 @@ export const PartnerSection: React.FC<PartnerSectionProps> = ({ onClose }) => {
           <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
           <h4 className="text-lg font-bold text-white">Partner Application Received!</h4>
           <p className="text-xs text-slate-300 max-w-md mx-auto">
-            Dhanyawad {landDetails.name}! Agarwal Real Estate Group ke senior acquisition head aapse Bhankrota office me meeting ke liye 24 ghante me contact karenge.
+            Dhanyawad {landDetails.name}! Ajarwal Real Estate Group ke senior acquisition head aapse Bhankrota office me meeting ke liye 24 ghante me contact karenge.
           </p>
         </div>
       ) : (
@@ -88,7 +88,7 @@ export const PartnerSection: React.FC<PartnerSectionProps> = ({ onClose }) => {
                 required
                 value={landDetails.name}
                 onChange={(e) => setLandDetails({ ...landDetails, name: e.target.value })}
-                placeholder="Ramesh Agarwal / colonizer name"
+                placeholder="Ramesh Ajarwal / colonizer name"
                 className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-amber-500"
               />
             </div>

@@ -1,7 +1,7 @@
 export type RealEstateTheme = 
+  | 'jaipur-sandstone' 
   | 'emerald-gold' 
   | 'corporate-blue' 
-  | 'jaipur-sandstone' 
   | 'midnight-gold' 
   | 'clean-ivory';
 
@@ -22,9 +22,23 @@ export interface ThemeConfig {
 
 export const REAL_ESTATE_THEMES: ThemeConfig[] = [
   {
+    id: 'jaipur-sandstone',
+    name: 'Jaipur Sandstone & Terracotta',
+    hindiName: 'जयपुर सैंडस्टोन & टेराकोटा (डिफ़ॉल्ट)',
+    tagline: 'Authentic Pink City Heritage & Warmth',
+    bestFor: 'Luxury Heritage Villas, Farmhouse Retreats, Local Culture',
+    palette: {
+      bg: '#140c09',
+      card: '#1f130e',
+      primary: '#ea580c',
+      accent: '#f59e0b',
+      text: '#fff5f0'
+    }
+  },
+  {
     id: 'emerald-gold',
     name: 'Royal Emerald & Gold',
-    hindiName: 'रॉयल एमराल्ड & गोल्ड (डिफ़ॉल्ट)',
+    hindiName: 'रॉयल एमराल्ड & गोल्ड',
     tagline: 'Classic Rajasthani Prosperity & JDA Trust',
     bestFor: 'JDA Plots, Land Investment, Traditional Trust',
     palette: {
@@ -47,20 +61,6 @@ export const REAL_ESTATE_THEMES: ThemeConfig[] = [
       primary: '#3b82f6',
       accent: '#06b6d4',
       text: '#f8fafc'
-    }
-  },
-  {
-    id: 'jaipur-sandstone',
-    name: 'Jaipur Sandstone & Terracotta',
-    hindiName: 'जयपुर सैंडस्टोन & टेराकोटा',
-    tagline: 'Authentic Pink City Heritage & Warmth',
-    bestFor: 'Luxury Heritage Villas, Farmhouse Retreats, Local Culture',
-    palette: {
-      bg: '#140c09',
-      card: '#1f130e',
-      primary: '#ea580c',
-      accent: '#f59e0b',
-      text: '#fff5f0'
     }
   },
   {

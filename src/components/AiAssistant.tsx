@@ -30,7 +30,7 @@ export const AiAssistant: React.FC = () => {
     {
       id: '1',
       sender: 'ai',
-      text: 'Namaste! Main Pooja bol rahi hoon Agarwal Real Estate Group se. Bhankrota aur Ajmer Road me aap kis tarah ki property dekh rahe hain — JDA Plot, Duplex Villa, ya Farmhouse?',
+      text: 'Namaste! Main Pooja bol rahi hoon Ajarwal Real Estate Group se. Bhankrota aur Ajmer Road me aap kis tarah ki property dekh rahe hain — JDA Plot, Duplex Villa, ya Farmhouse?',
       time: 'Just now'
     }
   ]);
@@ -72,8 +72,8 @@ export const AiAssistant: React.FC = () => {
   const handleStartCall = () => {
     setMode('call');
     setIsCalling(true);
-    setCallTranscript('Namaste sir! Main Pooja, Agarwal Real Estate Group se bol rahi hoon. Bhankrota me aap kis budget me property dekh rahe hain?');
-    speakText('Namaste sir! Main Pooja, Agarwal Real Estate Group se bol rahi hoon. Bhankrota me aap kis budget me property dekh rahe hain?');
+    setCallTranscript('Namaste sir! Main Pooja, Ajarwal Real Estate Group se bol rahi hoon. Bhankrota me aap kis budget me property dekh rahe hain?');
+    speakText('Namaste sir! Main Pooja, Ajarwal Real Estate Group se bol rahi hoon. Bhankrota me aap kis budget me property dekh rahe hain?');
   };
 
   const handleEndCall = () => {
@@ -185,20 +185,22 @@ export const AiAssistant: React.FC = () => {
             <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-emerald-950 p-3.5 sm:p-4 border-b border-slate-800 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <div className="relative">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-700 p-0.5 shadow-md flex items-center justify-center text-white font-bold text-base">
-                    P
-                  </div>
+                  <img
+                    src="/logo-emblem.jpg"
+                    alt="Ajarwal Real Estate Emblem"
+                    className="w-10 h-10 rounded-full object-cover border border-amber-400 shadow-sm"
+                  />
                   <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-slate-900 rounded-full" />
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">
-                    <h3 className="font-bold text-white text-sm sm:text-base">Pooja (AI Advisor)</h3>
+                    <h3 className="font-bold text-white text-sm sm:text-base">Pooja (AI Property Advisor)</h3>
                     <span className="bg-emerald-500/20 text-emerald-400 text-[9px] font-semibold px-2 py-0.5 rounded-full border border-emerald-500/30">
                       Live
                     </span>
                   </div>
                   <p className="text-[10px] sm:text-xs text-slate-400 truncate max-w-[180px] sm:max-w-none">
-                    Agarwal Group • Bhankrota Specialist
+                    Ajarwal Group • Bhankrota Specialist
                   </p>
                 </div>
               </div>
@@ -226,12 +228,14 @@ export const AiAssistant: React.FC = () => {
             {mode === 'call' && (
               <div className="flex-1 p-4 sm:p-6 flex flex-col items-center justify-between bg-gradient-to-b from-slate-900 to-slate-950 min-h-[350px]">
                 <div className="flex flex-col items-center text-center mt-2">
-                  <div className={`relative w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center border-4 ${aiSpeaking ? 'border-emerald-400 shadow-[0_0_35px_rgba(16,185,129,0.5)]' : 'border-slate-700'}`}>
-                    <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-emerald-600 to-teal-800 flex items-center justify-center text-white text-2xl sm:text-3xl font-extrabold shadow-inner">
-                      P
-                    </div>
+                  <div className={`relative w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center border-4 ${aiSpeaking ? 'border-amber-400 shadow-[0_0_35px_rgba(245,158,11,0.5)]' : 'border-slate-700'}`}>
+                    <img
+                      src="/logo-emblem.jpg"
+                      alt="Ajarwal"
+                      className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover shadow-inner"
+                    />
                     {aiSpeaking && (
-                      <div className="absolute inset-0 rounded-full border-2 border-emerald-400 animate-ping opacity-60" />
+                      <div className="absolute inset-0 rounded-full border-2 border-amber-400 animate-ping opacity-60" />
                     )}
                   </div>
 
@@ -385,7 +389,7 @@ export const AiAssistant: React.FC = () => {
             {/* Footer Trust Note */}
             <div className="bg-slate-950 py-2 px-3 text-center text-[10px] text-slate-500 border-t border-slate-800/80 flex items-center justify-center gap-1">
               <CheckCircle2 className="w-3 h-3 text-emerald-500" />
-              <span>Agarwal Group • 100% Verified Legal Titles • Bhankrota</span>
+              <span>Ajarwal Group • 100% Verified Legal Titles • Bhankrota</span>
             </div>
           </div>
         </div>

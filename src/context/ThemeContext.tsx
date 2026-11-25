@@ -16,11 +16,12 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentTheme, setCurrentThemeState] = useState<RealEstateTheme>(() => {
-    const saved = localStorage.getItem('agarwal_re_theme') as RealEstateTheme;
+    const saved = localStorage.getItem('ajarwal_re_theme') as RealEstateTheme;
     if (saved && REAL_ESTATE_THEMES.some((t) => t.id === saved)) {
       return saved;
     }
-    return 'emerald-gold';
+    // Default to user's favorite Jaipur Sandstone & Terracotta
+    return 'jaipur-sandstone';
   });
 
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
@@ -31,7 +32,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     // Apply data-theme to root html element
     document.documentElement.setAttribute('data-theme', currentTheme);
-    localStorage.setItem('agarwal_re_theme', currentTheme);
+    localStorage.setItem('ajarwal_re_theme', currentTheme);
 
     // Also toggle dark class for clean-ivory
     if (currentTheme === 'clean-ivory') {

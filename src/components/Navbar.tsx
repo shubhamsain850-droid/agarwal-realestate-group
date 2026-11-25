@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, MessageCircle, Building2, Menu, X, ArrowRight, Palette } from 'lucide-react';
+import { Phone, MessageCircle, Menu, X, ArrowRight, Palette } from 'lucide-react';
 import type { PropertyCategory } from '../types/property';
 import { useRealEstateTheme } from '../context/ThemeContext';
 
@@ -54,22 +54,24 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center justify-between h-20">
           {/* Logo & Brand Identity */}
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 via-emerald-600 to-teal-700 p-0.5 shadow-lg flex items-center justify-center">
-              <div className="w-full h-full bg-slate-950 rounded-2xl flex items-center justify-center">
-                <Building2 className="w-6 h-6 text-amber-400" />
-              </div>
+            <div className="relative shrink-0">
+              <img
+                src="/logo-emblem.jpg"
+                alt="Ajarwal Real Estate Group Emblem"
+                className="w-12 h-12 rounded-full object-cover border-2 border-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
+              />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-xl tracking-tight text-white">
-                  AGARWAL
+                <span className="font-black text-xl sm:text-2xl tracking-tight text-white font-serif">
+                  AJARWAL
                 </span>
-                <span className="text-amber-400 text-xs font-bold uppercase tracking-widest bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
+                <span className="text-amber-400 text-[10px] sm:text-xs font-bold uppercase tracking-widest bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
                   REAL ESTATE GROUP
                 </span>
               </div>
               <p className="text-[11px] text-slate-400 font-medium">
-                अग्रवाल रियल एस्टेट ग्रुप • भंकरोटा, अजमेर रोड (जयपुर)
+                अजरवाल रियल एस्टेट ग्रुप • भंकरोटा, अजमेर रोड (जयपुर)
               </p>
             </div>
           </div>
@@ -80,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={item.id}
                 onClick={() => onSelectCategory(item.id)}
-                className={`px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                   activeCategory === item.id
                     ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/50'
                     : 'text-slate-300 hover:text-white hover:bg-slate-800'
@@ -107,7 +109,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Palette className="w-3.5 h-3.5 text-amber-400" />
               <span>Theme:</span>
-              <span className="text-emerald-400 truncate max-w-[80px]">{themeConfig.name.split(' ')[0]}</span>
+              <span className="text-amber-400 truncate max-w-[85px]">{themeConfig.name.split(' ')[0]}</span>
             </button>
 
             <button
@@ -119,7 +121,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             <a
-              href="https://wa.me/919829000000?text=Namaste%20Agarwal%20Real%20Estate%20Group,%20mujhe%20Bhankrota%20me%20property%20ki%20jaankari%20chahiye."
+              href="https://wa.me/919829000000?text=Namaste%20Ajarwal%20Real%20Estate%20Group,%20mujhe%20Bhankrota%20me%20property%20ki%20jaankari%20chahiye."
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 shadow-md shadow-emerald-900/40 transition"

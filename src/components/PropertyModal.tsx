@@ -24,7 +24,7 @@ export const PropertyModal: React.FC<PropertyModalProps> = ({ property, onClose 
   };
 
   const getWhatsappInquiryUrl = () => {
-    const text = `Namaste Agarwal Real Estate Group! Mujhe "${property.title}" (${property.priceDisplay}, Location: ${property.subLocation}) ka brochure aur layout plan bhejiye. Mera naam ${visitName || 'grahak'} hai.`;
+    const text = `Namaste Ajarwal Real Estate Group! Mujhe "${property.title}" (${property.priceDisplay}, Location: ${property.subLocation}) ka brochure aur layout plan bhejiye. Mera naam ${visitName || 'grahak'} hai.`;
     return `https://wa.me/919829000000?text=${encodeURIComponent(text)}`;
   };
 
@@ -157,7 +157,7 @@ export const PropertyModal: React.FC<PropertyModalProps> = ({ property, onClose 
                 <CheckCircle2 className="w-7 h-7 text-emerald-400 mx-auto" />
                 <h5 className="font-bold text-white text-xs sm:text-sm">Site Visit Request Received!</h5>
                 <p className="text-[11px] text-slate-300">
-                  Dhanyawad {visitName}! Agarwal Group ki Bhankrota team 15 minute me call karegi.
+                  Dhanyawad {visitName}! Ajarwal Group ki Bhankrota team 15 minute me call karegi.
                 </p>
               </div>
             ) : (

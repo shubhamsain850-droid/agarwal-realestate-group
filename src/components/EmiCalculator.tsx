@@ -152,7 +152,7 @@ export const EmiCalculator: React.FC<EmiCalculatorProps> = ({ onClose }) => {
 
           <div className="mt-6">
             <a
-              href="https://wa.me/919829000000?text=Namaste%20Agarwal%20Group!%20Mujhe%20Bhankrota%20property%20ke%20liye%20bank%20loan%20eligibility%20check%20karwani%20hai."
+              href="https://wa.me/919829000000?text=Namaste%20Ajarwal%20Group!%20Mujhe%20Bhankrota%20property%20ke%20liye%20bank%20loan%20eligibility%20check%20karwani%20hai."
               target="_blank"
               rel="noopener noreferrer"
               className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-lg transition"
