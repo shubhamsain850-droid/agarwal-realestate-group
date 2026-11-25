@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, MessageCircle, Menu, X, ArrowRight, Palette } from 'lucide-react';
+import { Phone, MessageCircle, Menu, X, Palette } from 'lucide-react';
 import type { PropertyCategory } from '../types/property';
 import { useRealEstateTheme } from '../context/ThemeContext';
 
