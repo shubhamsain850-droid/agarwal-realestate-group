@@ -26,8 +26,8 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
             </div>
 
             <p className="text-slate-400 leading-relaxed text-xs">
-              Bhankrota (Pincode: 302026), Ajmer Road corridor ki sabse vishwasniya property advisory. 
-              Single JDA Patta plots, gated villas, farmhouses aur highway commercial zameen me 100% legal title assurance.
+              Bhankrota (Pincode: 302026) and Ajmer Road corridor's premier property advisory. 
+              Single JDA Patta plots, gated villas, farmhouses, and highway commercial land with 100% legal title assurance.
             </p>
 
             <div className="flex items-center gap-2 text-amber-400 font-semibold">

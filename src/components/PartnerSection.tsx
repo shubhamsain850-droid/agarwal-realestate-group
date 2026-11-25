@@ -32,7 +32,7 @@ export const PartnerSection: React.FC<PartnerSectionProps> = ({ onClose }) => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-white">Colonizers, Builders & Land Owners Partner Desk</h3>
-            <p className="text-xs text-slate-400">Apni zameen ya plotted township ko Ajarwal Real Estate Group ke sath sale karwayein</p>
+            <p className="text-xs text-slate-400">List your land or plotted township with Ajarwal Real Estate Group for rapid sales and premium reach</p>
           </div>
         </div>
         {onClose && (
@@ -50,7 +50,7 @@ export const PartnerSection: React.FC<PartnerSectionProps> = ({ onClose }) => {
           <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
           <h4 className="text-lg font-bold text-white">Partner Application Received!</h4>
           <p className="text-xs text-slate-300 max-w-md mx-auto">
-            Dhanyawad {landDetails.name}! Ajarwal Real Estate Group ke senior acquisition head aapse Bhankrota office me meeting ke liye 24 ghante me contact karenge.
+            Thank you {landDetails.name}! Ajarwal Real Estate Group's senior acquisition head will connect with you within 24 hours for a strategic review at our Bhankrota office.
           </p>
         </div>
       ) : (

@@ -24,7 +24,7 @@ export const PropertyModal: React.FC<PropertyModalProps> = ({ property, onClose 
   };
 
   const getWhatsappInquiryUrl = () => {
-    const text = `Namaste Ajarwal Real Estate Group! Mujhe "${property.title}" (${property.priceDisplay}, Location: ${property.subLocation}) ka brochure aur layout plan bhejiye. Mera naam ${visitName || 'grahak'} hai.`;
+    const text = `Hello Ajarwal Real Estate Group! Please send the verified brochure and layout plan for "${property.title}" (${property.priceDisplay}, Location: ${property.subLocation}). My name is ${visitName || 'Buyer'}.`;
     return `https://wa.me/919829000000?text=${encodeURIComponent(text)}`;
   };
 
@@ -147,8 +147,8 @@ export const PropertyModal: React.FC<PropertyModalProps> = ({ property, onClose 
           <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-emerald-950 p-4 sm:p-5 rounded-2xl border border-emerald-800/40 space-y-3">
             <div className="flex items-center justify-between">
               <div>
-                <h4 className="font-bold text-white text-sm sm:text-base">Book Free Site Visit (नि:शुल्क विजिट)</h4>
-                <p className="text-[11px] text-slate-400">Bhankrota office ya ghar se pickup car suvidha uplabdh.</p>
+                <h4 className="font-bold text-white text-sm sm:text-base">Book Free Site Visit (Cab Pickup & Drop)</h4>
+                <p className="text-[11px] text-slate-400">Complimentary car pickup available from your home or our Bhankrota office.</p>
               </div>
             </div>
 
@@ -157,7 +157,7 @@ export const PropertyModal: React.FC<PropertyModalProps> = ({ property, onClose 
                 <CheckCircle2 className="w-7 h-7 text-emerald-400 mx-auto" />
                 <h5 className="font-bold text-white text-xs sm:text-sm">Site Visit Request Received!</h5>
                 <p className="text-[11px] text-slate-300">
-                  Dhanyawad {visitName}! Ajarwal Group ki Bhankrota team 15 minute me call karegi.
+                  Thank you {visitName}! Ajarwal Group's Bhankrota site team will connect with you within 15 minutes.
                 </p>
               </div>
             ) : (
@@ -196,7 +196,7 @@ export const PropertyModal: React.FC<PropertyModalProps> = ({ property, onClose 
                       onChange={(e) => setNeedPickup(e.target.checked)}
                       className="rounded border-slate-700 text-emerald-500 focus:ring-emerald-500 cursor-pointer"
                     />
-                    <span>Mujhe Bhankrota / Mansarovar se pickup car chahiye</span>
+                    <span>Request complimentary cab pickup from Bhankrota / Mansarovar</span>
                   </label>
 
                   <button

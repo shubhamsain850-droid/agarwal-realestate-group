@@ -47,7 +47,7 @@ export const MobileBottomBar: React.FC<MobileBottomBarProps> = ({
 
         {/* WhatsApp Quick Link */}
         <a
-          href="https://wa.me/919829000000?text=Namaste%20Ajarwal%20Real%20Estate%20Group!%20Mujhe%20Bhankrota%20property%20ki%20details%20chahiye."
+          href="https://wa.me/919829000000?text=Hello%20Ajarwal%20Real%20Estate%20Group!%20I%20am%20interested%20in%20verified%20properties%20in%20Bhankrota%2C%20Ajmer%20Road."
           target="_blank"
           rel="noopener noreferrer"
           className="flex flex-col items-center justify-center py-1 px-1 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 active:scale-95 transition cursor-pointer"

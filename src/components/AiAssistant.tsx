@@ -9,12 +9,12 @@ interface ChatMessage {
 }
 
 const KNOWLEDGE_BASE: Record<string, string> = {
-  'plot_rate': 'Bhankrota 200 ft bypass aur Jaisinghpura link road par JDA approved plots ka rate lagbhag ₹38,500 se ₹45,000 per gaj chal raha hai. Hamare paas 111 gaj aur 200 gaj ke prime corner plots available hain jinki turant registry ho jayegi.',
-  'loan': 'Ji bilkul sir! Hamari sabhi JDA approved properties par SBI, HDFC aur ICICI Bank se 80% tak ka home loan uplabdh hai. File clearance aur documentation me hamari team poori madad karti hai.',
-  'registry': 'Ji 100% verified legal title hai! Single JDA patta aur RERA approved townships hain. Registry aur Dakhil-Kharij (Mutation) ke sabhi papers complete hain.',
-  'site_visit': 'Maine aapki site visit request note kar li hai. Hamari team kal aapko Bhankrota office ya aapke home address se pickup karke location visit karwa degi. Kripya apna phone number confirm kar dijiye.',
-  'villa': 'Delhi Public School (DPS) ke paas hamare paas 3 aur 4 BHK ke ready-to-move luxury duplex villas hain. Inka rate ₹78 Lakh se ₹85 Lakh ke beech hai, gated security aur private terrace ke sath.',
-  'farmhouse': 'Weekend farmhouses ke liye Boraj-Begus road par 600 gaj se 1000 gaj ke gated farmhouse plots hain, jisme clubhouse, swimming pool aur 25 fruit trees plantation included hai. Rate sirf ₹9,200 per gaj hai.'
+  'plot_rate': 'JDA-approved residential plots along the Bhankrota 200 ft bypass and Jaisinghpura link road currently range from ₹38,500 to ₹45,000 per gaj. We have prime corner plots of 111 gaj and 200 gaj available with immediate registry and clear titles.',
+  'loan': 'Yes, absolutely! All our JDA-approved properties are eligible for up to 80% home loans from SBI, HDFC, and ICICI Bank. Our dedicated documentation team manages the complete paperwork and loan clearance.',
+  'registry': 'All properties come with 100% verified legal titles, Single JDA Patta, and RERA approvals. Registry and mutation (Dakhil-Kharij) documents are fully verified.',
+  'site_visit': 'Your site visit request has been recorded! Our field advisory team can pick you up from our Bhankrota office or directly from your home. Please confirm your preferred date and contact number.',
+  'villa': 'We offer ready-to-move 3 & 4 BHK luxury duplex villas near Delhi Public School (DPS), Ajmer Road. Prices range from ₹78 Lakh to ₹85 Lakh with 24x7 gated security, private terrace, and clubhouse amenities.',
+  'farmhouse': 'For weekend farmhouses, we offer 600 to 1,000 gaj gated estates along the Boraj-Begus road featuring a private clubhouse, swimming pool, and organic plantation at just ₹9,200 per gaj.'
 };
 
 export const AiAssistant: React.FC = () => {
@@ -24,13 +24,13 @@ export const AiAssistant: React.FC = () => {
   const [callDuration, setCallDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [aiSpeaking, setAiSpeaking] = useState(false);
-  const [callTranscript, setCallTranscript] = useState<string>('Call connect ho rahi hai...');
+  const [callTranscript, setCallTranscript] = useState<string>('Connecting to AI Assistant...');
 
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
       sender: 'ai',
-      text: 'Namaste! Main Pooja bol rahi hoon Ajarwal Real Estate Group se. Bhankrota aur Ajmer Road me aap kis tarah ki property dekh rahe hain — JDA Plot, Duplex Villa, ya Farmhouse?',
+      text: 'Hello! I am Pooja from Ajarwal Real Estate Group. Which property type are you looking for in Bhankrota and Ajmer Road — JDA Plots, Luxury Villas, or Farmhouses?',
       time: 'Just now'
     }
   ]);
@@ -59,7 +59,7 @@ export const AiAssistant: React.FC = () => {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'hi-IN';
+      utterance.lang = 'en-US';
       utterance.rate = 1.0;
       utterance.pitch = 1.05;
       setAiSpeaking(true);
@@ -72,8 +72,9 @@ export const AiAssistant: React.FC = () => {
   const handleStartCall = () => {
     setMode('call');
     setIsCalling(true);
-    setCallTranscript('Namaste sir! Main Pooja, Ajarwal Real Estate Group se bol rahi hoon. Bhankrota me aap kis budget me property dekh rahe hain?');
-    speakText('Namaste sir! Main Pooja, Ajarwal Real Estate Group se bol rahi hoon. Bhankrota me aap kis budget me property dekh rahe hain?');
+    const welcomeMsg = 'Hello! I am Pooja from Ajarwal Real Estate Group. Which budget or property type are you exploring in Bhankrota and Ajmer Road?';
+    setCallTranscript(welcomeMsg);
+    speakText(welcomeMsg);
   };
 
   const handleEndCall = () => {
@@ -82,12 +83,12 @@ export const AiAssistant: React.FC = () => {
     }
     setIsCalling(false);
     setAiSpeaking(false);
-    setCallTranscript('Call samapt hui.');
+    setCallTranscript('Call ended. Thank you for connecting with Ajarwal Real Estate Group!');
   };
 
   const handleUserResponseInCall = (type: string, userText: string) => {
-    const aiReply = KNOWLEDGE_BASE[type] || 'Ji sir, main aapki baat samajh gayi. Hamara office Bhankrota Chauraha par hai, aap jab chahein aakar direct site inspect kar sakte hain.';
-    setCallTranscript(`Aapne poocha: "${userText}"\n\nPooja: "${aiReply}"`);
+    const aiReply = KNOWLEDGE_BASE[type] || 'Thank you! Our primary office is located at Bhankrota Chauraha, Ajmer Road. You are welcome to visit us anytime for on-ground property inspections.';
+    setCallTranscript(`You asked: "${userText}"\n\nPooja: "${aiReply}"`);
     speakText(aiReply);
   };
 
@@ -107,20 +108,20 @@ export const AiAssistant: React.FC = () => {
 
     // Generate AI response
     setTimeout(() => {
-      let reply = 'Dhanyawad aapke sandesh ke liye! Main aapko Bhankrota ki best verified property details share kar rahi hoon. Kya aap apna WhatsApp number share karna chahenge taaki brochure bhej sakein?';
+      let reply = 'Thank you for your message! I will gladly share the verified property listings with you. Would you like to connect on WhatsApp or arrange a site visit?';
       const lower = text.toLowerCase();
 
-      if (lower.includes('rate') || lower.includes('plot') || lower.includes('zameen') || lower.includes('price')) {
+      if (lower.includes('rate') || lower.includes('plot') || lower.includes('price')) {
         reply = KNOWLEDGE_BASE['plot_rate'];
-      } else if (lower.includes('loan') || lower.includes('sbi') || lower.includes('bank')) {
+      } else if (lower.includes('loan') || lower.includes('sbi') || lower.includes('bank') || lower.includes('hdfc')) {
         reply = KNOWLEDGE_BASE['loan'];
-      } else if (lower.includes('registry') || lower.includes('jda') || lower.includes('patta')) {
+      } else if (lower.includes('registry') || lower.includes('jda') || lower.includes('patta') || lower.includes('title')) {
         reply = KNOWLEDGE_BASE['registry'];
-      } else if (lower.includes('villa') || lower.includes('house') || lower.includes('makan')) {
+      } else if (lower.includes('villa') || lower.includes('house') || lower.includes('duplex')) {
         reply = KNOWLEDGE_BASE['villa'];
-      } else if (lower.includes('farmhouse') || lower.includes('kheti')) {
+      } else if (lower.includes('farmhouse') || lower.includes('land')) {
         reply = KNOWLEDGE_BASE['farmhouse'];
-      } else if (lower.includes('visit') || lower.includes('dekhna') || lower.includes('call') || lower.includes('phone')) {
+      } else if (lower.includes('visit') || lower.includes('tour') || lower.includes('call') || lower.includes('contact')) {
         reply = KNOWLEDGE_BASE['site_visit'];
       }
 
@@ -173,7 +174,7 @@ export const AiAssistant: React.FC = () => {
           className="flex items-center gap-1.5 bg-slate-900/90 backdrop-blur text-slate-200 hover:text-white px-3.5 py-1.5 rounded-full text-xs font-medium border border-slate-700 shadow-lg hover:bg-slate-800 transition cursor-pointer"
         >
           <MessageSquare className="w-3 h-3 text-emerald-400" />
-          <span>Chat in Hindi / English</span>
+          <span>Chat with AI Pooja</span>
         </button>
       </div>
 
@@ -257,30 +258,31 @@ export const AiAssistant: React.FC = () => {
                 </div>
 
                 {/* Quick Interactive Prompt Buttons for Call */}
+                {/* Quick Call Action Prompts */}
                 <div className="w-full grid grid-cols-2 gap-1.5 sm:gap-2 mb-3">
                   <button
-                    onClick={() => handleUserResponseInCall('plot_rate', 'Bhankrota me plot rate kya hai?')}
+                    onClick={() => handleUserResponseInCall('plot_rate', 'What are the plot rates in Bhankrota?')}
                     className="p-2 sm:p-2.5 text-left text-[11px] sm:text-xs bg-slate-800/90 active:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
                   >
-                    💬 "Plot rate kya hai?"
+                    💬 "What are the plot rates?"
                   </button>
                   <button
-                    onClick={() => handleUserResponseInCall('loan', 'Bank loan kitna milega?')}
+                    onClick={() => handleUserResponseInCall('loan', 'How much bank loan is available from SBI or HDFC?')}
                     className="p-2 sm:p-2.5 text-left text-[11px] sm:text-xs bg-slate-800/90 active:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
                   >
-                    💬 "SBI/HDFC loan kitna?"
+                    💬 "Bank loan eligibility?"
                   </button>
                   <button
-                    onClick={() => handleUserResponseInCall('registry', 'JDA patta aur registry clear hai?')}
+                    onClick={() => handleUserResponseInCall('registry', 'Are JDA patta and legal titles verified?')}
                     className="p-2 sm:p-2.5 text-left text-[11px] sm:text-xs bg-slate-800/90 active:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
                   >
-                    💬 "JDA patta pakka hai?"
+                    💬 "JDA patta & registry?"
                   </button>
                   <button
-                    onClick={() => handleUserResponseInCall('site_visit', 'Kal site visit book kar do')}
+                    onClick={() => handleUserResponseInCall('site_visit', 'Book a free site visit for tomorrow')}
                     className="p-2 sm:p-2.5 text-left text-[11px] sm:text-xs bg-slate-800/90 active:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
                   >
-                    💬 "Site visit book karo"
+                    💬 "Book free site visit"
                   </button>
                 </div>
 
@@ -334,7 +336,7 @@ export const AiAssistant: React.FC = () => {
                       >
                         <div className="flex items-center gap-1 font-semibold text-[10px] mb-0.5 opacity-80">
                           {msg.sender === 'ai' && <Bot className="w-3 h-3 text-emerald-400" />}
-                          <span>{msg.sender === 'ai' ? 'Pooja (AI)' : 'Aap'}</span>
+                          <span>{msg.sender === 'ai' ? 'Pooja (AI)' : 'You'}</span>
                           <span>• {msg.time}</span>
                         </div>
                         <p>{msg.text}</p>
@@ -347,22 +349,22 @@ export const AiAssistant: React.FC = () => {
                 {/* Preset Chips */}
                 <div className="px-2.5 py-2 bg-slate-900 border-t border-slate-800/80 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
                   <button
-                    onClick={() => handleSendMessage('Bhankrota 200ft road pe JDA plot rate kya hai?')}
+                    onClick={() => handleSendMessage('What are the current plot rates in Bhankrota?')}
                     className="whitespace-nowrap px-2.5 py-1 text-[10px] sm:text-[11px] bg-slate-800 active:bg-slate-700 text-slate-300 rounded-full border border-slate-700 cursor-pointer"
                   >
-                    Plot Rate Bhankrota?
+                    Plot Rates?
                   </button>
                   <button
-                    onClick={() => handleSendMessage('Kya 80% bank loan SBI se mil jayega?')}
+                    onClick={() => handleSendMessage('Can I get an 80% bank loan from SBI or HDFC?')}
                     className="whitespace-nowrap px-2.5 py-1 text-[10px] sm:text-[11px] bg-slate-800 active:bg-slate-700 text-slate-300 rounded-full border border-slate-700 cursor-pointer"
                   >
                     Bank Loan?
                   </button>
                   <button
-                    onClick={() => handleSendMessage('Mujhe kal site visit karni hai')}
+                    onClick={() => handleSendMessage('I want to schedule a free site visit for tomorrow')}
                     className="whitespace-nowrap px-2.5 py-1 text-[10px] sm:text-[11px] bg-slate-800 active:bg-slate-700 text-slate-300 rounded-full border border-slate-700 cursor-pointer"
                   >
-                    Site Visit
+                    Site Visit?
                   </button>
                 </div>
 
@@ -373,7 +375,7 @@ export const AiAssistant: React.FC = () => {
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                    placeholder="Pooja se Bhankrota property ke baare me puchiye..."
+                    placeholder="Ask Pooja about Bhankrota plots, villas, or prices..."
                     className="flex-1 bg-slate-950 border border-slate-700 text-slate-200 placeholder:text-slate-500 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500"
                   />
                   <button

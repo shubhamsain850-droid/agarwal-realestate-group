@@ -44,15 +44,15 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-            भरोसा ज़मीन का, <br className="hidden sm:inline" />
+            Trust in Every Plot, <br className="hidden sm:inline" />
             <span className="bg-gradient-to-r from-amber-400 via-emerald-300 to-teal-300 bg-clip-text text-transparent">
-              वादा तरक्की और पक्की रजिस्ट्री का।
+              Guaranteed Appreciation & Verified Titles.
             </span>
           </h1>
 
           <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-            Bhankrota (302026), 200 ft Bypass, Jaisinghpura, Mahapura, aur Ring Road belt ke 
-            <strong> 100% verified JDA Single Patta plots, duplex villas, weekend farmhouses aur commercial spaces</strong> direct developer rates par.
+            Bhankrota (302026), 200 ft Bypass, Jaisinghpura, Mahapura, and Ring Road corridor's 
+            <strong> 100% verified JDA Single Patta plots, luxury duplex villas, weekend farmhouses, and commercial spaces</strong> at direct developer prices.
           </p>
 
           {/* Quick Voice AI Trigger Banner */}
@@ -62,7 +62,7 @@ export const Hero: React.FC<HeroProps> = ({
               className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-emerald-600/90 to-teal-600/90 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-emerald-950/60 transition cursor-pointer border border-emerald-400/30 hover:scale-105"
             >
               <Sparkles className="w-4 h-4 text-amber-300 animate-spin" />
-              <span>Pooja (AI Calling Agent) se Phone pe Baat Karein</span>
+              <span>Speak to Pooja (Live AI Calling Agent)</span>
               <span className="bg-amber-400 text-slate-950 text-[10px] font-extrabold px-2 py-0.5 rounded-full">
                 FREE CALL
               </span>

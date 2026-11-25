@@ -24,7 +24,7 @@ export const REAL_ESTATE_THEMES: ThemeConfig[] = [
   {
     id: 'jaipur-sandstone',
     name: 'Amber Sandstone & Terracotta',
-    hindiName: 'एम्बर सैंडस्टोन & टेराकोटा (जयपुर)',
+    hindiName: 'Jaipur Heritage Edition (Active)',
     tagline: 'Authentic Pink City Amber Sandstone & Warm Gold',
     bestFor: 'Luxury Heritage Villas, Farmhouse Retreats, Local Culture',
     palette: {
@@ -38,7 +38,7 @@ export const REAL_ESTATE_THEMES: ThemeConfig[] = [
   {
     id: 'emerald-gold',
     name: 'Royal Emerald & Gold',
-    hindiName: 'रॉयल एमराल्ड & गोल्ड',
+    hindiName: 'JDA Trust & Prosperity Edition',
     tagline: 'Classic Rajasthani Prosperity & JDA Trust',
     bestFor: 'JDA Plots, Land Investment, Traditional Trust',
     palette: {
@@ -52,7 +52,7 @@ export const REAL_ESTATE_THEMES: ThemeConfig[] = [
   {
     id: 'corporate-blue',
     name: 'Corporate Sapphire',
-    hindiName: 'मॉडर्न कॉर्पोरेट सफायर',
+    hindiName: 'Modern Commercial Edition',
     tagline: 'High-Tech Commercial & Institutional Focus',
     bestFor: 'Commercial SCO, Mahindra SEZ Tech Buyers, IT Corridor',
     palette: {
@@ -66,7 +66,7 @@ export const REAL_ESTATE_THEMES: ThemeConfig[] = [
   {
     id: 'midnight-gold',
     name: 'Midnight Obsidian & Gold',
-    hindiName: 'मिडनाइट ओब्सीडियन & गोल्ड',
+    hindiName: 'VIP Ultra-Luxury Edition',
     tagline: 'Ultra-Luxury VIP & High-Ticket Estates',
     bestFor: 'High-Net-Worth Investors, Premium Duplexes, Elite Estates',
     palette: {
@@ -80,7 +80,7 @@ export const REAL_ESTATE_THEMES: ThemeConfig[] = [
   {
     id: 'clean-ivory',
     name: 'Clean Ivory & Platinum Light',
-    hindiName: 'क्लीन आइवरी & प्लैटिनम (लाइट थीम)',
+    hindiName: 'Daylight Architectural Edition',
     tagline: 'High-Readability Daytime Corporate Architecture',
     bestFor: 'Corporate Portals, High-Contrast Reading, Daytime Browsing',
     palette: {

@@ -29,7 +29,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
   };
 
   const getWhatsappLink = () => {
-    const text = `Namaste Ajarwal Real Estate Group! Mujhe "${property.title}" (${property.priceDisplay}, ${property.subLocation}) ke baare me inquiry karni hai. Kripya layout plan aur video send karein.`;
+    const text = `Hello Ajarwal Real Estate Group! I would like to inquire about "${property.title}" (${property.priceDisplay}, ${property.subLocation}). Please share the verified layout plan, brochure, and video tour.`;
     return `https://wa.me/919829000000?text=${encodeURIComponent(text)}`;
   };
 

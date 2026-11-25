@@ -135,7 +135,7 @@ export function App() {
             <Building className="w-10 h-10 text-slate-600 mx-auto mb-3" />
             <h3 className="text-base sm:text-lg font-bold text-white">No Properties Found</h3>
             <p className="text-xs text-slate-400 mt-1 mb-4">
-              Aapke search criteria ke anusaar property nahi mili. Kripya filter reset karein ya direct Pooja (AI Advisor) se puchiye.
+              No properties matched your search criteria. Please reset your filters or consult with Pooja (AI Advisor).
             </p>
             <button
               onClick={() => {

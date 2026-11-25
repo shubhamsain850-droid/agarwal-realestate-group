@@ -71,7 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </span>
               </div>
               <p className="text-[11px] text-slate-400 font-medium">
-                अजरवाल रियल एस्टेट ग्रुप • भंकरोटा, अजमेर रोड (जयपुर)
+                Ajarwal Real Estate Group • Bhankrota, Ajmer Road (Jaipur)
               </p>
             </div>
           </div>
@@ -121,7 +121,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             <a
-              href="https://wa.me/919829000000?text=Namaste%20Ajarwal%20Real%20Estate%20Group,%20mujhe%20Bhankrota%20me%20property%20ki%20jaankari%20chahiye."
+              href="https://wa.me/919829000000?text=Hello%20Ajarwal%20Real%20Estate%20Group!%20I%20am%20interested%20in%20verified%20properties%20in%20Bhankrota%2C%20Ajmer%20Road."
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 shadow-md shadow-emerald-900/40 transition"
