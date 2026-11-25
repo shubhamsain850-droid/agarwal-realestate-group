@@ -9,6 +9,8 @@ import { MarketGuide } from './components/MarketGuide';
 import { PartnerSection } from './components/PartnerSection';
 import { Footer } from './components/Footer';
 import { MobileBottomBar } from './components/MobileBottomBar';
+import { ThemeSelectorModal } from './components/ThemeSelectorModal';
+import { ThemeFloatingButton } from './components/ThemeFloatingButton';
 import { PROPERTIES_DATA } from './data/properties';
 import type { Property, PropertyCategory } from './types/property';
 import { Sparkles, Building } from 'lucide-react';
@@ -59,14 +61,13 @@ export function App() {
     if (trigger) {
       trigger.click();
     } else {
-      // If modal is not open yet, find floating button or trigger direct open
       const floatBtn = document.querySelector('.group.relative') as HTMLButtonElement;
       if (floatBtn) floatBtn.click();
     }
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-slate-950 pb-16 lg:pb-0">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-slate-950 pb-16 lg:pb-0 transition-colors duration-300">
       {/* Navigation */}
       <Navbar
         activeCategory={activeCategory}
@@ -192,6 +193,10 @@ export function App() {
 
       {/* Floating AI Voice & Chat Assistant (Pooja) */}
       <AiAssistant />
+
+      {/* Real Estate Theme Selector Floating Button & Modal */}
+      <ThemeFloatingButton />
+      <ThemeSelectorModal />
 
       {/* Mobile Sticky Quick Action Bar */}
       <MobileBottomBar

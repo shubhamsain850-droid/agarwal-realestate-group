@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Phone, MessageCircle, Building2, Menu, X, ArrowRight } from 'lucide-react';
+import { Phone, MessageCircle, Building2, Menu, X, ArrowRight, Palette } from 'lucide-react';
 import type { PropertyCategory } from '../types/property';
+import { useRealEstateTheme } from '../context/ThemeContext';
 
 interface NavbarProps {
   activeCategory: PropertyCategory | 'all';
@@ -16,6 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenCalculator
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { themeConfig, openThemeModal } = useRealEstateTheme();
 
   const navCategories: { id: PropertyCategory | 'all'; label: string }[] = [
     { id: 'all', label: 'All Properties' },
@@ -78,7 +80,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={item.id}
                 onClick={() => onSelectCategory(item.id)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                className={`px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                   activeCategory === item.id
                     ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/50'
                     : 'text-slate-300 hover:text-white hover:bg-slate-800'
@@ -91,25 +93,36 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={onOpenCalculator}
               className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-800 transition cursor-pointer"
             >
-              EMI Calculator
+              EMI Calc
             </button>
           </nav>
 
-          {/* Action Buttons */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Action Buttons & Theme Selector */}
+          <div className="hidden sm:flex items-center gap-2.5">
+            {/* Theme Selector Button */}
+            <button
+              onClick={openThemeModal}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-200 bg-slate-900 border border-slate-700 hover:border-amber-400/60 hover:text-white transition cursor-pointer"
+              title="Change Website Theme"
+            >
+              <Palette className="w-3.5 h-3.5 text-amber-400" />
+              <span>Theme:</span>
+              <span className="text-emerald-400 truncate max-w-[80px]">{themeConfig.name.split(' ')[0]}</span>
+            </button>
+
             <button
               onClick={onOpenPartnerModal}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 transition cursor-pointer"
+              className="flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 transition cursor-pointer"
             >
-              <span>Colonizers / Sell Land</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <span>Colonizers</span>
+              <ArrowRight className="w-3 h-3" />
             </button>
 
             <a
               href="https://wa.me/919829000000?text=Namaste%20Agarwal%20Real%20Estate%20Group,%20mujhe%20Bhankrota%20me%20property%20ki%20jaankari%20chahiye."
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 shadow-md shadow-emerald-900/40 transition"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 shadow-md shadow-emerald-900/40 transition"
             >
               <MessageCircle className="w-4 h-4 text-emerald-200" />
               <span>WhatsApp</span>
@@ -118,6 +131,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-2">
+            <button
+              onClick={openThemeModal}
+              className="p-2.5 rounded-xl bg-slate-900 text-amber-400 border border-slate-800 cursor-pointer"
+              title="Select Theme"
+            >
+              <Palette className="w-5 h-5" />
+            </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2.5 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-800 cursor-pointer"
@@ -153,10 +173,21 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="pt-2 border-t border-slate-800 flex flex-col gap-2">
             <button
               onClick={() => {
+                openThemeModal();
+                setMobileMenuOpen(false);
+              }}
+              className="w-full py-2.5 px-3 text-center text-xs font-bold bg-slate-800 text-amber-400 border border-amber-500/30 rounded-xl flex items-center justify-center gap-2"
+            >
+              <Palette className="w-4 h-4" />
+              <span>Change Website Theme ({themeConfig.name})</span>
+            </button>
+
+            <button
+              onClick={() => {
                 onOpenCalculator();
                 setMobileMenuOpen(false);
               }}
-              className="w-full py-2.5 text-center text-xs font-semibold bg-slate-800 rounded-xl text-amber-300 cursor-pointer"
+              className="w-full py-2.5 text-center text-xs font-semibold bg-slate-800 rounded-xl text-sky-400 cursor-pointer"
             >
               Loan / EMI Calculator
             </button>
