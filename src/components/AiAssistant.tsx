@@ -230,7 +230,7 @@ export const AiAssistant: React.FC = () => {
                 <div className="flex flex-col items-center text-center mt-2">
                   <div className={`relative w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center border-4 ${aiSpeaking ? 'border-amber-400 shadow-[0_0_35px_rgba(245,158,11,0.5)]' : 'border-slate-700'}`}>
                     <img
-                      src="/logo-emblem.jpg"
+                      src="/logo-emblem-sandstone.jpg"
                       alt="Ajarwal"
                       className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover shadow-inner"
                     />

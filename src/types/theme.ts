@@ -23,15 +23,15 @@ export interface ThemeConfig {
 export const REAL_ESTATE_THEMES: ThemeConfig[] = [
   {
     id: 'jaipur-sandstone',
-    name: 'Jaipur Sandstone & Terracotta',
-    hindiName: 'जयपुर सैंडस्टोन & टेराकोटा (डिफ़ॉल्ट)',
-    tagline: 'Authentic Pink City Heritage & Warmth',
+    name: 'Amber Sandstone & Terracotta',
+    hindiName: 'एम्बर सैंडस्टोन & टेराकोटा (जयपुर)',
+    tagline: 'Authentic Pink City Amber Sandstone & Warm Gold',
     bestFor: 'Luxury Heritage Villas, Farmhouse Retreats, Local Culture',
     palette: {
       bg: '#140c09',
       card: '#1f130e',
-      primary: '#ea580c',
-      accent: '#f59e0b',
+      primary: '#df9b58',
+      accent: '#c86446',
       text: '#fff5f0'
     }
   },

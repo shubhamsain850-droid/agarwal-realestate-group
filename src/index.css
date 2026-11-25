@@ -73,7 +73,7 @@
 }
 
 /* ========================================================
-   THEME 3: JAIPUR SANDSTONE & TERRACOTTA
+   THEME 3: JAIPUR AMBER SANDSTONE & TERRACOTTA
    ======================================================== */
 [data-theme="jaipur-sandstone"] .bg-slate-950 {
   background-color: #140c09 !important;
@@ -88,39 +88,42 @@
   border-color: #4a2e24 !important;
 }
 [data-theme="jaipur-sandstone"] .from-emerald-600 {
-  --tw-gradient-from: #ea580c !important;
-  --tw-gradient-stops: var(--tw-gradient-from), #c2410c !important;
+  --tw-gradient-from: #df9b58 !important;
+  --tw-gradient-stops: var(--tw-gradient-from), #c86446 !important;
 }
 [data-theme="jaipur-sandstone"] .to-teal-700,
 [data-theme="jaipur-sandstone"] .to-teal-600 {
-  --tw-gradient-to: #c2410c !important;
+  --tw-gradient-to: #c86446 !important;
 }
 [data-theme="jaipur-sandstone"] .bg-emerald-600 {
-  background-color: #ea580c !important;
+  background: linear-gradient(135deg, #df9b58, #c86446) !important;
+  color: #140c09 !important;
+  font-weight: 700 !important;
 }
 [data-theme="jaipur-sandstone"] .hover\:bg-emerald-500:hover {
-  background-color: #f97316 !important;
+  background: linear-gradient(135deg, #f0b170, #d57353) !important;
+  color: #140c09 !important;
 }
 [data-theme="jaipur-sandstone"] .text-emerald-400 {
-  color: #fb923c !important;
+  color: #df9b58 !important;
 }
 [data-theme="jaipur-sandstone"] .text-emerald-300 {
-  color: #fdba74 !important;
+  color: #f6d1a6 !important;
 }
 [data-theme="jaipur-sandstone"] .border-emerald-500,
 [data-theme="jaipur-sandstone"] .border-emerald-500\/30,
 [data-theme="jaipur-sandstone"] .border-emerald-500\/50 {
-  border-color: #ea580c !important;
+  border-color: #df9b58 !important;
 }
 [data-theme="jaipur-sandstone"] .bg-emerald-500\/10,
 [data-theme="jaipur-sandstone"] .bg-emerald-500\/20 {
-  background-color: rgba(234, 88, 12, 0.15) !important;
+  background-color: rgba(223, 155, 88, 0.15) !important;
 }
 [data-theme="jaipur-sandstone"] .from-emerald-900 {
-  --tw-gradient-from: #431407 !important;
+  --tw-gradient-from: #2c160e !important;
 }
 [data-theme="jaipur-sandstone"] .to-teal-950 {
-  --tw-gradient-to: #1c0e08 !important;
+  --tw-gradient-to: #180b06 !important;
 }
 
 /* ========================================================
