@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Phone, PhoneCall, PhoneOff, Mic, MicOff, X, Send, Bot, CheckCircle2 } from 'lucide-react';
+import { Phone, PhoneCall, PhoneOff, Mic, MicOff, X, Send, Bot, Sparkles, CheckCircle2 } from 'lucide-react';
 
 interface ChatMessage {
   id: string;
