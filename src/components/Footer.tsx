@@ -15,7 +15,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <img
-                src="/logo-emblem.jpg"
+                src="/logo-emblem-sandstone.jpg"
                 alt="Ajarwal Real Estate Group Emblem"
                 className="w-12 h-12 rounded-full object-cover border-2 border-amber-400 shadow-md"
               />

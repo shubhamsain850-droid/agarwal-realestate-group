@@ -56,9 +56,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="flex items-center gap-3">
             <div className="relative shrink-0">
               <img
-                src="/logo-emblem.jpg"
+                src="/logo-emblem-sandstone.jpg"
                 alt="Ajarwal Real Estate Group Emblem"
-                className="w-12 h-12 rounded-full object-cover border-2 border-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
+                className="w-12 h-12 rounded-full object-cover border-2 border-amber-400/90 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
               />
             </div>
             <div>

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajarwal Real Estate Group - Jaipur Sandstone Logo Concepts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #120906;
+      --bg-sandstone: #1a0f0a;
+      --bg-card: #22140d;
+      --border-gold: rgba(223, 155, 88, 0.35);
+      --gold-primary: #df9b58;
+      --gold-light: #fef1b8;
+      --gold-rich: #d4af37;
+      --terracotta: #c86446;
+      --terracotta-dark: #963b20;
+      --text-main: #f9ede4;
+      --text-muted: #b89886;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: radial-gradient(circle at top, #23120b 0%, #120906 60%, #0a0402 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 24px 16px 80px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+      padding: 20px 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200, 100, 70, 0.18);
+      border: 1px solid rgba(223, 155, 88, 0.4);
+      color: var(--gold-primary);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #fff2be 0%, #df9b58 50%, #c86446 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Background Switcher */
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: rgba(34, 20, 13, 0.8);
+      border: 1px solid var(--border-gold);
+      padding: 12px 20px;
+      border-radius: 16px;
+      margin-bottom: 36px;
+      backdrop-filter: blur(12px);
+    }
+
+    .controls-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-right: 6px;
+    }
+
+    .bg-btn {
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(223, 155, 88, 0.3);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-main);
+      transition: all 0.2s;
+    }
+
+    .bg-btn.active, .bg-btn:hover {
+      background: linear-gradient(135deg, #c86446, #df9b58);
+      color: #120906;
+      border-color: #df9b58;
+    }
+
+    /* Logo Grid */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-bottom: 50px;
+    }
+
+    .logo-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .logo-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(223, 155, 88, 0.18);
+      border-color: var(--gold-primary);
+    }
+
+    .card-tag {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: linear-gradient(135deg, #c86446, #8a3318);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+      z-index: 2;
+    }
+
+    .tag-live {
+      background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    }
+
+    .logo-display {
+      height: 290px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: #150b07;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-display img, .logo-display svg {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.6));
+    }
+
+    .card-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      margin-bottom: 6px;
+    }
+
+    .card-hindi {
+      font-size: 0.9rem;
+      color: var(--terracotta);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    .specs-list {
+      list-style: none;
+      font-size: 0.8rem;
+      color: #d1b8aa;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(223, 155, 88, 0.15);
+    }
+
+    .specs-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .specs-list li span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+      display: inline-block;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: 1px solid var(--border-gold);
+      background: rgba(223, 155, 88, 0.1);
+      color: var(--gold-light);
+    }
+
+    .btn-action:hover {
+      background: linear-gradient(135deg, var(--gold-primary), var(--terracotta));
+      color: #120906;
+      border-color: var(--gold-primary);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold-primary), var(--terracotta));
+      color: #120906;
+      border-color: var(--gold-primary);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #fff2be, var(--gold-primary));
+    }
+
+    /* Live Mockup Section */
+    .mockup-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 24px;
+      padding: 36px 28px;
+      margin-bottom: 40px;
+    }
+
+    .mockup-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .mockup-header h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: var(--gold-primary);
+      margin-bottom: 8px;
+    }
+
+    /* Navbar Mockup */
+    .nav-mockup {
+      background: #140c09;
+      border: 1px solid rgba(223, 155, 88, 0.3);
+      border-radius: 16px;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+
+    .mockup-logo-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mockup-logo-brand img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--gold-primary);
+    }
+
+    .mockup-brand-text h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      letter-spacing: 1px;
+    }
+
+    .mockup-brand-text p {
+      font-size: 0.68rem;
+      color: var(--terracotta);
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+
+    .mockup-nav-links {
+      display: flex;
+      gap: 20px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 650px) {
+      .mockup-nav-links {
+        display: none;
+      }
+    }
+
+    /* Color Palette Swatch */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .swatch {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .swatch-color {
+      height: 48px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .swatch-name {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .swatch-hex {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-family: monospace;
+    }
+
+    /* Footer return button */
+    .footer-bar {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .return-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold-primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .return-link:hover {
+      color: var(--gold-light);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Top Header -->
+    <header class="header">
+      <div class="badge">🎨 Theme Identity Showcase</div>
+      <h1>JAIPUR SANDSTONE & TERRACOTTA</h1>
+      <p class="subtitle">
+        अजरवाल रियल एस्टेट ग्रुप के लिए विशेष रूप से तैयार किए गए 4 रॉयल & मॉडर्न लोगो कॉन्सेप्ट्स। अपनी पसंद अनुसार कोई भी लोगो एक्टिव करें।
+      </p>
+    </header>
+
+    <!-- Background Theme Switcher -->
+    <div class="controls-bar">
+      <span class="controls-label">Preview Background:</span>
+      <button class="bg-btn active" onclick="changeBg('#150b07')">Dark Sandstone (#150B07)</button>
+      <button class="bg-btn" onclick="changeBg('#23120b')">Imperial Terracotta (#23120B)</button>
+      <button class="bg-btn" onclick="changeBg('#f6eee6', '#140c09')">Light Sandstone Cream</button>
+      <button class="bg-btn" onclick="changeBg('#000000')">Pitch Black (#000000)</button>
+    </div>
+
+    <!-- 4 Logo Concepts Grid -->
+    <div class="logo-grid">
+      
+      <!-- Option 1: Live Sandstone Adaptation of User's Logo -->
+      <div class="logo-card">
+        <span class="card-tag tag-live">CURRENTLY ACTIVE</span>
+        <div class="logo-display" id="disp-1">
+          <img src="/logo-emblem-sandstone.jpg" alt="Option 1 - Sandstone Gold Edition">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">1. Sandstone Gold Seal</h3>
+          <div class="card-hindi">सैंडस्टोन 3D गोल्ड एम्बलम (Current)</div>
+          <p class="card-desc">
+            आपके ओरिजिनल 3D गोल्ड लोगो का बैकग्राउंड कॉर्पोरेट नेवी से बदलकर <strong>जयपुर डार्क सैंडस्टोन लेदर</strong> में ट्यून किया गया है। यह आपकी लाइव वेबसाइट पर पहले से लगा हुआ है।
+          </p>
+          <ul class="specs-list">
+            <li><span class="dot"></span> <strong>Style:</strong> 3D Embossed Gold Crest</li>
+            <li><span class="dot"></span> <strong>Best For:</strong> Official Seal, Favicon, Immediate Use</li>
+            <li><span class="dot"></span> <strong>Status:</strong> Live on Navbar & Footer</li>
+          </ul>
+          <a href="/" class="btn-action btn-primary">Website Par Dekhein ➔</a>
+        </div>
+      </div>
+
+      <!-- Option 2: Royal Mehrab Monogram -->
+      <div class="logo-card">
+        <span class="card-tag">ROYAL HERITAGE</span>
+        <div class="logo-display" id="disp-2">
+          <img src="/logo-concepts/concept-mehrab.svg" alt="Option 2 - Royal Mehrab Monogram">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">2. The Royal Mehrab Arch</h3>
+          <div class="card-hindi">राजपूताना मेहराब & हेरिटेज विला</div>
+          <p class="card-desc">
+            अक्षर <strong>'A'</strong> के अंदर जयपुर के महलों का राजसी मेहराब (Cusped Archway) उकेरा गया है जिसके अंदर लक्ज़री विला और झरोखा बेस है। जयपुर हेरिटेज और संस्कृति का सटीक प्रतीक।
+          </p>
+          <ul class="specs-list">
+            <li><span class="dot"></span> <strong>Style:</strong> Architectural Heritage Archway</li>
+            <li><span class="dot"></span> <strong>Best For:</strong> Luxury Heritage Villas & NRI Clients</li>
+            <li><span class="dot"></span> <strong>Format:</strong> Scalable Vector (SVG + HD)</li>
+          </ul>
+          <a href="/logo-concepts/concept-mehrab.svg" download="Ajarwal-Royal-Mehrab-Logo.svg" class="btn-action">Download SVG 📥</a>
+        </div>
+      </div>
+
+      <!-- Option 3: Suryavanshi Sunrise Crest -->
+      <div class="logo-card">
+        <span class="card-tag">VASTU & PROSPERITY</span>
+        <div class="logo-display" id="disp-3">
+          <img src="/logo-concepts/concept-suryavanshi.svg" alt="Option 3 - Suryavanshi Sunrise Crest">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">3. Suryavanshi Sunrise Crest</h3>
+          <div class="card-hindi">सूर्योदय & टाउनशिप लैंडमार्क</div>
+          <p class="card-desc">
+            शुभ सूर्योदय की 12 किरणें, प्लॉटेड लैंड बॉउंड्री ग्रिड (मास्टरप्लान), और आधुनिक A-फ्रेम विला रूफलाइन। समृद्धि, वास्तु अनुपालन और विश्वसनीयता का प्रतीक।
+          </p>
+          <ul class="specs-list">
+            <li><span class="dot"></span> <strong>Style:</strong> Circular Sun Crest + Plot Grid</li>
+            <li><span class="dot"></span> <strong>Best For:</strong> Plotted Townships & Farmlands</li>
+            <li><span class="dot"></span> <strong>Format:</strong> Scalable Vector (SVG + HD)</li>
+          </ul>
+          <a href="/logo-concepts/concept-suryavanshi.svg" download="Ajarwal-Suryavanshi-Logo.svg" class="btn-action">Download SVG 📥</a>
+        </div>
+      </div>
+
+      <!-- Option 4: Modernist Haveli / Laser-Cut Jaali -->
+      <div class="logo-card">
+        <span class="card-tag">ULTRA LUXURY</span>
+        <div class="logo-display" id="disp-4">
+          <img src="/logo-concepts/concept-modern-jali.svg" alt="Option 4 - Modernist Jaali Monogram">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">4. Modern Haveli & Jaali</h3>
+          <div class="card-hindi">मॉडर्न हवेली & लेजर-कट जाली</div>
+          <p class="card-desc">
+            ईमार और ओबेरॉय ग्रुप स्टाइल का मिनिमल हाई-एंड आर्किटेक्चरल लोगो। अष्टकोणीय शील्ड के साथ हवा महल की जाली पैटर्न और कंटेंपरेरी रोज-कॉपर गोल्ड फिनिश।
+          </p>
+          <ul class="specs-list">
+            <li><span class="dot"></span> <strong>Style:</strong> Geometric Luxury Monogram</li>
+            <li><span class="dot"></span> <strong>Best For:</strong> Modern Gated Duplexes & App Icon</li>
+            <li><span class="dot"></span> <strong>Format:</strong> Scalable Vector (SVG + HD)</li>
+          </ul>
+          <a href="/logo-concepts/concept-modern-jali.svg" download="Ajarwal-Modern-Jaali-Logo.svg" class="btn-action">Download SVG 📥</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Live Website Mockup Preview -->
+    <section class="mockup-section">
+      <div class="mockup-header">
+        <h2>Live Website Header Mockup</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          देखिए कि आपकी वेबसाइट के हेडर और नेवबार में यह लोगो थीम के साथ कैसा रॉयल लुक देता है:
+        </p>
+      </div>
+
+      <div class="nav-mockup">
+        <div class="mockup-logo-brand">
+          <img src="/logo-emblem-sandstone.jpg" alt="Ajarwal Logo">
+          <div class="mockup-brand-text">
+            <h3>AJARWAL REAL ESTATE GROUP</h3>
+            <p>BHANKROTA • JAIPUR</p>
+          </div>
+        </div>
+        <div class="mockup-nav-links">
+          <span>Properties</span>
+          <span>Jaipur Corridor</span>
+          <span>EMI Calculator</span>
+          <span>Contact</span>
+          <span style="color: var(--gold-primary); font-weight: 600;">Call: +91 98290 XXXXX</span>
+        </div>
+      </div>
+
+      <!-- Theme Color Palette -->
+      <h3 style="font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-primary); margin-top: 30px; margin-bottom: 12px; text-align: center;">
+        Official Theme Color Palette (जयपुर सैंडस्टोन & टेराकोटा)
+      </h3>
+      <div class="palette-grid">
+        <div class="swatch">
+          <div class="swatch-color" style="background: #140c09; border: 1px solid #df9b58;"></div>
+          <div class="swatch-name">Imperial Dark Sandstone</div>
+          <div class="swatch-hex">#140C09</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #df9b58;"></div>
+          <div class="swatch-name">Amber Sandstone</div>
+          <div class="swatch-hex">#DF9B58</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #c86446;"></div>
+          <div class="swatch-name">Terracotta Rust</div>
+          <div class="swatch-hex">#C86446</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #d4af37;"></div>
+          <div class="swatch-name">Antique Royal Gold</div>
+          <div class="swatch-hex">#D4AF37</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #f5ede4;"></div>
+          <div class="swatch-name">Sandstone Cream</div>
+          <div class="swatch-hex">#F5EDE4</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer link -->
+    <div class="footer-bar">
+      <a href="/" class="return-link">← Return to Ajarwal Real Estate Group Website</a>
+    </div>
+
+  </div>
+
+  <script>
+    function changeBg(bgColor, textColor) {
+      const displays = document.querySelectorAll('.logo-display');
+      displays.forEach(d => {
+        d.style.background = bgColor;
+      });
+
+      // Update button active state
+      const buttons = document.querySelectorAll('.bg-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>

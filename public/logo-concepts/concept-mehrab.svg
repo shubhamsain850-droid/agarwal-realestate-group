@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2a1711"/>
+      <stop offset="70%" stop-color="#180e0a"/>
+      <stop offset="100%" stop-color="#0f0806"/>
+    </radialGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fdf4b8"/>
+      <stop offset="25%" stop-color="#d4af37"/>
+      <stop offset="50%" stop-color="#aa7c11"/>
+      <stop offset="75%" stop-color="#e8c85a"/>
+      <stop offset="100%" stop-color="#8a5a00"/>
+    </linearGradient>
+    <linearGradient id="terracottaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c86446"/>
+      <stop offset="100%" stop-color="#df9b58"/>
+    </linearGradient>
+    <filter id="goldShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="500" rx="40" fill="url(#bgGlow)"/>
+
+  <!-- Outer Heritage Ring -->
+  <circle cx="250" cy="250" r="215" fill="none" stroke="url(#goldGrad)" stroke-width="5" opacity="0.9"/>
+  <circle cx="250" cy="250" r="202" fill="none" stroke="url(#terracottaGrad)" stroke-width="1.5" stroke-dasharray="4 6" opacity="0.7"/>
+  <circle cx="250" cy="250" r="192" fill="none" stroke="url(#goldGrad)" stroke-width="2" opacity="0.6"/>
+
+  <!-- Royal Mehrab Archway (Negative & Positive Space) -->
+  <g filter="url(#goldShadow)">
+    <!-- Main A Body forming Arch -->
+    <path d="M 250 85 
+             L 345 325 
+             L 310 325 
+             L 282 255 
+             L 218 255 
+             L 190 325 
+             L 155 325 Z" 
+          fill="url(#goldGrad)"/>
+
+    <!-- Inner Mehrab Cutout (Royal Cusped Archway) -->
+    <path d="M 250 145 
+             Q 262 185 270 205
+             C 275 220 270 235 250 240
+             C 230 235 225 220 230 205
+             Q 238 185 250 145 Z" 
+          fill="#180e0a"/>
+
+    <!-- Modern Luxury Villa Roofline nestled across the crossbar -->
+    <path d="M 200 245 
+             L 250 205 
+             L 300 245 
+             L 290 250 
+             L 250 218 
+             L 210 250 Z" 
+          fill="url(#goldGrad)"/>
+
+    <!-- Villa Chimney / Tower accent -->
+    <rect x="275" y="215" width="10" height="20" fill="url(#goldGrad)"/>
+
+    <!-- Jharokha Base Pedestal -->
+    <path d="M 175 328 L 325 328 L 315 336 L 185 336 Z" fill="url(#goldGrad)"/>
+    <path d="M 195 339 L 305 339 L 295 344 L 205 344 Z" fill="url(#terracottaGrad)"/>
+  </g>
+
+  <!-- Typography: AJARWAL -->
+  <text x="250" y="385" font-family="'Cinzel', 'Playfair Display', serif" font-size="28" font-weight="700" fill="url(#goldGrad)" text-anchor="middle" letter-spacing="6">AJARWAL</text>
+
+  <!-- Subtitle: REAL ESTATE GROUP -->
+  <text x="250" y="415" font-family="'Inter', 'Montserrat', sans-serif" font-size="13" font-weight="600" fill="#df9b58" text-anchor="middle" letter-spacing="4">REAL ESTATE GROUP</text>
+
+  <!-- Tagline: JAIPUR -->
+  <text x="250" y="438" font-family="'Inter', sans-serif" font-size="10" font-weight="500" fill="#a07a65" text-anchor="middle" letter-spacing="5">JAIPUR • RAJASTHAN</text>
+</svg>

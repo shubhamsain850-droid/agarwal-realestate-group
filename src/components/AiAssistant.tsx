@@ -186,7 +186,7 @@ export const AiAssistant: React.FC = () => {
               <div className="flex items-center gap-2.5">
                 <div className="relative">
                   <img
-                    src="/logo-emblem.jpg"
+                    src="/logo-emblem-sandstone.jpg"
                     alt="Ajarwal Real Estate Emblem"
                     className="w-10 h-10 rounded-full object-cover border border-amber-400 shadow-sm"
                   />

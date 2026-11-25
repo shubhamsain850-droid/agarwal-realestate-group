@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgModern" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#24140e"/>
+      <stop offset="70%" stop-color="#150a06"/>
+      <stop offset="100%" stop-color="#080302"/>
+    </radialGradient>
+    <linearGradient id="champagneGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#f3d898"/>
+      <stop offset="70%" stop-color="#c99738"/>
+      <stop offset="100%" stop-color="#805b12"/>
+    </linearGradient>
+    <linearGradient id="roseCopper" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a8482f"/>
+      <stop offset="50%" stop-color="#d97d5a"/>
+      <stop offset="100%" stop-color="#f5b89a"/>
+    </linearGradient>
+    <pattern id="jaaliGrid" width="14" height="14" patternUnits="userSpaceOnUse">
+      <path d="M 7 0 L 14 7 L 7 14 L 0 7 Z" fill="none" stroke="#d97d5a" stroke-width="1" opacity="0.65"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="500" rx="40" fill="url(#bgModern)"/>
+
+  <!-- Minimalist Geometric Octagon Shield -->
+  <polygon points="250,55 395,115 395,315 250,375 105,315 105,115" fill="none" stroke="url(#champagneGold)" stroke-width="2" opacity="0.4"/>
+  <polygon points="250,68 380,123 380,307 250,362 120,307 120,123" fill="none" stroke="url(#roseCopper)" stroke-width="1" opacity="0.3"/>
+
+  <!-- The Architectural A Monogram with Jaali Screen -->
+  <g>
+    <!-- Left Ascender -->
+    <polygon points="250,90 220,90 145,285 180,285 205,220 250,220" fill="url(#champagneGold)"/>
+    
+    <!-- Right Ascender -->
+    <polygon points="250,90 280,90 355,285 320,285 295,220 250,220" fill="url(#champagneGold)"/>
+
+    <!-- Integrated Modern Cantilever Villa Roofline -->
+    <polygon points="250,110 325,185 310,195 250,135 190,195 175,185" fill="url(#roseCopper)"/>
+
+    <!-- Micro-Laser Cut Jaali Pattern filled inside the Crossbar Shield -->
+    <polygon points="205,220 295,220 285,255 215,255" fill="url(#bgModern)" stroke="url(#roseCopper)" stroke-width="2"/>
+    <polygon points="207,222 293,222 283,253 217,253" fill="url(#jaaliGrid)"/>
+
+    <!-- Modern Villa Chimney / Skyward Pillar -->
+    <rect x="295" y="145" width="12" height="28" fill="url(#champagneGold)"/>
+  </g>
+
+  <!-- Typography: Ultra Sharp Clean Luxury -->
+  <text x="250" y="415" font-family="'Montserrat', 'Cinzel', sans-serif" font-size="28" font-weight="800" fill="url(#champagneGold)" text-anchor="middle" letter-spacing="8">AJARWAL</text>
+  <text x="250" y="442" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="url(#roseCopper)" text-anchor="middle" letter-spacing="5">REAL ESTATE GROUP</text>
+</svg>
