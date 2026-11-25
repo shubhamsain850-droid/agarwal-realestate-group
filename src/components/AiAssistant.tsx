@@ -144,37 +144,26 @@ export const AiAssistant: React.FC = () => {
   return (
     <>
       {/* Floating Trigger Button (Hidden on small mobile since MobileBottomBar handles it, visible on md+) */}
-      <div className="hidden sm:flex fixed bottom-6 right-6 z-40 flex-col items-end gap-2.5">
+      <div className="hidden sm:flex fixed bottom-6 right-6 z-40 items-center">
         <button
           onClick={() => {
             setIsOpen(true);
             setMode('call');
             if (!isCalling) handleStartCall();
           }}
-          className="group relative flex items-center gap-3 bg-gradient-to-r from-emerald-600 to-teal-700 text-white px-5 py-3 rounded-full shadow-2xl hover:scale-105 transition-all duration-300 border-2 border-emerald-400/30 cursor-pointer"
+          className="group relative flex items-center gap-3 bg-gradient-to-r from-amber-500 via-[#df9b58] to-[#c86446] text-slate-950 px-5 py-3 rounded-full shadow-[0_12px_35px_rgba(223,155,88,0.4)] hover:scale-105 transition-all duration-300 border border-amber-300/50 cursor-pointer"
         >
           <div className="relative">
-            <PhoneCall className="w-5 h-5 animate-bounce" />
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-400 rounded-full animate-ping" />
+            <PhoneCall className="w-5 h-5 text-slate-950 animate-bounce" />
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-white rounded-full animate-ping" />
           </div>
           <div className="text-left">
-            <div className="text-[10px] font-semibold text-emerald-100 flex items-center gap-1">
-              <span>LIVE AI ASSISTANT</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="text-[10px] font-extrabold text-slate-900/80 uppercase tracking-widest flex items-center gap-1">
+              <span>LIVE AI ADVISOR</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-slate-950 animate-pulse" />
             </div>
-            <div className="text-xs font-bold tracking-wide">Call Pooja (AI Agent)</div>
+            <div className="text-xs font-black tracking-wide text-slate-950">Speak to Pooja (AI)</div>
           </div>
-        </button>
-
-        <button
-          onClick={() => {
-            setIsOpen(true);
-            setMode('chat');
-          }}
-          className="flex items-center gap-1.5 bg-slate-900/90 backdrop-blur text-slate-200 hover:text-white px-3.5 py-1.5 rounded-full text-xs font-medium border border-slate-700 shadow-lg hover:bg-slate-800 transition cursor-pointer"
-        >
-          <MessageSquare className="w-3 h-3 text-emerald-400" />
-          <span>Chat with AI Pooja</span>
         </button>
       </div>
 

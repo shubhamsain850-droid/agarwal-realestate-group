@@ -31,17 +31,17 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md border-b border-slate-800 text-white shadow-xl">
       {/* Top Notification Bar */}
-      <div className="bg-gradient-to-r from-emerald-900 via-slate-900 to-teal-950 py-1.5 px-4 text-xs border-b border-emerald-900/30">
+      <div className="bg-[#140b07] py-1.5 px-4 text-xs border-b border-amber-500/20">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2 text-emerald-300 font-medium">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="flex items-center gap-2 text-amber-200/90 font-medium">
+            <span className="flex h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
             <span>Bhankrota (302026) & Ajmer Road Specialists • JDA Approved & RERA Verified Only</span>
           </div>
           <div className="flex items-center gap-4 text-slate-300 text-[11px]">
             <span className="hidden sm:inline">Office: Bhankrota Chauraha, Jaipur</span>
             <a
               href="tel:+919829000000"
-              className="flex items-center gap-1 text-emerald-400 font-bold hover:underline"
+              className="flex items-center gap-1 text-amber-400 font-bold hover:underline"
             >
               <Phone className="w-3 h-3" /> +91 98290 XXXXX
             </a>
@@ -51,28 +51,23 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-20 gap-4">
           {/* Logo & Brand Identity */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3.5 shrink-0">
             <div className="relative shrink-0">
               <img
                 src="/logo-emblem-sandstone.jpg"
                 alt="Ajarwal Real Estate Group Emblem"
-                className="w-12 h-12 rounded-full object-cover border-2 border-amber-400/90 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
+                className="w-12 h-12 rounded-full object-cover border-2 border-amber-400/90 shadow-[0_0_15px_rgba(223,155,88,0.35)]"
               />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-black text-xl sm:text-2xl tracking-tight text-white font-serif">
-                  AJARWAL
-                </span>
-                <span className="text-amber-400 text-[10px] sm:text-xs font-bold uppercase tracking-widest bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
-                  REAL ESTATE GROUP
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-400 font-medium">
-                Ajarwal Real Estate Group • Bhankrota, Ajmer Road (Jaipur)
-              </p>
+            <div className="flex flex-col justify-center shrink-0">
+              <span className="font-serif font-black text-2xl tracking-[0.06em] text-white leading-none">
+                AJARWAL
+              </span>
+              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.24em] text-amber-400 mt-1 whitespace-nowrap">
+                REAL ESTATE GROUP
+              </span>
             </div>
           </div>
 
@@ -82,10 +77,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={item.id}
                 onClick={() => onSelectCategory(item.id)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                className={`px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                   activeCategory === item.id
-                    ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/50'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                    ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold shadow-sm'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-900/60'
                 }`}
               >
                 {item.label}
@@ -93,40 +88,37 @@ export const Navbar: React.FC<NavbarProps> = ({
             ))}
             <button
               onClick={onOpenCalculator}
-              className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-800 transition cursor-pointer"
+              className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-900/60 transition cursor-pointer"
             >
               EMI Calc
             </button>
           </nav>
 
           {/* Action Buttons & Theme Selector */}
-          <div className="hidden sm:flex items-center gap-2.5">
-            {/* Theme Selector Button */}
+          <div className="hidden sm:flex items-center gap-2.5 shrink-0">
+            {/* Theme Selector Icon Button */}
             <button
               onClick={openThemeModal}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-200 bg-slate-900 border border-slate-700 hover:border-amber-400/60 hover:text-white transition cursor-pointer"
+              className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 hover:border-amber-400/60 text-amber-400 transition cursor-pointer"
               title="Change Website Theme"
             >
-              <Palette className="w-3.5 h-3.5 text-amber-400" />
-              <span>Theme:</span>
-              <span className="text-amber-400 truncate max-w-[85px]">{themeConfig.name.split(' ')[0]}</span>
+              <Palette className="w-4 h-4" />
             </button>
 
             <button
               onClick={onOpenPartnerModal}
-              className="flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 transition cursor-pointer"
+              className="px-3 py-2 rounded-xl text-xs font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 transition cursor-pointer"
             >
-              <span>Colonizers</span>
-              <ArrowRight className="w-3 h-3" />
+              Partner Desk
             </button>
 
             <a
               href="https://wa.me/919829000000?text=Hello%20Ajarwal%20Real%20Estate%20Group!%20I%20am%20interested%20in%20verified%20properties%20in%20Bhankrota%2C%20Ajmer%20Road."
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 shadow-md shadow-emerald-900/40 transition"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-amber-500 via-[#df9b58] to-[#c86446] hover:brightness-110 shadow-md shadow-amber-950/60 transition"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-200" />
+              <MessageCircle className="w-4 h-4 text-slate-950" />
               <span>WhatsApp</span>
             </a>
           </div>

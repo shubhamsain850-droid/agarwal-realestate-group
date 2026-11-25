@@ -10,7 +10,6 @@ import { PartnerSection } from './components/PartnerSection';
 import { Footer } from './components/Footer';
 import { MobileBottomBar } from './components/MobileBottomBar';
 import { ThemeSelectorModal } from './components/ThemeSelectorModal';
-import { ThemeFloatingButton } from './components/ThemeFloatingButton';
 import { PROPERTIES_DATA } from './data/properties';
 import type { Property, PropertyCategory } from './types/property';
 import { Sparkles, Building } from 'lucide-react';
@@ -194,8 +193,7 @@ export function App() {
       {/* Floating AI Voice & Chat Assistant (Pooja) */}
       <AiAssistant />
 
-      {/* Real Estate Theme Selector Floating Button & Modal */}
-      <ThemeFloatingButton />
+      {/* Real Estate Theme Selector Modal */}
       <ThemeSelectorModal />
 
       {/* Mobile Sticky Quick Action Bar */}

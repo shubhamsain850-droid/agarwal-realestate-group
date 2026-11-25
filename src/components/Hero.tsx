@@ -38,14 +38,14 @@ export const Hero: React.FC<HeroProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Value Proposition Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
-            <Award className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold tracking-wide">
+            <Award className="w-3.5 h-3.5 text-amber-400" />
             <span>#1 Real Estate Advisory in Bhankrota & Ajmer Road Corridor</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.18]">
             Trust in Every Plot, <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-amber-400 via-emerald-300 to-teal-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#ffe8ab] via-[#df9b58] to-[#c86446] bg-clip-text text-transparent">
               Guaranteed Appreciation & Verified Titles.
             </span>
           </h1>
@@ -55,16 +55,26 @@ export const Hero: React.FC<HeroProps> = ({
             <strong> 100% verified JDA Single Patta plots, luxury duplex villas, weekend farmhouses, and commercial spaces</strong> at direct developer prices.
           </p>
 
-          {/* Quick Voice AI Trigger Banner */}
-          <div className="pt-2">
+          {/* Luxury CTAs */}
+          <div className="pt-3 flex flex-wrap items-center justify-center gap-3.5">
+            <button
+              onClick={() => {
+                const el = document.querySelector('section');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="px-6 py-3 rounded-2xl bg-gradient-to-r from-amber-500 via-[#df9b58] to-[#c86446] hover:brightness-110 text-slate-950 font-extrabold text-xs sm:text-sm shadow-xl shadow-amber-950/60 hover:scale-105 transition cursor-pointer"
+            >
+              Explore Verified Properties ➔
+            </button>
+
             <button
               onClick={onOpenAiCall}
-              className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-emerald-600/90 to-teal-600/90 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-emerald-950/60 transition cursor-pointer border border-emerald-400/30 hover:scale-105"
+              className="inline-flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-amber-300 font-bold text-xs sm:text-sm border border-amber-500/40 hover:border-amber-400 shadow-lg shadow-black/40 transition cursor-pointer hover:scale-105"
             >
               <Sparkles className="w-4 h-4 text-amber-300 animate-spin" />
-              <span>Speak to Pooja (Live AI Calling Agent)</span>
+              <span>Speak to Pooja (AI Calling Agent)</span>
               <span className="bg-amber-400 text-slate-950 text-[10px] font-extrabold px-2 py-0.5 rounded-full">
-                FREE CALL
+                FREE
               </span>
             </button>
           </div>
