@@ -9,12 +9,12 @@ interface ChatMessage {
 }
 
 const KNOWLEDGE_BASE: Record<string, string> = {
-  'plot_rate': 'JDA-approved residential plots along the Bhankrota 200 ft bypass and Jaisinghpura link road currently range from ₹38,500 to ₹45,000 per gaj. We have prime corner plots of 111 gaj and 200 gaj available with immediate registry and clear titles.',
-  'loan': 'Yes, absolutely! All our JDA-approved properties are eligible for up to 80% home loans from SBI, HDFC, and ICICI Bank. Our dedicated documentation team manages the complete paperwork and loan clearance.',
-  'registry': 'All properties come with 100% verified legal titles, Single JDA Patta, and RERA approvals. Registry and mutation (Dakhil-Kharij) documents are fully verified.',
-  'site_visit': 'Your site visit request has been recorded! Our field advisory team can pick you up from our Bhankrota office or directly from your home. Please confirm your preferred date and contact number.',
-  'villa': 'We offer ready-to-move 3 & 4 BHK luxury duplex villas near Delhi Public School (DPS), Ajmer Road. Prices range from ₹78 Lakh to ₹85 Lakh with 24x7 gated security, private terrace, and clubhouse amenities.',
-  'farmhouse': 'For weekend farmhouses, we offer 600 to 1,000 gaj gated estates along the Boraj-Begus road featuring a private clubhouse, swimming pool, and organic plantation at just ₹9,200 per gaj.'
+  'plot_rate': 'Our featured Weekend Farms project in Hirapura (Near Mahindra SEZ, Ajmer Road) is priced at ₹11,950 per Gaj. Flexible farmhouse plot sizes range from 300 Gaj (₹35.85 Lakh) up to 3,000 Gaj with 100 ft wide approach road access.',
+  'loan': 'Yes! Even though Weekend Farms (Hirapura) is an Agriculture Registry scheme, we arrange up to 70% bank loan assistance for eligible buyers along with complete documentation support.',
+  'registry': 'The Weekend Farms project at Revenue Village Hirapura (Tehsil Madhorajpura) offers clean Tehsil Registry on Agriculture status with clear plot demarcation, gated boundary walls, and road infrastructure.',
+  'site_visit': 'We would be pleased to schedule your site visit at Weekend Farms, Hirapura (Near Mahindra SEZ). Please share your preferred date and contact number on the booking form or via WhatsApp.',
+  'farmhouse': 'Weekend Farms in Hirapura features gated farmhouse blocks (F-1 to F-24) on 60 ft & 40 ft interlocking paver roads, a 100 ft main approach road, electricity poles, parks, and close proximity to Mahindra SEZ, Oswal, Flipkart & Amazon warehouses.',
+  'location': 'Weekend Farms is located at Ajay Rajpura – Hirapura near Mahindra World City SEZ: 4 km from Diggi/Renwal Road, 9 km from Muhana Ring Road, 17 km from Ring Road, and 24 km from 200 ft Ajmer Road.'
 };
 
 export const AiAssistant: React.FC = () => {
@@ -30,7 +30,7 @@ export const AiAssistant: React.FC = () => {
     {
       id: '1',
       sender: 'ai',
-      text: 'Hello! I am Pooja from Ajarwal Real Estate Group. Which property type are you looking for in Bhankrota and Ajmer Road — JDA Plots, Luxury Villas, or Farmhouses?',
+      text: 'Hello! I am Pooja from Ajarwal Real Estate Group. Ask me about our Weekend Farms project in Hirapura (Near Mahindra SEZ) — rates, plot sizes, 70% loan assistance, or scheduling your site visit.',
       time: 'Just now'
     }
   ]);
@@ -72,7 +72,7 @@ export const AiAssistant: React.FC = () => {
   const handleStartCall = () => {
     setMode('call');
     setIsCalling(true);
-    const welcomeMsg = 'Hello! I am Pooja from Ajarwal Real Estate Group. Which budget or property type are you exploring in Bhankrota and Ajmer Road?';
+    const welcomeMsg = 'Hello! I am Pooja from Ajarwal Real Estate Group. Would you like details on our Weekend Farms plots at Hirapura near Mahindra SEZ?';
     setCallTranscript(welcomeMsg);
     speakText(welcomeMsg);
   };
@@ -87,7 +87,7 @@ export const AiAssistant: React.FC = () => {
   };
 
   const handleUserResponseInCall = (type: string, userText: string) => {
-    const aiReply = KNOWLEDGE_BASE[type] || 'Thank you! Our primary office is located at Bhankrota Chauraha, Ajmer Road. You are welcome to visit us anytime for on-ground property inspections.';
+    const aiReply = KNOWLEDGE_BASE[type] || 'Thank you! You can explore our Weekend Farms layout map, real site photos, and book your site visit directly on the project page.';
     setCallTranscript(`You asked: "${userText}"\n\nPooja: "${aiReply}"`);
     speakText(aiReply);
   };
@@ -108,18 +108,18 @@ export const AiAssistant: React.FC = () => {
 
     // Generate AI response
     setTimeout(() => {
-      let reply = 'Thank you for your message! I will gladly share the verified property listings with you. Would you like to connect on WhatsApp or arrange a site visit?';
+      let reply = 'Thank you for your message! I would be glad to share details for Weekend Farms in Hirapura (Near Mahindra SEZ). Would you like to connect on WhatsApp or book a site visit?';
       const lower = text.toLowerCase();
 
-      if (lower.includes('rate') || lower.includes('plot') || lower.includes('price')) {
+      if (lower.includes('rate') || lower.includes('plot') || lower.includes('price') || lower.includes('gaj')) {
         reply = KNOWLEDGE_BASE['plot_rate'];
-      } else if (lower.includes('loan') || lower.includes('sbi') || lower.includes('bank') || lower.includes('hdfc')) {
+      } else if (lower.includes('loan') || lower.includes('bank') || lower.includes('70%')) {
         reply = KNOWLEDGE_BASE['loan'];
-      } else if (lower.includes('registry') || lower.includes('jda') || lower.includes('patta') || lower.includes('title')) {
+      } else if (lower.includes('registry') || lower.includes('agri') || lower.includes('title')) {
         reply = KNOWLEDGE_BASE['registry'];
-      } else if (lower.includes('villa') || lower.includes('house') || lower.includes('duplex')) {
-        reply = KNOWLEDGE_BASE['villa'];
-      } else if (lower.includes('farmhouse') || lower.includes('land')) {
+      } else if (lower.includes('location') || lower.includes('sez') || lower.includes('hirapura') || lower.includes('km')) {
+        reply = KNOWLEDGE_BASE['location'];
+      } else if (lower.includes('farmhouse') || lower.includes('size')) {
         reply = KNOWLEDGE_BASE['farmhouse'];
       } else if (lower.includes('visit') || lower.includes('tour') || lower.includes('call') || lower.includes('contact')) {
         reply = KNOWLEDGE_BASE['site_visit'];
@@ -250,28 +250,28 @@ export const AiAssistant: React.FC = () => {
                 {/* Quick Call Action Prompts */}
                 <div className="w-full grid grid-cols-2 gap-1.5 sm:gap-2 mb-3">
                   <button
-                    onClick={() => handleUserResponseInCall('plot_rate', 'What are the plot rates in Bhankrota?')}
+                    onClick={() => handleUserResponseInCall('plot_rate', 'What is the per Gaj rate in Hirapura?')}
                     className="p-2 sm:p-2.5 text-left text-[11px] sm:text-xs bg-slate-800/90 active:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
                   >
-                    💬 "What are the plot rates?"
+                    💬 "Hirapura plot rates?"
                   </button>
                   <button
-                    onClick={() => handleUserResponseInCall('loan', 'How much bank loan is available from SBI or HDFC?')}
+                    onClick={() => handleUserResponseInCall('loan', 'How much loan assistance is available?')}
                     className="p-2 sm:p-2.5 text-left text-[11px] sm:text-xs bg-slate-800/90 active:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
                   >
-                    💬 "Bank loan eligibility?"
+                    💬 "70% Bank loan details?"
                   </button>
                   <button
-                    onClick={() => handleUserResponseInCall('registry', 'Are JDA patta and legal titles verified?')}
+                    onClick={() => handleUserResponseInCall('registry', 'What is the registry & legal status?')}
                     className="p-2 sm:p-2.5 text-left text-[11px] sm:text-xs bg-slate-800/90 active:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
                   >
-                    💬 "JDA patta & registry?"
+                    💬 "Registry & legal status?"
                   </button>
                   <button
-                    onClick={() => handleUserResponseInCall('site_visit', 'Book a free site visit for tomorrow')}
+                    onClick={() => handleUserResponseInCall('site_visit', 'Book a site visit at Weekend Farms')}
                     className="p-2 sm:p-2.5 text-left text-[11px] sm:text-xs bg-slate-800/90 active:bg-slate-700 text-slate-200 rounded-xl border border-slate-700 transition cursor-pointer"
                   >
-                    💬 "Book free site visit"
+                    💬 "Book your site visit"
                   </button>
                 </div>
 
@@ -338,22 +338,22 @@ export const AiAssistant: React.FC = () => {
                 {/* Preset Chips */}
                 <div className="px-2.5 py-2 bg-slate-900 border-t border-slate-800/80 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
                   <button
-                    onClick={() => handleSendMessage('What are the current plot rates in Bhankrota?')}
+                    onClick={() => handleSendMessage('What is the per Gaj rate in Hirapura Weekend Farms?')}
                     className="whitespace-nowrap px-2.5 py-1 text-[10px] sm:text-[11px] bg-slate-800 active:bg-slate-700 text-slate-300 rounded-full border border-slate-700 cursor-pointer"
                   >
-                    Plot Rates?
+                    Rate per Gaj?
                   </button>
                   <button
-                    onClick={() => handleSendMessage('Can I get an 80% bank loan from SBI or HDFC?')}
+                    onClick={() => handleSendMessage('Can I get up to 70% bank loan?')}
                     className="whitespace-nowrap px-2.5 py-1 text-[10px] sm:text-[11px] bg-slate-800 active:bg-slate-700 text-slate-300 rounded-full border border-slate-700 cursor-pointer"
                   >
-                    Bank Loan?
+                    70% Loan?
                   </button>
                   <button
-                    onClick={() => handleSendMessage('I want to schedule a free site visit for tomorrow')}
+                    onClick={() => handleSendMessage('I want to book a site visit')}
                     className="whitespace-nowrap px-2.5 py-1 text-[10px] sm:text-[11px] bg-slate-800 active:bg-slate-700 text-slate-300 rounded-full border border-slate-700 cursor-pointer"
                   >
-                    Site Visit?
+                    Book Site Visit
                   </button>
                 </div>
 
@@ -364,7 +364,7 @@ export const AiAssistant: React.FC = () => {
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                    placeholder="Ask Pooja about Bhankrota plots, villas, or prices..."
+                    placeholder="Ask Pooja about Hirapura Weekend Farms..."
                     className="flex-1 bg-slate-950 border border-slate-700 text-slate-200 placeholder:text-slate-500 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500"
                   />
                   <button

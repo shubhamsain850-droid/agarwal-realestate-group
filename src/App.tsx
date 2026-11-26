@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { PropertyCard } from './components/PropertyCard';
-import { PropertyModal } from './components/PropertyModal';
+import { PropertyDetailPage } from './components/PropertyDetailPage';
 import { AiAssistant } from './components/AiAssistant';
 import { EmiCalculator } from './components/EmiCalculator';
 import { MarketGuide } from './components/MarketGuide';
@@ -28,10 +28,18 @@ export function App() {
     subCategory: string = 'all',
     shouldScroll: boolean = false
   ) => {
+    setSelectedProperty(null);
     setActiveCategory(cat);
     setActiveSubCategory(subCategory);
     if (shouldScroll) {
-      scrollToSection('properties');
+      setTimeout(() => scrollToSection('properties'), 50);
+    }
+  };
+
+  const openPropertyFullPage = (prop: Property, jumpToVisit: boolean = false) => {
+    setSelectedProperty(prop);
+    if (jumpToVisit) {
+      setTimeout(() => scrollToSection('book-visit-section'), 120);
     }
   };
 
@@ -115,155 +123,159 @@ export function App() {
         onOpenCalculator={() => setShowCalculator(true)}
       />
 
-      {/* Hero Section */}
-      <Hero
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        selectedCategory={activeCategory}
-        selectedSubCategory={activeSubCategory}
-        onSubCategoryChange={(sub) => {
-          setActiveSubCategory(sub);
-          if (sub !== 'all') {
-            scrollToSection('properties');
-          }
-        }}
-        availableSubCategories={availableSubCategories}
-        selectedLocation={selectedLocation}
-        onLocationChange={setSelectedLocation}
-        onResetFilters={handleResetFilters}
-        onOpenAiCall={triggerAiCall}
-        onSelectProperty={(p) => setSelectedProperty(p)}
-      />
+      {/* FULL-SCREEN PROPERTY DETAIL VIEW OR MAIN HOME VIEW */}
+      {selectedProperty ? (
+        <PropertyDetailPage
+          property={selectedProperty}
+          onBack={() => setSelectedProperty(null)}
+        />
+      ) : (
+        <>
+          {/* Hero Section */}
+          <Hero
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            selectedCategory={activeCategory}
+            selectedSubCategory={activeSubCategory}
+            onSubCategoryChange={(sub) => {
+              setActiveSubCategory(sub);
+              if (sub !== 'all') {
+                scrollToSection('properties');
+              }
+            }}
+            availableSubCategories={availableSubCategories}
+            selectedLocation={selectedLocation}
+            onLocationChange={setSelectedLocation}
+            onResetFilters={handleResetFilters}
+            onOpenAiCall={triggerAiCall}
+            onSelectProperty={(p) => openPropertyFullPage(p)}
+          />
 
-      {/* Main Property Listings Section */}
-      <main id="properties" className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
-        {/* Listings Header & Filter Counter */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 sm:pb-5 mb-4 border-b border-slate-800/80 gap-3">
-          <div>
-            <div className="flex items-center gap-1.5 text-xs font-bold text-amber-400 uppercase tracking-widest">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Verified Inventory (Jaipur • Ajmer Road Corridor)</span>
+          {/* Main Property Listings Section */}
+          <main id="properties" className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
+            {/* Listings Header & Filter Counter */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 sm:pb-5 mb-4 border-b border-slate-800/80 gap-3">
+              <div>
+                <div className="flex items-center gap-1.5 text-xs font-bold text-amber-400 uppercase tracking-widest">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Verified Inventory (Jaipur • Ajmer Road Corridor)</span>
+                </div>
+                <h2 className="text-xl sm:text-3xl font-black text-white mt-1">
+                  Available Properties & Plotted Schemes
+                </h2>
+                <p className="text-xs text-slate-400 mt-1">
+                  Showing {filteredProperties.length} verified deals grouped by area & location
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleResetFilters}
+                  className="px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-semibold bg-slate-900 active:bg-slate-800 text-slate-300 border border-slate-800 transition cursor-pointer"
+                >
+                  Reset Filters
+                </button>
+              </div>
             </div>
-            <h2 className="text-xl sm:text-3xl font-black text-white mt-1">
-              Available Properties & Plotted Schemes
-            </h2>
-            <p className="text-xs text-slate-400 mt-1">
-              Showing {filteredProperties.length} verified assets grouped by area & location
-            </p>
-          </div>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => {
-                setActiveCategory('all');
-                setActiveSubCategory('all');
-                setSelectedLocation('all');
-                setSearchQuery('');
-              }}
-              className="px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-semibold bg-slate-900 active:bg-slate-800 text-slate-300 border border-slate-800 transition cursor-pointer"
-            >
-              Reset Filters
-            </button>
-          </div>
-        </div>
-
-        {/* Location / Area Subcategory Filter Bar */}
-        {availableSubCategories.length > 0 && (
-          <div className="mb-6 flex flex-wrap items-center gap-2">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1">
-              <MapPin className="w-3.5 h-3.5 text-amber-400" />
-              Area Subcategory:
-            </span>
-            <button
-              onClick={() => setActiveSubCategory('all')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer border ${
-                activeSubCategory === 'all'
-                  ? 'bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950 border-amber-400 shadow-sm'
-                  : 'bg-slate-900 text-slate-300 border-slate-800 hover:border-amber-500/40 hover:text-white'
-              }`}
-            >
-              All Areas
-            </button>
-            {availableSubCategories.map((sub) => (
-              <button
-                key={sub.name}
-                onClick={() => setActiveSubCategory(sub.name)}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer border flex items-center gap-1.5 ${
-                  activeSubCategory === sub.name
-                    ? 'bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950 border-amber-400 shadow-sm'
-                    : 'bg-slate-900 text-slate-300 border-slate-800 hover:border-amber-500/40 hover:text-white'
-                }`}
-              >
-                <span>{sub.name}</span>
-                <span
-                  className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                    activeSubCategory === sub.name
-                      ? 'bg-slate-950/20 text-slate-950 font-extrabold'
-                      : 'bg-slate-800 text-amber-400'
+            {/* Location / Area Subcategory Filter Bar */}
+            {availableSubCategories.length > 0 && (
+              <div className="mb-6 flex flex-wrap items-center gap-2">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1">
+                  <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                  Area Subcategory:
+                </span>
+                <button
+                  onClick={() => setActiveSubCategory('all')}
+                  className={`px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer border ${
+                    activeSubCategory === 'all'
+                      ? 'bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950 border-amber-400 shadow-sm'
+                      : 'bg-slate-900 text-slate-300 border-slate-800 hover:border-amber-500/40 hover:text-white'
                   }`}
                 >
-                  {sub.count}
-                </span>
-              </button>
-            ))}
-          </div>
-        )}
+                  All Areas
+                </button>
+                {availableSubCategories.map((sub) => (
+                  <button
+                    key={sub.name}
+                    onClick={() => setActiveSubCategory(sub.name)}
+                    className={`px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer border flex items-center gap-1.5 ${
+                      activeSubCategory === sub.name
+                        ? 'bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950 border-amber-400 shadow-sm'
+                        : 'bg-slate-900 text-slate-300 border-slate-800 hover:border-amber-500/40 hover:text-white'
+                    }`}
+                  >
+                    <span>{sub.name}</span>
+                    <span
+                      className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                        activeSubCategory === sub.name
+                          ? 'bg-slate-950/20 text-slate-950 font-extrabold'
+                          : 'bg-slate-800 text-amber-400'
+                      }`}
+                    >
+                      {sub.count}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            )}
 
-        {/* Properties Grid */}
-        {filteredProperties.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-            {filteredProperties.map((prop) => (
-              <PropertyCard
-                key={prop.id}
-                property={prop}
-                onSelect={(p) => setSelectedProperty(p)}
-                onBookVisit={(p) => setSelectedProperty(p)}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="bg-slate-900 rounded-3xl p-8 sm:p-12 text-center border border-slate-800 max-w-lg mx-auto">
-            <Building className="w-10 h-10 text-slate-600 mx-auto mb-3" />
-            <h3 className="text-base sm:text-lg font-bold text-white">No Properties Found</h3>
-            <p className="text-xs text-slate-400 mt-1 mb-4">
-              No properties matched your search criteria. Please reset your filters or consult with Pooja (AI Advisor).
-            </p>
-            <button
-              onClick={() => {
-                setActiveCategory('all');
-                setActiveSubCategory('all');
-                setSelectedLocation('all');
-                setSearchQuery('');
-              }}
-              className="px-4 py-2.5 rounded-xl bg-emerald-600 active:bg-emerald-500 text-white font-bold text-xs transition cursor-pointer"
-            >
-              Show All Properties
-            </button>
-          </div>
-        )}
+            {/* Properties Grid */}
+            {filteredProperties.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                {filteredProperties.map((prop) => (
+                  <PropertyCard
+                    key={prop.id}
+                    property={prop}
+                    onSelect={(p) => openPropertyFullPage(p, false)}
+                    onBookVisit={(p) => openPropertyFullPage(p, true)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="bg-slate-900 rounded-3xl p-8 sm:p-12 text-center border border-amber-500/20 max-w-xl mx-auto">
+                <Building className="w-10 h-10 text-amber-400 mx-auto mb-3" />
+                <h3 className="text-base sm:text-lg font-bold text-white">
+                  New Verified Projects Coming Soon
+                </h3>
+                <p className="text-xs text-slate-400 mt-1.5 mb-5 leading-relaxed">
+                  Verified deals for this category are currently being onboarded. Explore our live Weekend Farms project in Hirapura (Near Mahindra SEZ) or list your property with us.
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  <button
+                    onClick={handleResetFilters}
+                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950 font-extrabold text-xs transition cursor-pointer"
+                  >
+                    View Live Projects
+                  </button>
+                  <button
+                    onClick={() => setShowPartnerModal(true)}
+                    className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold text-xs border border-amber-500/30 transition cursor-pointer"
+                  >
+                    List Your Property
+                  </button>
+                </div>
+              </div>
+            )}
 
-        {/* Inline EMI Calculator Anchor Section */}
-        <div id="calculator" className="mt-12 sm:mt-16">
-          <EmiCalculator />
-        </div>
+            {/* Inline EMI Calculator Anchor Section */}
+            <div id="calculator" className="mt-12 sm:mt-16">
+              <EmiCalculator />
+            </div>
 
-        {/* Inline Partner Section */}
-        <div id="partners" className="mt-12 sm:mt-16">
-          <PartnerSection />
-        </div>
-      </main>
+            {/* Inline Partner Section */}
+            <div id="partners" className="mt-12 sm:mt-16">
+              <PartnerSection />
+            </div>
+          </main>
 
-      {/* Local Area Growth & Investment Guide */}
-      <MarketGuide />
+          {/* Local Area Growth & Investment Guide */}
+          <MarketGuide />
+        </>
+      )}
 
       {/* Footer */}
       <Footer onSelectCategory={handleCategoryChange} />
-
-      {/* Property Detail Modal */}
-      <PropertyModal
-        property={selectedProperty}
-        onClose={() => setSelectedProperty(null)}
-      />
 
       {/* Dedicated Partner Modal */}
       {showPartnerModal && (

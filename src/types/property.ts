@@ -22,11 +22,13 @@ export interface Property {
   bankLoanPercentage: number; // e.g. 80
   featured: boolean;
   images: string[];
+  videos?: { title: string; duration?: string; url?: string }[];
   googleMapsUrl?: string;
   layoutMapPdf?: string;
   description: string;
   highlights: string[];
   amenities: string[];
+  corporateHubs?: string[];
   distanceMilestones: { label: string; distance: string }[];
   readyToRegistry: boolean;
 }

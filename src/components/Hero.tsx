@@ -95,7 +95,7 @@ export const Hero: React.FC<HeroProps> = ({
             {/* Location Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-semibold tracking-wider uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-              <span>Bhankrota • Ajmer Road • Hirapura • Mahindra SEZ Corridor</span>
+              <span>Jaipur • Ajmer Road • Hirapura • Mahindra SEZ Corridor</span>
             </div>
 
             {/* Crisp 2-Line Luxury Headline */}
@@ -108,8 +108,8 @@ export const Hero: React.FC<HeroProps> = ({
 
             {/* Concise 1-Line Value Subhead */}
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-xl">
-              Direct developer & verified owner deals across Ajmer Road, Bhankrota, Mahindra SEZ & Hirapura —{' '}
-              <span className="text-amber-200 font-semibold">100% Transparent Legal Titles.</span>
+              Direct verified deals across Ajmer Road, Mahindra SEZ & Hirapura —{' '}
+              <span className="text-amber-200 font-semibold">Transparent Registry & Loan Assistance.</span>
             </p>
 
             {/* Search Property by Area Card (No Duplicate Category Bar!) */}
@@ -203,14 +203,12 @@ export const Hero: React.FC<HeroProps> = ({
                     onChange={(e) => onLocationChange(e.target.value)}
                     className="w-full bg-slate-950 border border-slate-700/80 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-500 transition cursor-pointer appearance-none"
                   >
-                    <option value="all">All Jaipur Belts</option>
-                    <option value="Hirapura">Hirapura (Near Mahindra SEZ)</option>
-                    <option value="Bhankrota">Bhankrota 200 ft Road</option>
-                    <option value="Jaisinghpura">Jaisinghpura Corridor</option>
-                    <option value="Mahapura">Mahapura & SEZ Belt</option>
-                    <option value="Ring Road">Ring Road Junction</option>
-                    <option value="Ajmer Road">NH-48 Highway Touch</option>
-                    <option value="Boraj">Boraj Farmhouse Belt</option>
+                    <option value="all">All Jaipur Areas</option>
+                    {availableSubCategories.map((sub) => (
+                      <option key={sub.name} value={sub.name.split(' ')[0]}>
+                        {sub.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -229,15 +227,15 @@ export const Hero: React.FC<HeroProps> = ({
               <div className="flex flex-wrap items-center gap-4 text-[11px] font-semibold text-slate-300">
                 <span className="flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-amber-400" />
-                  100% JDA & RERA Clear
+                  Verified Legal Registry
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Landmark className="w-4 h-4 text-amber-400" />
-                  80% SBI / HDFC Loan
+                  Up to 70% Loan Assistance
                 </span>
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-amber-400" />
-                  0% Brokerage
+                  Direct & Transparent Deals
                 </span>
               </div>
 

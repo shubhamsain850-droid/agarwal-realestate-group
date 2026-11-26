@@ -35,8 +35,11 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
   return (
     <div className="group bg-slate-900 rounded-3xl border border-slate-800 hover:border-emerald-500/50 shadow-xl overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1">
-      {/* Property Image Container */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
+      {/* Card Container Click Opens Full Page */}
+      <div
+        onClick={() => onSelect(property)}
+        className="relative aspect-[16/10] overflow-hidden bg-slate-950 cursor-pointer"
+      >
         <img
           src={property.images[0]}
           alt={property.title}

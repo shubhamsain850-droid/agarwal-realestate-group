@@ -55,7 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2 text-amber-200/90 font-medium">
             <span className="flex h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
-            <span>Bhankrota (302026) & Ajmer Road Specialists • JDA Approved & RERA Verified Only</span>
+            <span>Jaipur Real Estate Corridor • Ajmer Road & Mahindra SEZ • Verified Inventory</span>
           </div>
           <div className="flex items-center gap-4 text-slate-300 text-[11px]">
             <span className="hidden sm:inline">Office: Bhankrota Chauraha, Jaipur</span>

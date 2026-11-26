@@ -26,13 +26,13 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
             </div>
 
             <p className="text-slate-400 leading-relaxed text-xs">
-              Bhankrota (Pincode: 302026) and Ajmer Road corridor's premier property advisory. 
-              Single JDA Patta plots, gated villas, farmhouses, and highway commercial land with 100% legal title assurance.
+              Ajarwal Real Estate Group — Trusted property advisory for Jaipur's Ajmer Road, Mahindra SEZ, and Hirapura corridor. 
+              Verified farmhouse estates, plotted land, and transparent registry & loan support.
             </p>
 
             <div className="flex items-center gap-2 text-amber-400 font-semibold">
               <ShieldCheck className="w-4 h-4" />
-              <span>Rajasthan RERA & JDA Compliant Portal</span>
+              <span>Verified Documentation & Transparent Deals</span>
             </div>
           </div>
 
@@ -41,28 +41,28 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
             <h4 className="font-bold text-white text-sm mb-3 uppercase tracking-wider">Property Categories</h4>
             <ul className="space-y-2">
               <li>
-                <button onClick={() => onSelectCategory('plot')} className="hover:text-emerald-400 transition cursor-pointer">
-                  JDA Approved Residential Plots
+                <button onClick={() => onSelectCategory('farmhouse')} className="hover:text-amber-400 transition cursor-pointer">
+                  Weekend Farmhouses (Hirapura / SEZ)
                 </button>
               </li>
               <li>
-                <button onClick={() => onSelectCategory('villa')} className="hover:text-emerald-400 transition cursor-pointer">
-                  Luxury Duplex Villas (Bhankrota)
+                <button onClick={() => onSelectCategory('plot')} className="hover:text-amber-400 transition cursor-pointer">
+                  Residential Plots (Upcoming)
                 </button>
               </li>
               <li>
-                <button onClick={() => onSelectCategory('farmhouse')} className="hover:text-emerald-400 transition cursor-pointer">
-                  Gated Weekend Farmhouses (Boraj Belt)
+                <button onClick={() => onSelectCategory('villa')} className="hover:text-amber-400 transition cursor-pointer">
+                  Luxury Villas (Upcoming)
                 </button>
               </li>
               <li>
-                <button onClick={() => onSelectCategory('commercial')} className="hover:text-emerald-400 transition cursor-pointer">
-                  Highway Commercial SCO & Shops
+                <button onClick={() => onSelectCategory('commercial')} className="hover:text-amber-400 transition cursor-pointer">
+                  Commercial Plots (Upcoming)
                 </button>
               </li>
               <li>
-                <button onClick={() => onSelectCategory('land')} className="hover:text-emerald-400 transition cursor-pointer">
-                  1 to 10 Bigha Commercial / Warehouse Land
+                <button onClick={() => onSelectCategory('land')} className="hover:text-amber-400 transition cursor-pointer">
+                  Large Land Parcels (Upcoming)
                 </button>
               </li>
             </ul>
@@ -72,13 +72,12 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
           <div>
             <h4 className="font-bold text-white text-sm mb-3 uppercase tracking-wider">Coverage Areas</h4>
             <ul className="space-y-2 text-slate-400">
-              <li>Bhankrota 200 ft Bypass (302026)</li>
-              <li>Jaisinghpura Link Road</li>
-              <li>Mahapura SEZ Road Corridor</li>
-              <li>Ring Road Cloverleaf Junction</li>
-              <li>Near Delhi Public School (DPS) Ajmer Road</li>
-              <li>Bad ke Balaji & Omaxe City Stretch</li>
-              <li>Boraj - Begus Farmhouse Green Belt</li>
+              <li>Hirapura (Near Mahindra SEZ)</li>
+              <li>Ajay Rajpura – Hirapura Belt</li>
+              <li>Mahindra World City Corridor</li>
+              <li>Diggi – Renwal Road Stretch</li>
+              <li>Muhana & Jaipur Ring Road</li>
+              <li>Ajmer Road (NH-48) Corridor</li>
             </ul>
           </div>
 
