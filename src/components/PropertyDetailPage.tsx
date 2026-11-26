@@ -17,6 +17,7 @@ import {
   Landmark
 } from 'lucide-react';
 import type { Property } from '../types/property';
+import { GoogleMapsButton } from './GoogleMapsButton';
 
 interface PropertyDetailPageProps {
   property: Property;
@@ -24,15 +25,14 @@ interface PropertyDetailPageProps {
 }
 
 const PHOTO_LABELS = [
-  'Architectural Concept View',
   'Main Entrance Gate & Site Approach',
-  'Internal 40 ft Interlocking Paver Road',
-  'Developed Wide Road & Paver Block Layout',
-  'Demarcated Farmhouse Plots & Boundary Walls',
+  'Stacked Paver Blocks & Demarcated Plots',
+  'Wide Interlocking Paver Road Construction',
+  'Farmhouse Plots & Perimeter Boundary Wall',
   'Internal Road Network & Curbstones',
-  'Tree Plantation & Perimeter Boundary',
-  'Electricity Poles & Site Infrastructure',
-  'Ongoing Paver & Development Work'
+  'Green Belt Tree Plantation & Roads',
+  'Electricity Poles & Boundary Infrastructure',
+  'Finished Interlocking Road Toward Entrance Gate'
 ];
 
 export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({ property, onBack }) => {
@@ -70,7 +70,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({ property
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 pb-24 lg:pb-12">
       {/* Sticky Top Action Bar */}
-      <div className="sticky top-[104px] sm:top-[110px] z-30 bg-[#140c09]/95 backdrop-blur-xl border-b border-amber-500/25 shadow-xl">
+      <div className="sticky top-[88px] sm:top-[110px] z-30 bg-[#140c09]/95 backdrop-blur-xl border-b border-amber-500/25 shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
           <button
             onClick={onBack}
@@ -102,15 +102,15 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({ property
       </div>
 
       {/* Full-Width Hero Cover Poster Banner */}
-      <section className="relative h-[380px] sm:h-[480px] lg:h-[520px] w-full overflow-hidden border-b border-amber-500/20">
+      <section className="relative min-h-[410px] sm:min-h-[480px] w-full overflow-hidden border-b border-amber-500/20 flex items-end">
         <img
-          src={property.images[0]}
+          src={property.detailBanner || property.images[0]}
           alt={property.title}
-          className="w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#120906] via-[#120906]/55 to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#120906] via-[#120906]/65 to-black/35" />
 
-        <div className="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-8 sm:pb-12">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 sm:pb-12">
           <div className="flex flex-wrap items-center gap-2 mb-3">
             <span className="px-3 py-1 rounded-full bg-amber-500 text-slate-950 text-[11px] font-extrabold uppercase tracking-wider">
               {property.categoryLabel}
@@ -243,7 +243,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({ property
                   >
                     <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
                     <div className="absolute bottom-0 left-0 right-0 bg-black/65 px-2 py-1 text-[10px] text-white font-medium truncate">
-                      {idx === 0 ? 'Cover Poster' : `Site Photo ${idx}`}
+                      Site Photo {idx + 1}
                     </div>
                   </button>
                 ))}
@@ -362,20 +362,13 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({ property
                 Inspect exact plot dimensions (Blocks F-1 to F-24: 270.87 Sq. Yd. to 1,576.25 Sq. Yd.), 100 ft main road frontage, internal 60 ft / 40 ft roads, parks, and navigate straight to the project site.
               </p>
 
-              <div className="space-y-2.5 pt-1">
+              <div className="space-y-3 pt-1">
                 {property.googleMapsUrl && (
-                  <a
-                    href={property.googleMapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full flex items-center justify-between px-4 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-[#df9b58] to-[#c86446] hover:brightness-110 text-slate-950 font-extrabold text-xs transition shadow-lg"
-                  >
-                    <span className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4" />
-                      Open Exact Site Pin on Google Maps
-                    </span>
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
+                  <GoogleMapsButton
+                    url={property.googleMapsUrl}
+                    label="Open Exact Site Pin"
+                    className="w-full"
+                  />
                 )}
 
                 {property.layoutMapPdf && (

@@ -21,6 +21,9 @@ export interface Property {
   bankLoanAvailable: boolean;
   bankLoanPercentage: number; // e.g. 80
   featured: boolean;
+  heroPoster?: string;
+  cardCover?: string;
+  detailBanner?: string;
   images: string[];
   videos?: { title: string; duration?: string; url?: string }[];
   googleMapsUrl?: string;

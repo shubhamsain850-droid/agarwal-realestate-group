@@ -21,10 +21,12 @@ export const PROPERTIES_DATA: Property[] = [
     bankLoanAvailable: true,
     bankLoanPercentage: 70,
     featured: true,
+    heroPoster: '/properties/weekend-farms-hirapura/hero-brochure-poster.jpg',
+    cardCover: '/properties/weekend-farms-hirapura/card-brochure-cover.jpg',
+    detailBanner: '/properties/weekend-farms-hirapura/detail-banner-poster.jpg',
     googleMapsUrl: 'https://maps.app.goo.gl/ZEpzibi6mF9D3g1h6',
     layoutMapPdf: '/maps/weekend-farms-hirapura-map.pdf',
     images: [
-      '/properties/weekend-farms-hirapura/premium-cover-poster.jpg',
       '/properties/weekend-farms-hirapura/site-1-gate-view.jpg',
       '/properties/weekend-farms-hirapura/site-2-paver-road.jpg',
       '/properties/weekend-farms-hirapura/site-3-wide-road.jpg',

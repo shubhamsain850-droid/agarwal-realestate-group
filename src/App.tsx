@@ -6,12 +6,15 @@ import { PropertyDetailPage } from './components/PropertyDetailPage';
 import { AiAssistant } from './components/AiAssistant';
 import { EmiCalculator } from './components/EmiCalculator';
 import { MarketGuide } from './components/MarketGuide';
+import { BlogSection } from './components/BlogSection';
+import { BlogReaderPage } from './components/BlogReaderPage';
 import { PartnerSection } from './components/PartnerSection';
 import { Footer } from './components/Footer';
 import { MobileBottomBar } from './components/MobileBottomBar';
 import { ThemeSelectorModal } from './components/ThemeSelectorModal';
 import { PROPERTIES_DATA } from './data/properties';
 import type { Property, PropertyCategory } from './types/property';
+import type { BlogArticle } from './data/blogs';
 import { Sparkles, Building, MapPin } from 'lucide-react';
 
 export function App() {
@@ -20,6 +23,7 @@ export function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('all');
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
+  const [selectedBlog, setSelectedBlog] = useState<BlogArticle | null>(null);
   const [showCalculator, setShowCalculator] = useState(false);
   const [showPartnerModal, setShowPartnerModal] = useState(false);
 
@@ -29,18 +33,26 @@ export function App() {
     shouldScroll: boolean = false
   ) => {
     setSelectedProperty(null);
+    setSelectedBlog(null);
     setActiveCategory(cat);
     setActiveSubCategory(subCategory);
     if (shouldScroll) {
-      setTimeout(() => scrollToSection('properties'), 50);
+      setTimeout(() => scrollToSection('properties'), 60);
     }
   };
 
   const openPropertyFullPage = (prop: Property, jumpToVisit: boolean = false) => {
+    setSelectedBlog(null);
     setSelectedProperty(prop);
     if (jumpToVisit) {
       setTimeout(() => scrollToSection('book-visit-section'), 120);
     }
+  };
+
+  const openInsightsSection = () => {
+    setSelectedProperty(null);
+    setSelectedBlog(null);
+    setTimeout(() => scrollToSection('insights'), 60);
   };
 
   const handleResetFilters = () => {
@@ -121,10 +133,17 @@ export function App() {
         onSelectCategory={handleCategoryChange}
         onOpenPartnerModal={() => setShowPartnerModal(true)}
         onOpenCalculator={() => setShowCalculator(true)}
+        onOpenInsights={openInsightsSection}
       />
 
-      {/* FULL-SCREEN PROPERTY DETAIL VIEW OR MAIN HOME VIEW */}
-      {selectedProperty ? (
+      {/* FULL-SCREEN BLOG READER, FULL-SCREEN PROPERTY DETAIL VIEW, OR MAIN HOME VIEW */}
+      {selectedBlog ? (
+        <BlogReaderPage
+          article={selectedBlog}
+          onBack={() => setSelectedBlog(null)}
+          onOpenProperty={(p) => openPropertyFullPage(p)}
+        />
+      ) : selectedProperty ? (
         <PropertyDetailPage
           property={selectedProperty}
           onBack={() => setSelectedProperty(null)}
@@ -271,6 +290,9 @@ export function App() {
 
           {/* Local Area Growth & Investment Guide */}
           <MarketGuide />
+
+          {/* Flagship SEO Research Blogs */}
+          <BlogSection onSelectBlog={(article) => setSelectedBlog(article)} />
         </>
       )}
 

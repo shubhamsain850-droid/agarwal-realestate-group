@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShieldCheck, Compass, MapPin, CheckCircle2, MessageCircle, Eye } from 'lucide-react';
 import type { Property } from '../types/property';
+import { GoogleMapsButton } from './GoogleMapsButton';
 
 interface PropertyCardProps {
   property: Property;
@@ -41,7 +42,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         className="relative aspect-[16/10] overflow-hidden bg-slate-950 cursor-pointer"
       >
         <img
-          src={property.images[0]}
+          src={property.cardCover || property.images[0]}
           alt={property.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
@@ -87,16 +88,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
               <span className="truncate">{property.subCategory || property.location}</span>
             </div>
             {property.googleMapsUrl && (
-              <a
-                href={property.googleMapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="text-[10px] font-bold text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 px-2 py-0.5 rounded-full shrink-0 transition"
-                title="Open Exact Google Maps Location"
-              >
-                Maps Pin ↗
-              </a>
+              <GoogleMapsButton url={property.googleMapsUrl} compact />
             )}
           </div>
 

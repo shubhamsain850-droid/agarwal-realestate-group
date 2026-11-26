@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ajarwalrealestategroup.com/sitemap.xml

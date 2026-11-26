@@ -256,49 +256,51 @@ export const Hero: React.FC<HeroProps> = ({
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden bg-slate-900 border border-amber-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.6)] group">
               {/* Showcase Image */}
-              <div className="relative h-[320px] sm:h-[370px] overflow-hidden">
+              <div
+                onClick={() => onSelectProperty(currentFeatured)}
+                className="relative h-[340px] sm:h-[390px] overflow-hidden cursor-pointer"
+              >
                 <img
-                  src={currentFeatured.images[0]}
+                  src={currentFeatured.heroPoster || currentFeatured.images[0]}
                   alt={currentFeatured.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#120906] via-[#120906]/45 to-black/30" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#120906] via-[#120906]/40 to-transparent" />
 
-                {/* Top Overlay Bar: Status & Slide Arrows */}
-                <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between">
-                  <span className="px-3 py-1 rounded-full bg-[#140c09]/85 backdrop-blur-md border border-amber-400/40 text-amber-300 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-                    Featured • {currentFeatured.approvalStatus}
-                  </span>
-
-                  <div className="flex items-center gap-1.5">
+                {/* Top Overlay Bar: Slide Arrows only if multiple featured items */}
+                {featuredList.length > 1 && (
+                  <div className="absolute top-3.5 right-3.5 flex items-center gap-1.5">
                     <button
-                      onClick={() =>
-                        setSlideIndex((prev) => (prev - 1 + featuredList.length) % featuredList.length)
-                      }
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSlideIndex((prev) => (prev - 1 + featuredList.length) % featuredList.length);
+                      }}
                       aria-label="Previous Featured Property"
                       className="p-1.5 rounded-full bg-[#140c09]/80 hover:bg-amber-500 text-white hover:text-slate-950 border border-amber-500/30 transition cursor-pointer"
                     >
                       <ChevronLeft className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() => setSlideIndex((prev) => (prev + 1) % featuredList.length)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSlideIndex((prev) => (prev + 1) % featuredList.length);
+                      }}
                       aria-label="Next Featured Property"
                       className="p-1.5 rounded-full bg-[#140c09]/80 hover:bg-amber-500 text-white hover:text-slate-950 border border-amber-500/30 transition cursor-pointer"
                     >
                       <ChevronRight className="w-4 h-4" />
                     </button>
                   </div>
-                </div>
+                )}
 
                 {/* Bottom Overlay Info */}
-                <div className="absolute bottom-0 left-0 right-0 p-5 space-y-2.5">
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 space-y-2">
                   <div className="flex items-center justify-between text-[11px] text-amber-300 font-semibold">
-                    <span className="uppercase tracking-wider">{currentFeatured.categoryLabel}</span>
-                    <span>{currentFeatured.areaSizeUnit}</span>
+                    <span className="uppercase tracking-wider">{currentFeatured.approvalStatus}</span>
+                    <span>{currentFeatured.areaSize} {currentFeatured.areaSizeUnit}</span>
                   </div>
 
-                  <h2 className="font-serif text-lg sm:text-xl font-bold text-white leading-snug line-clamp-2">
+                  <h2 className="font-serif text-base sm:text-xl font-bold text-white leading-snug line-clamp-2">
                     {currentFeatured.title}
                   </h2>
 
@@ -309,7 +311,7 @@ export const Hero: React.FC<HeroProps> = ({
 
                   <div className="pt-2 flex items-center justify-between border-t border-amber-500/20">
                     <div>
-                      <span className="text-xl font-black text-amber-400">
+                      <span className="text-lg sm:text-xl font-black text-amber-400">
                         {currentFeatured.priceDisplay}
                       </span>
                       <span className="block text-[10px] text-slate-300">
@@ -318,7 +320,10 @@ export const Hero: React.FC<HeroProps> = ({
                     </div>
 
                     <button
-                      onClick={() => onSelectProperty(currentFeatured)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelectProperty(currentFeatured);
+                      }}
                       className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 via-[#df9b58] to-[#c86446] hover:brightness-110 text-slate-950 font-extrabold text-xs shadow-lg transition cursor-pointer flex items-center gap-1"
                     >
                       <span>View Project</span>

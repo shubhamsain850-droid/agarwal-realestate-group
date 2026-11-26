@@ -10,6 +10,7 @@ interface NavbarProps {
   onSelectCategory: (cat: PropertyCategory | 'all', subCategory?: string, shouldScroll?: boolean) => void;
   onOpenPartnerModal: () => void;
   onOpenCalculator: () => void;
+  onOpenInsights: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -17,7 +18,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   activeSubCategory,
   onSelectCategory,
   onOpenPartnerModal,
-  onOpenCalculator
+  onOpenCalculator,
+  onOpenInsights
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<PropertyCategory | 'all' | null>(null);
@@ -50,15 +52,16 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md border-b border-slate-800 text-white shadow-xl">
-      {/* Top Notification Bar */}
-      <div className="bg-[#140b07] py-1.5 px-4 text-xs border-b border-amber-500/20">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2 text-amber-200/90 font-medium">
-            <span className="flex h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
-            <span>Jaipur Real Estate Corridor • Ajmer Road & Mahindra SEZ • Verified Inventory</span>
+      {/* Top Notification Bar - Slim single-line on Mobile */}
+      <div className="bg-[#140b07] py-1 sm:py-1.5 px-3 sm:px-4 text-[11px] sm:text-xs border-b border-amber-500/20">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 text-amber-200/90 font-medium truncate">
+            <span className="flex h-2 w-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
+            <span className="sm:hidden truncate">Jaipur • Ajmer Rd & Mahindra SEZ</span>
+            <span className="hidden sm:inline">Jaipur Real Estate Corridor • Ajmer Road & Mahindra SEZ • Verified Inventory</span>
           </div>
-          <div className="flex items-center gap-4 text-slate-300 text-[11px]">
-            <span className="hidden sm:inline">Office: Bhankrota Chauraha, Jaipur</span>
+          <div className="flex items-center gap-4 text-slate-300 text-[11px] shrink-0">
+            <span className="hidden md:inline">Office: Bhankrota Chauraha, Jaipur</span>
             <a
               href="tel:+919829000000"
               className="flex items-center gap-1 text-amber-400 font-bold hover:underline"
@@ -70,22 +73,25 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Main Navbar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 gap-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
           {/* Logo & Brand Identity */}
-          <div className="flex items-center gap-3.5 shrink-0">
+          <div
+            onClick={() => onSelectCategory('all', 'all', false)}
+            className="flex items-center gap-2.5 sm:gap-3.5 shrink-0 cursor-pointer"
+          >
             <div className="relative shrink-0">
               <img
                 src="/logo-emblem-sandstone.jpg"
                 alt="Ajarwal Real Estate Group Emblem"
-                className="w-12 h-12 rounded-full object-cover border-2 border-amber-400/90 shadow-[0_0_15px_rgba(223,155,88,0.35)]"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-amber-400/90 shadow-[0_0_15px_rgba(223,155,88,0.35)]"
               />
             </div>
             <div className="flex flex-col justify-center shrink-0">
-              <span className="font-serif font-black text-2xl tracking-[0.06em] text-white leading-none">
+              <span className="font-serif font-black text-lg sm:text-2xl tracking-[0.06em] text-white leading-none">
                 AJARWAL
               </span>
-              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.24em] text-amber-400 mt-1 whitespace-nowrap">
+              <span className="text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.2em] sm:tracking-[0.24em] text-amber-400 mt-0.5 sm:mt-1 whitespace-nowrap">
                 REAL ESTATE GROUP
               </span>
             </div>
@@ -187,6 +193,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
               );
             })}
+            <button
+              onClick={onOpenInsights}
+              className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-900/60 transition cursor-pointer"
+            >
+              Guides
+            </button>
             <button
               onClick={onOpenCalculator}
               className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-900/60 transition cursor-pointer"
@@ -303,6 +315,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>Change Website Theme ({themeConfig.name})</span>
             </button>
 
+            <button
+              onClick={() => {
+                onOpenInsights();
+                setMobileMenuOpen(false);
+              }}
+              className="w-full py-2.5 text-center text-xs font-semibold bg-slate-800 rounded-xl text-amber-300 cursor-pointer"
+            >
+              Area Research Guides & Blogs
+            </button>
             <button
               onClick={() => {
                 onOpenCalculator();
