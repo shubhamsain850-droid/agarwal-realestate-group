@@ -12,21 +12,45 @@ import { MobileBottomBar } from './components/MobileBottomBar';
 import { ThemeSelectorModal } from './components/ThemeSelectorModal';
 import { PROPERTIES_DATA } from './data/properties';
 import type { Property, PropertyCategory } from './types/property';
-import { Sparkles, Building } from 'lucide-react';
+import { Sparkles, Building, MapPin } from 'lucide-react';
 
 export function App() {
   const [activeCategory, setActiveCategory] = useState<PropertyCategory | 'all'>('all');
+  const [activeSubCategory, setActiveSubCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('all');
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [showCalculator, setShowCalculator] = useState(false);
   const [showPartnerModal, setShowPartnerModal] = useState(false);
 
+  const handleCategoryChange = (cat: PropertyCategory | 'all') => {
+    setActiveCategory(cat);
+    setActiveSubCategory('all');
+  };
+
+  // Location / Area Subcategories for the active category
+  const availableSubCategories = useMemo(() => {
+    const matchingCategoryProps = PROPERTIES_DATA.filter(
+      (prop) => activeCategory === 'all' || prop.category === activeCategory
+    );
+    const counts = new Map<string, number>();
+    matchingCategoryProps.forEach((prop) => {
+      if (prop.subCategory) {
+        counts.set(prop.subCategory, (counts.get(prop.subCategory) || 0) + 1);
+      }
+    });
+    return Array.from(counts.entries()).map(([name, count]) => ({ name, count }));
+  }, [activeCategory]);
+
   // Filtered properties
   const filteredProperties = useMemo(() => {
     return PROPERTIES_DATA.filter((prop) => {
       // Category match
       if (activeCategory !== 'all' && prop.category !== activeCategory) {
+        return false;
+      }
+      // Subcategory (Area / Location) match
+      if (activeSubCategory !== 'all' && prop.subCategory !== activeSubCategory) {
         return false;
       }
       // Location match
@@ -38,15 +62,16 @@ export function App() {
         const query = searchQuery.toLowerCase();
         const matchesTitle = prop.title.toLowerCase().includes(query);
         const matchesSub = prop.subLocation.toLowerCase().includes(query);
+        const matchesSubCat = (prop.subCategory || '').toLowerCase().includes(query);
         const matchesDesc = prop.description.toLowerCase().includes(query);
         const matchesHighlights = prop.highlights.some((h) => h.toLowerCase().includes(query));
-        if (!matchesTitle && !matchesSub && !matchesDesc && !matchesHighlights) {
+        if (!matchesTitle && !matchesSub && !matchesSubCat && !matchesDesc && !matchesHighlights) {
           return false;
         }
       }
       return true;
     });
-  }, [activeCategory, selectedLocation, searchQuery]);
+  }, [activeCategory, activeSubCategory, selectedLocation, searchQuery]);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -70,7 +95,7 @@ export function App() {
       {/* Navigation */}
       <Navbar
         activeCategory={activeCategory}
-        onSelectCategory={setActiveCategory}
+        onSelectCategory={handleCategoryChange}
         onOpenPartnerModal={() => setShowPartnerModal(true)}
         onOpenCalculator={() => setShowCalculator(true)}
       />
@@ -80,7 +105,7 @@ export function App() {
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         selectedCategory={activeCategory}
-        onCategoryChange={setActiveCategory}
+        onCategoryChange={handleCategoryChange}
         selectedLocation={selectedLocation}
         onLocationChange={setSelectedLocation}
         onOpenAiCall={triggerAiCall}
@@ -90,17 +115,17 @@ export function App() {
       {/* Main Property Listings Section */}
       <main id="properties" className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
         {/* Listings Header & Filter Counter */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 sm:pb-6 mb-6 sm:mb-8 border-b border-slate-800/80 gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 sm:pb-5 mb-4 border-b border-slate-800/80 gap-3">
           <div>
             <div className="flex items-center gap-1.5 text-xs font-bold text-amber-400 uppercase tracking-widest">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Verified Inventory (Bhankrota 302026)</span>
+              <span>Verified Inventory (Jaipur • Ajmer Road Corridor)</span>
             </div>
             <h2 className="text-xl sm:text-3xl font-black text-white mt-1">
               Available Properties & Plotted Schemes
             </h2>
             <p className="text-xs text-slate-400 mt-1">
-              Showing {filteredProperties.length} verified legal title assets along Ajmer Road corridor
+              Showing {filteredProperties.length} verified assets grouped by area & location
             </p>
           </div>
 
@@ -108,6 +133,7 @@ export function App() {
             <button
               onClick={() => {
                 setActiveCategory('all');
+                setActiveSubCategory('all');
                 setSelectedLocation('all');
                 setSearchQuery('');
               }}
@@ -117,6 +143,48 @@ export function App() {
             </button>
           </div>
         </div>
+
+        {/* Location / Area Subcategory Filter Bar */}
+        {availableSubCategories.length > 0 && (
+          <div className="mb-6 flex flex-wrap items-center gap-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1">
+              <MapPin className="w-3.5 h-3.5 text-amber-400" />
+              Area Subcategory:
+            </span>
+            <button
+              onClick={() => setActiveSubCategory('all')}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer border ${
+                activeSubCategory === 'all'
+                  ? 'bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950 border-amber-400 shadow-sm'
+                  : 'bg-slate-900 text-slate-300 border-slate-800 hover:border-amber-500/40 hover:text-white'
+              }`}
+            >
+              All Areas
+            </button>
+            {availableSubCategories.map((sub) => (
+              <button
+                key={sub.name}
+                onClick={() => setActiveSubCategory(sub.name)}
+                className={`px-3 py-1.5 rounded-full text-xs font-bold transition cursor-pointer border flex items-center gap-1.5 ${
+                  activeSubCategory === sub.name
+                    ? 'bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950 border-amber-400 shadow-sm'
+                    : 'bg-slate-900 text-slate-300 border-slate-800 hover:border-amber-500/40 hover:text-white'
+                }`}
+              >
+                <span>{sub.name}</span>
+                <span
+                  className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                    activeSubCategory === sub.name
+                      ? 'bg-slate-950/20 text-slate-950 font-extrabold'
+                      : 'bg-slate-800 text-amber-400'
+                  }`}
+                >
+                  {sub.count}
+                </span>
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Properties Grid */}
         {filteredProperties.length > 0 ? (
@@ -140,6 +208,7 @@ export function App() {
             <button
               onClick={() => {
                 setActiveCategory('all');
+                setActiveSubCategory('all');
                 setSelectedLocation('all');
                 setSearchQuery('');
               }}
@@ -165,7 +234,7 @@ export function App() {
       <MarketGuide />
 
       {/* Footer */}
-      <Footer onSelectCategory={setActiveCategory} />
+      <Footer onSelectCategory={handleCategoryChange} />
 
       {/* Property Detail Modal */}
       <PropertyModal

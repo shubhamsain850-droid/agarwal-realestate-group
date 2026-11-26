@@ -135,6 +135,7 @@ export const Hero: React.FC<HeroProps> = ({
                     className="w-full bg-slate-950 border border-slate-700/80 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-500 transition cursor-pointer appearance-none"
                   >
                     <option value="all">All Ajmer Road Zones</option>
+                    <option value="Hirapura">Hirapura (Near Mahindra SEZ)</option>
                     <option value="Bhankrota">Bhankrota 200 ft Road</option>
                     <option value="Jaisinghpura">Jaisinghpura Corridor</option>
                     <option value="Mahapura">Mahapura & SEZ Belt</option>

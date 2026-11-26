@@ -77,16 +77,31 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
       {/* Card Content Body */}
       <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
         <div>
-          {/* Location Pin */}
-          <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-semibold mb-1">
-            <MapPin className="w-3.5 h-3.5 shrink-0" />
-            <span className="truncate">{property.subLocation}</span>
+          {/* Area Subcategory & Location Pin */}
+          <div className="flex items-center justify-between gap-2 mb-1.5">
+            <div className="flex items-center gap-1.5 text-xs text-amber-400 font-semibold min-w-0">
+              <MapPin className="w-3.5 h-3.5 shrink-0" />
+              <span className="truncate">{property.subCategory || property.location}</span>
+            </div>
+            {property.googleMapsUrl && (
+              <a
+                href={property.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="text-[10px] font-bold text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 px-2 py-0.5 rounded-full shrink-0 transition"
+                title="Open Exact Google Maps Location"
+              >
+                Maps Pin ↗
+              </a>
+            )}
           </div>
 
           {/* Title */}
-          <h3 className="font-bold text-white text-base leading-snug group-hover:text-emerald-300 transition line-clamp-2">
+          <h3 className="font-bold text-white text-base leading-snug group-hover:text-amber-300 transition line-clamp-2">
             {property.title}
           </h3>
+          <p className="text-[11px] text-slate-400 mt-1 truncate">{property.subLocation}</p>
 
           {/* Quick Specification Badges */}
           <div className="mt-3 grid grid-cols-2 gap-2 text-[11px] text-slate-300">

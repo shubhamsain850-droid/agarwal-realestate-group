@@ -5,6 +5,7 @@ export interface Property {
   title: string;
   category: PropertyCategory;
   categoryLabel: string;
+  subCategory?: string; // Location / Area subcategory for grouping deals
   location: string;
   subLocation: string;
   pincode: string;
@@ -15,12 +16,14 @@ export interface Property {
   areaSizeUnit: string; // "Gaj" or "Sq. Yd." or "Bigha"
   facing: 'East' | 'North' | 'North-East' | 'West' | 'Corner';
   roadWidth: string; // e.g. "40 ft road", "60 ft sector road"
-  approvalStatus: 'JDA Approved' | 'JDA 90A Approved' | 'Society Patta' | 'RERA Registered';
+  approvalStatus: 'JDA Approved' | 'JDA 90A Approved' | 'Society Patta' | 'RERA Registered' | 'Agriculture (Registry)';
   reraId?: string;
   bankLoanAvailable: boolean;
   bankLoanPercentage: number; // e.g. 80
   featured: boolean;
   images: string[];
+  googleMapsUrl?: string;
+  layoutMapPdf?: string;
   description: string;
   highlights: string[];
   amenities: string[];

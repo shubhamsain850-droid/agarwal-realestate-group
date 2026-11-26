@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X, MapPin, ShieldCheck, CheckCircle2, MessageCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, MapPin, ShieldCheck, CheckCircle2, MessageCircle, FileText, ExternalLink } from 'lucide-react';
 import type { Property } from '../types/property';
 
 interface PropertyModalProps {
@@ -14,6 +14,11 @@ export const PropertyModal: React.FC<PropertyModalProps> = ({ property, onClose 
   const [visitDate, setVisitDate] = useState('');
   const [needPickup, setNeedPickup] = useState(false);
   const [isBooked, setIsBooked] = useState(false);
+
+  useEffect(() => {
+    setSelectedImageIndex(0);
+    setIsBooked(false);
+  }, [property?.id]);
 
   if (!property) return null;
 
@@ -34,11 +39,16 @@ export const PropertyModal: React.FC<PropertyModalProps> = ({ property, onClose 
         {/* Modal Top Bar */}
         <div className="bg-slate-950 p-3.5 sm:p-4 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-2 truncate">
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
               {property.categoryLabel}
             </span>
+            {property.subCategory && (
+              <span className="hidden sm:inline-block text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-800 text-amber-400 border border-slate-700">
+                {property.subCategory}
+              </span>
+            )}
             <span className="text-[11px] font-semibold text-slate-400 flex items-center gap-1 truncate">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-400 shrink-0" />
               <span className="truncate">{property.approvalStatus}</span>
             </span>
           </div>
@@ -85,9 +95,9 @@ export const PropertyModal: React.FC<PropertyModalProps> = ({ property, onClose 
 
           {/* Title & Core Location */}
           <div>
-            <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-amber-400">
               <MapPin className="w-3.5 h-3.5 shrink-0" />
-              <span>{property.subLocation}, Bhankrota, Jaipur ({property.pincode})</span>
+              <span>{property.subLocation}</span>
             </div>
             <h2 className="text-lg sm:text-2xl font-extrabold text-white mt-1 leading-snug">
               {property.title}
@@ -113,9 +123,39 @@ export const PropertyModal: React.FC<PropertyModalProps> = ({ property, onClose 
             </div>
             <div>
               <div className="text-[10px] text-slate-400">Bank Loan</div>
-              <div className="text-xs sm:text-sm font-bold text-emerald-400 mt-0.5">Up to {property.bankLoanPercentage}% Approved</div>
+              <div className="text-xs sm:text-sm font-bold text-amber-400 mt-0.5">Up to {property.bankLoanPercentage}% Available</div>
             </div>
           </div>
+
+          {/* Direct Map Pin & PDF Layout Map Action Row */}
+          {(property.googleMapsUrl || property.layoutMapPdf) && (
+            <div className="flex flex-wrap items-center gap-2.5">
+              {property.googleMapsUrl && (
+                <a
+                  href={property.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/40 text-amber-300 text-xs font-bold transition"
+                >
+                  <MapPin className="w-4 h-4 text-amber-400" />
+                  <span>View Exact Location on Google Maps</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
+              {property.layoutMapPdf && (
+                <a
+                  href={property.layoutMapPdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white text-xs font-bold transition"
+                >
+                  <FileText className="w-4 h-4 text-amber-400" />
+                  <span>View / Download Site Layout Map (PDF)</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
+            </div>
+          )}
 
           {/* Amenities & Infrastructure */}
           <div>
