@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
-import { Phone, MessageCircle, Menu, X, Palette } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { Phone, MessageCircle, Menu, X, Palette, ChevronDown, MapPin } from 'lucide-react';
 import type { PropertyCategory } from '../types/property';
 import { useRealEstateTheme } from '../context/ThemeContext';
+import { PROPERTIES_DATA } from '../data/properties';
 
 interface NavbarProps {
   activeCategory: PropertyCategory | 'all';
-  onSelectCategory: (cat: PropertyCategory | 'all') => void;
+  activeSubCategory: string;
+  onSelectCategory: (cat: PropertyCategory | 'all', subCategory?: string, shouldScroll?: boolean) => void;
   onOpenPartnerModal: () => void;
   onOpenCalculator: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activeCategory,
+  activeSubCategory,
   onSelectCategory,
   onOpenPartnerModal,
   onOpenCalculator
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<PropertyCategory | 'all' | null>(null);
   const { themeConfig, openThemeModal } = useRealEstateTheme();
 
   const navCategories: { id: PropertyCategory | 'all'; label: string }[] = [
@@ -27,6 +31,22 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'commercial', label: 'Commercial' },
     { id: 'land', label: 'Big Land / 90A' }
   ];
+
+  // Dynamically map area subcategories per category from real properties
+  const categorySubMap = useMemo(() => {
+    const map: Record<string, { name: string; count: number }[]> = {};
+    navCategories.forEach((cat) => {
+      if (cat.id === 'all') return;
+      const counts = new Map<string, number>();
+      PROPERTIES_DATA.filter((p) => p.category === cat.id).forEach((p) => {
+        if (p.subCategory) {
+          counts.set(p.subCategory, (counts.get(p.subCategory) || 0) + 1);
+        }
+      });
+      map[cat.id] = Array.from(counts.entries()).map(([name, count]) => ({ name, count }));
+    });
+    return map;
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md border-b border-slate-800 text-white shadow-xl">
@@ -71,21 +91,102 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </div>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation Links with Area Subcategory Dropdowns */}
           <nav className="hidden lg:flex items-center gap-1">
-            {navCategories.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => onSelectCategory(item.id)}
-                className={`px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                  activeCategory === item.id
-                    ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold shadow-sm'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-900/60'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
+            {navCategories.map((item) => {
+              const subs = categorySubMap[item.id] || [];
+              const hasSubs = subs.length > 0;
+              const isDropdownOpen = openDropdown === item.id;
+
+              return (
+                <div
+                  key={item.id}
+                  className="relative"
+                  onMouseEnter={() => hasSubs && setOpenDropdown(item.id)}
+                  onMouseLeave={() => setOpenDropdown(null)}
+                >
+                  <button
+                    onClick={() => {
+                      onSelectCategory(item.id, 'all', false);
+                      if (hasSubs) {
+                        setOpenDropdown(isDropdownOpen ? null : item.id);
+                      } else {
+                        setOpenDropdown(null);
+                      }
+                    }}
+                    className={`px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center gap-1 ${
+                      activeCategory === item.id
+                        ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold shadow-sm'
+                        : 'text-slate-300 hover:text-white hover:bg-slate-900/60'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    {hasSubs && (
+                      <ChevronDown
+                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                          isDropdownOpen ? 'rotate-180 text-amber-400' : 'opacity-70'
+                        }`}
+                      />
+                    )}
+                  </button>
+
+                  {/* Area Subcategory Dropdown */}
+                  {hasSubs && isDropdownOpen && (
+                    <div className="absolute left-0 top-full pt-1.5 w-64 z-50">
+                      <div className="bg-[#180e09] border border-amber-500/35 rounded-2xl shadow-2xl p-2 space-y-1 backdrop-blur-xl">
+                        <div className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-amber-400/80 border-b border-amber-500/15 mb-1">
+                          Select {item.label} Area
+                        </div>
+                        <button
+                          onClick={() => {
+                            onSelectCategory(item.id, 'all', true);
+                            setOpenDropdown(null);
+                          }}
+                          className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition flex items-center justify-between cursor-pointer ${
+                            activeCategory === item.id && activeSubCategory === 'all'
+                              ? 'bg-amber-500 text-slate-950 font-bold'
+                              : 'text-slate-200 hover:bg-amber-500/15 hover:text-amber-300'
+                          }`}
+                        >
+                          <span>All {item.label}</span>
+                          <span className="text-[10px] opacity-75">
+                            {subs.reduce((acc, s) => acc + s.count, 0)}
+                          </span>
+                        </button>
+                        {subs.map((sub) => (
+                          <button
+                            key={sub.name}
+                            onClick={() => {
+                              onSelectCategory(item.id, sub.name, true);
+                              setOpenDropdown(null);
+                            }}
+                            className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold transition flex items-center justify-between gap-2 cursor-pointer ${
+                              activeCategory === item.id && activeSubCategory === sub.name
+                                ? 'bg-amber-500 text-slate-950 font-bold'
+                                : 'text-slate-200 hover:bg-amber-500/15 hover:text-amber-300'
+                            }`}
+                          >
+                            <span className="flex items-center gap-1.5 truncate">
+                              <MapPin className="w-3 h-3 text-amber-400 shrink-0" />
+                              <span className="truncate">{sub.name}</span>
+                            </span>
+                            <span
+                              className={`text-[10px] px-1.5 py-0.5 rounded-full shrink-0 ${
+                                activeCategory === item.id && activeSubCategory === sub.name
+                                  ? 'bg-slate-950/20 text-slate-950'
+                                  : 'bg-slate-900 text-amber-400'
+                              }`}
+                            >
+                              {sub.count}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
             <button
               onClick={onOpenCalculator}
               className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-900/60 transition cursor-pointer"
@@ -150,12 +251,12 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={item.id}
                 onClick={() => {
-                  onSelectCategory(item.id);
+                  onSelectCategory(item.id, 'all', true);
                   setMobileMenuOpen(false);
                 }}
                 className={`p-2.5 rounded-xl text-xs font-semibold text-left transition cursor-pointer ${
                   activeCategory === item.id
-                    ? 'bg-emerald-600 text-white'
+                    ? 'bg-amber-500 text-slate-950 font-bold'
                     : 'bg-slate-800/80 text-slate-300'
                 }`}
               >
@@ -163,6 +264,32 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
             ))}
           </div>
+
+          {activeCategory !== 'all' && (categorySubMap[activeCategory] || []).length > 0 && (
+            <div className="pb-3 border-b border-slate-800 space-y-1.5">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-amber-400 px-1">
+                Filter by Area Subcategory:
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {(categorySubMap[activeCategory] || []).map((sub) => (
+                  <button
+                    key={sub.name}
+                    onClick={() => {
+                      onSelectCategory(activeCategory, sub.name, true);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold cursor-pointer ${
+                      activeSubCategory === sub.name
+                        ? 'bg-amber-500 text-slate-950 font-bold'
+                        : 'bg-slate-800 text-slate-300 border border-slate-700'
+                    }`}
+                  >
+                    {sub.name} ({sub.count})
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="pt-2 border-t border-slate-800 flex flex-col gap-2">
             <button

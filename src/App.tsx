@@ -23,9 +23,23 @@ export function App() {
   const [showCalculator, setShowCalculator] = useState(false);
   const [showPartnerModal, setShowPartnerModal] = useState(false);
 
-  const handleCategoryChange = (cat: PropertyCategory | 'all') => {
+  const handleCategoryChange = (
+    cat: PropertyCategory | 'all',
+    subCategory: string = 'all',
+    shouldScroll: boolean = false
+  ) => {
     setActiveCategory(cat);
+    setActiveSubCategory(subCategory);
+    if (shouldScroll) {
+      scrollToSection('properties');
+    }
+  };
+
+  const handleResetFilters = () => {
+    setActiveCategory('all');
     setActiveSubCategory('all');
+    setSelectedLocation('all');
+    setSearchQuery('');
   };
 
   // Location / Area Subcategories for the active category
@@ -95,6 +109,7 @@ export function App() {
       {/* Navigation */}
       <Navbar
         activeCategory={activeCategory}
+        activeSubCategory={activeSubCategory}
         onSelectCategory={handleCategoryChange}
         onOpenPartnerModal={() => setShowPartnerModal(true)}
         onOpenCalculator={() => setShowCalculator(true)}
@@ -105,9 +120,17 @@ export function App() {
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         selectedCategory={activeCategory}
-        onCategoryChange={handleCategoryChange}
+        selectedSubCategory={activeSubCategory}
+        onSubCategoryChange={(sub) => {
+          setActiveSubCategory(sub);
+          if (sub !== 'all') {
+            scrollToSection('properties');
+          }
+        }}
+        availableSubCategories={availableSubCategories}
         selectedLocation={selectedLocation}
         onLocationChange={setSelectedLocation}
+        onResetFilters={handleResetFilters}
         onOpenAiCall={triggerAiCall}
         onSelectProperty={(p) => setSelectedProperty(p)}
       />

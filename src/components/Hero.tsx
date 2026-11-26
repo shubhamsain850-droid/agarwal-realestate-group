@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Search,
   ShieldCheck,
@@ -8,7 +8,8 @@ import {
   ChevronRight,
   ArrowUpRight,
   Landmark,
-  CheckCircle2
+  CheckCircle2,
+  Compass
 } from 'lucide-react';
 import type { Property, PropertyCategory } from '../types/property';
 import { PROPERTIES_DATA } from '../data/properties';
@@ -17,25 +18,54 @@ interface HeroProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
   selectedCategory: PropertyCategory | 'all';
-  onCategoryChange: (cat: PropertyCategory | 'all') => void;
+  selectedSubCategory: string;
+  onSubCategoryChange: (sub: string) => void;
+  availableSubCategories: { name: string; count: number }[];
   selectedLocation: string;
   onLocationChange: (loc: string) => void;
+  onResetFilters: () => void;
   onOpenAiCall: () => void;
   onSelectProperty: (property: Property) => void;
 }
+
+const CATEGORY_LABELS: Record<PropertyCategory | 'all', string> = {
+  all: 'All Categories',
+  plot: 'JDA Plots',
+  villa: 'Luxury Villas',
+  farmhouse: 'Farmhouses',
+  commercial: 'Commercial',
+  land: 'Big Land / 90A'
+};
 
 export const Hero: React.FC<HeroProps> = ({
   searchQuery,
   onSearchChange,
   selectedCategory,
-  onCategoryChange,
+  selectedSubCategory,
+  onSubCategoryChange,
+  availableSubCategories,
   selectedLocation,
   onLocationChange,
+  onResetFilters,
   onOpenAiCall,
   onSelectProperty
 }) => {
-  const featuredList = PROPERTIES_DATA.filter((p) => p.featured);
+  // Smartly sync showcase poster with selected category & area subcategory
+  const featuredList = useMemo(() => {
+    const filtered = PROPERTIES_DATA.filter((p) => {
+      if (selectedCategory !== 'all' && p.category !== selectedCategory) return false;
+      if (selectedSubCategory !== 'all' && p.subCategory !== selectedSubCategory) return false;
+      return true;
+    });
+    if (filtered.length > 0) return filtered;
+    return PROPERTIES_DATA.filter((p) => p.featured);
+  }, [selectedCategory, selectedSubCategory]);
+
   const [slideIndex, setSlideIndex] = useState(0);
+
+  useEffect(() => {
+    setSlideIndex(0);
+  }, [selectedCategory, selectedSubCategory]);
 
   useEffect(() => {
     if (featuredList.length <= 1) return;
@@ -47,22 +77,9 @@ export const Hero: React.FC<HeroProps> = ({
 
   const currentFeatured = featuredList[slideIndex] || PROPERTIES_DATA[0];
 
-  const categoryTabs: { id: PropertyCategory | 'all'; label: string }[] = [
-    { id: 'all', label: 'All Inventory' },
-    { id: 'plot', label: 'JDA Plots' },
-    { id: 'villa', label: 'Duplex Villas' },
-    { id: 'farmhouse', label: 'Farmhouses' },
-    { id: 'commercial', label: 'Commercial' },
-    { id: 'land', label: '90A Land' }
-  ];
-
   const scrollToListings = () => {
     const el = document.getElementById('properties');
     el?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleCategoryClick = (id: PropertyCategory | 'all') => {
-    onCategoryChange(id);
   };
 
   return (
@@ -73,56 +90,108 @@ export const Hero: React.FC<HeroProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-          {/* LEFT COLUMN: Crisp Heading + Search Bar + Trust Metrics */}
+          {/* LEFT COLUMN: Crisp Heading + Search Property by Area + Trust Metrics */}
           <div className="lg:col-span-7 space-y-5">
             {/* Location Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-semibold tracking-wider uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-              <span>Bhankrota • Ajmer Road Corridor • Jaipur 302026</span>
+              <span>Bhankrota • Ajmer Road • Hirapura • Mahindra SEZ Corridor</span>
             </div>
 
             {/* Crisp 2-Line Luxury Headline */}
             <h1 className="font-serif text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-tight text-white leading-[1.15]">
-              Verified JDA Plots &{' '}
+              Verified Properties &{' '}
               <span className="bg-gradient-to-r from-[#ffe8ab] via-[#df9b58] to-[#c86446] bg-clip-text text-transparent">
-                Luxury Villas in Jaipur.
+                Prime Estates in Jaipur.
               </span>
             </h1>
 
             {/* Concise 1-Line Value Subhead */}
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-xl">
-              Direct developer pricing across 200 ft Bypass, Jaisinghpura, Mahapura & Ring Road —{' '}
-              <span className="text-amber-200 font-semibold">100% Single Patta & RERA Verified.</span>
+              Direct developer & verified owner deals across Ajmer Road, Bhankrota, Mahindra SEZ & Hirapura —{' '}
+              <span className="text-amber-200 font-semibold">100% Transparent Legal Titles.</span>
             </p>
 
-            {/* Above-the-Fold Quick Search & Filter Card */}
-            <div className="bg-slate-900/90 backdrop-blur-xl rounded-2xl p-3.5 sm:p-4 shadow-2xl border border-amber-500/20 space-y-3">
-              {/* Category Tabs */}
-              <div className="flex items-center gap-1.5 overflow-x-auto pb-2 border-b border-slate-800/80 no-scrollbar">
-                {categoryTabs.map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => handleCategoryClick(tab.id)}
-                    className={`px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all whitespace-nowrap cursor-pointer ${
-                      selectedCategory === tab.id
-                        ? 'bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950 shadow-sm'
-                        : 'bg-slate-950/70 text-slate-300 hover:bg-slate-800 hover:text-white'
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
+            {/* Search Property by Area Card (No Duplicate Category Bar!) */}
+            <div className="bg-slate-900/90 backdrop-blur-xl rounded-2xl p-4 sm:p-5 shadow-2xl border border-amber-500/25 space-y-3.5">
+              {/* Card Header */}
+              <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 border-b border-slate-800/80">
+                <div className="flex items-center gap-2">
+                  <Compass className="w-4 h-4 text-amber-400" />
+                  <h2 className="font-sans text-xs sm:text-sm font-bold text-white tracking-wide uppercase">
+                    Search Property by Area
+                  </h2>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                    {CATEGORY_LABELS[selectedCategory]}
+                  </span>
+                  {(selectedCategory !== 'all' || selectedSubCategory !== 'all' || selectedLocation !== 'all' || searchQuery) && (
+                    <button
+                      onClick={onResetFilters}
+                      className="text-[11px] font-semibold text-slate-400 hover:text-amber-300 underline cursor-pointer"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
               </div>
 
-              {/* Search Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
+              {/* Area Subcategory Quick Selector */}
+              {availableSubCategories.length > 0 && (
+                <div className="space-y-1.5">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    {selectedCategory === 'all'
+                      ? 'Popular Locations / Area Subcategories:'
+                      : `${CATEGORY_LABELS[selectedCategory]} — Area Subcategories:`}
+                  </div>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <button
+                      onClick={() => onSubCategoryChange('all')}
+                      className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer ${
+                        selectedSubCategory === 'all'
+                          ? 'bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950 shadow-sm'
+                          : 'bg-slate-950/80 text-slate-300 border border-slate-800 hover:border-amber-500/40 hover:text-white'
+                      }`}
+                    >
+                      All Areas
+                    </button>
+                    {availableSubCategories.map((sub) => (
+                      <button
+                        key={sub.name}
+                        onClick={() => onSubCategoryChange(sub.name)}
+                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer flex items-center gap-1.5 ${
+                          selectedSubCategory === sub.name
+                            ? 'bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950 shadow-sm'
+                            : 'bg-slate-950/80 text-slate-300 border border-slate-800 hover:border-amber-500/40 hover:text-white'
+                        }`}
+                      >
+                        <MapPin className={`w-3 h-3 ${selectedSubCategory === sub.name ? 'text-slate-950' : 'text-amber-400'}`} />
+                        <span>{sub.name}</span>
+                        <span
+                          className={`text-[10px] px-1.5 rounded-full ${
+                            selectedSubCategory === sub.name
+                              ? 'bg-slate-950/20 text-slate-950'
+                              : 'bg-slate-800 text-amber-400'
+                          }`}
+                        >
+                          {sub.count}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Search Input & Area Dropdown Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-2.5 pt-1">
                 <div className="sm:col-span-5 relative">
                   <Search className="absolute left-3 top-3 w-4 h-4 text-amber-400/80" />
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => onSearchChange(e.target.value)}
-                    placeholder="Colony, 200ft, DPS..."
+                    placeholder="Area, project, 100ft, SEZ..."
                     className="w-full bg-slate-950 border border-slate-700/80 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-amber-500 transition"
                   />
                 </div>
@@ -134,7 +203,7 @@ export const Hero: React.FC<HeroProps> = ({
                     onChange={(e) => onLocationChange(e.target.value)}
                     className="w-full bg-slate-950 border border-slate-700/80 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-500 transition cursor-pointer appearance-none"
                   >
-                    <option value="all">All Ajmer Road Zones</option>
+                    <option value="all">All Jaipur Belts</option>
                     <option value="Hirapura">Hirapura (Near Mahindra SEZ)</option>
                     <option value="Bhankrota">Bhankrota 200 ft Road</option>
                     <option value="Jaisinghpura">Jaisinghpura Corridor</option>
@@ -149,7 +218,7 @@ export const Hero: React.FC<HeroProps> = ({
                   onClick={scrollToListings}
                   className="sm:col-span-3 py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-[#df9b58] to-[#c86446] hover:brightness-110 text-slate-950 font-extrabold text-xs shadow-lg shadow-amber-950/50 transition cursor-pointer flex items-center justify-center gap-1"
                 >
-                  <span>Explore</span>
+                  <span>Search Area</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </button>
               </div>
