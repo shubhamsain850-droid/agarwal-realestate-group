@@ -84,6 +84,7 @@ export function App() {
         selectedLocation={selectedLocation}
         onLocationChange={setSelectedLocation}
         onOpenAiCall={triggerAiCall}
+        onSelectProperty={(p) => setSelectedProperty(p)}
       />
 
       {/* Main Property Listings Section */}

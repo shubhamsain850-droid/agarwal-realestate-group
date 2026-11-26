@@ -82,13 +82,13 @@ export const PartnerSection: React.FC<PartnerSectionProps> = ({ onClose }) => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             <div>
-              <label className="text-[11px] text-slate-400 font-semibold block mb-1">Aapka Naam (Full Name)</label>
+              <label className="text-[11px] text-slate-400 font-semibold block mb-1">Full Name</label>
               <input
                 type="text"
                 required
                 value={landDetails.name}
                 onChange={(e) => setLandDetails({ ...landDetails, name: e.target.value })}
-                placeholder="Ramesh Ajarwal / colonizer name"
+                placeholder="Full Name / Developer Name"
                 className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-amber-500"
               />
             </div>

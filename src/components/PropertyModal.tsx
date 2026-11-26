@@ -168,7 +168,7 @@ export const PropertyModal: React.FC<PropertyModalProps> = ({ property, onClose 
                     required
                     value={visitName}
                     onChange={(e) => setVisitName(e.target.value)}
-                    placeholder="Aapka Naam (Full Name)"
+                    placeholder="Your Full Name"
                     className="bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-emerald-500"
                   />
                   <input
