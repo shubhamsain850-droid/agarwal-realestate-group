@@ -110,7 +110,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({ property
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#120906] via-[#120906]/65 to-black/35" />
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 sm:pb-12">
+        <div className="media-overlay-dark relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 sm:pb-12">
           <div className="flex flex-wrap items-center gap-2 mb-3">
             <span className="px-3 py-1 rounded-full bg-amber-500 text-slate-950 text-[11px] font-extrabold uppercase tracking-wider">
               {property.categoryLabel}
@@ -218,7 +218,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({ property
                     alt={`${property.title} view ${selectedImageIndex + 1}`}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2 bg-[#140c09]/85 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-amber-500/25">
+                  <div className="media-overlay-dark absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2 bg-[#140c09]/85 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-amber-500/25">
                     <span className="text-xs font-bold text-amber-200">
                       {PHOTO_LABELS[selectedImageIndex] || `Site View ${selectedImageIndex + 1}`}
                     </span>

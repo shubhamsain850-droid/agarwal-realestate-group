@@ -21,8 +21,8 @@ export const ThemeSelectorModal: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-extrabold text-lg text-white">Select Real Estate Website Theme</h3>
-                <span className="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-500/30">
-                  5 Curated Palettes
+                <span className="bg-amber-500/20 text-amber-400 text-[10px] font-bold px-2 py-0.5 rounded-full border border-amber-500/30">
+                  {availableThemes.length} Curated Palettes
                 </span>
               </div>
               <p className="text-xs text-slate-400">
@@ -49,17 +49,17 @@ export const ThemeSelectorModal: React.FC = () => {
                 onClick={() => setTheme(theme.id as RealEstateTheme)}
                 className={`p-4 rounded-2xl border-2 transition-all cursor-pointer relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
                   isSelected
-                    ? 'border-emerald-400 bg-slate-800/90 shadow-lg shadow-emerald-950/40'
+                    ? 'border-amber-400 bg-slate-800/90 shadow-lg shadow-amber-950/30'
                     : 'border-slate-800 bg-slate-950 hover:border-slate-700 hover:bg-slate-900'
                 }`}
               >
                 {/* Left Info */}
                 <div className="space-y-1 flex-1">
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <h4 className="font-bold text-white text-sm sm:text-base">{theme.name}</h4>
                     <span className="text-xs text-amber-400 font-medium">({theme.hindiName})</span>
                     {isSelected && (
-                      <span className="inline-flex items-center gap-1 bg-emerald-500 text-slate-950 text-[10px] font-extrabold px-2 py-0.5 rounded-full">
+                      <span className="inline-flex items-center gap-1 bg-amber-500 text-slate-950 text-[10px] font-extrabold px-2 py-0.5 rounded-full">
                         <Check className="w-3 h-3" /> Active
                       </span>
                     )}
@@ -106,7 +106,7 @@ export const ThemeSelectorModal: React.FC = () => {
           </span>
           <button
             onClick={closeThemeModal}
-            className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition cursor-pointer"
+            className="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:brightness-110 text-slate-950 font-extrabold text-xs transition cursor-pointer"
           >
             Apply & Close
           </button>

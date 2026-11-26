@@ -294,7 +294,7 @@ export const Hero: React.FC<HeroProps> = ({
                 )}
 
                 {/* Bottom Overlay Info */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 space-y-2">
+                <div className="media-overlay-dark absolute bottom-0 left-0 right-0 p-4 sm:p-5 space-y-2">
                   <div className="flex items-center justify-between text-[11px] text-amber-300 font-semibold">
                     <span className="uppercase tracking-wider">{currentFeatured.approvalStatus}</span>
                     <span>{currentFeatured.areaSize} {currentFeatured.areaSizeUnit}</span>

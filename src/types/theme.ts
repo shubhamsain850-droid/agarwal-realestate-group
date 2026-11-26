@@ -1,5 +1,6 @@
 export type RealEstateTheme = 
   | 'jaipur-sandstone' 
+  | 'royal-white-blue-gold'
   | 'emerald-gold' 
   | 'corporate-blue' 
   | 'midnight-gold' 
@@ -24,7 +25,7 @@ export const REAL_ESTATE_THEMES: ThemeConfig[] = [
   {
     id: 'jaipur-sandstone',
     name: 'Amber Sandstone & Terracotta',
-    hindiName: 'Jaipur Heritage Edition (Active)',
+    hindiName: 'Jaipur Heritage Edition',
     tagline: 'Authentic Pink City Amber Sandstone & Warm Gold',
     bestFor: 'Luxury Heritage Villas, Farmhouse Retreats, Local Culture',
     palette: {
@@ -33,6 +34,20 @@ export const REAL_ESTATE_THEMES: ThemeConfig[] = [
       primary: '#df9b58',
       accent: '#c86446',
       text: '#fff5f0'
+    }
+  },
+  {
+    id: 'royal-white-blue-gold',
+    name: 'Royal White, Blue & Gold',
+    hindiName: 'White • Royal Blue • Gold Edition',
+    tagline: 'Crisp Pearl White, Imperial Royal Blue & 24K Gold Luxury',
+    bestFor: 'Corporate Luxury Estates, NRI Buyers, Clean Daylight Presentation',
+    palette: {
+      bg: '#f8fafc',
+      card: '#ffffff',
+      primary: '#1e3a8a',
+      accent: '#d4af37',
+      text: '#0f172a'
     }
   },
   {

@@ -61,7 +61,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         </div>
 
         {/* Bottom Image Stats Overlay */}
-        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white">
+        <div className="media-overlay-dark absolute bottom-3 left-3 right-3 flex items-center justify-between text-white">
           <div>
             <div className="text-xl sm:text-2xl font-black text-amber-400">
               {property.priceDisplay}
