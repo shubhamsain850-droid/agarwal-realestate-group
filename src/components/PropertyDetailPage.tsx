@@ -70,7 +70,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({ property
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 pb-24 lg:pb-12">
       {/* Sticky Top Action Bar */}
-      <div className="sticky top-[88px] sm:top-[110px] z-30 bg-[#140c09]/95 backdrop-blur-xl border-b border-amber-500/25 shadow-xl">
+      <div className="sticky top-[132px] sm:top-[152px] lg:top-[110px] z-30 bg-[#140c09]/95 backdrop-blur-xl border-b border-amber-500/25 shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
           <button
             onClick={onBack}

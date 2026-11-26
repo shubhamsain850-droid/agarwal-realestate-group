@@ -3,13 +3,11 @@ import {
   Search,
   ShieldCheck,
   MapPin,
-  Sparkles,
   ChevronLeft,
   ChevronRight,
   ArrowUpRight,
   Landmark,
-  CheckCircle2,
-  Compass
+  CheckCircle2
 } from 'lucide-react';
 import type { Property, PropertyCategory } from '../types/property';
 import { PROPERTIES_DATA } from '../data/properties';
@@ -24,18 +22,8 @@ interface HeroProps {
   selectedLocation: string;
   onLocationChange: (loc: string) => void;
   onResetFilters: () => void;
-  onOpenAiCall: () => void;
   onSelectProperty: (property: Property) => void;
 }
-
-const CATEGORY_LABELS: Record<PropertyCategory | 'all', string> = {
-  all: 'All Categories',
-  plot: 'JDA Plots',
-  villa: 'Luxury Villas',
-  farmhouse: 'Farmhouses',
-  commercial: 'Commercial',
-  land: 'Big Land / 90A'
-};
 
 export const Hero: React.FC<HeroProps> = ({
   searchQuery,
@@ -47,10 +35,8 @@ export const Hero: React.FC<HeroProps> = ({
   selectedLocation,
   onLocationChange,
   onResetFilters,
-  onOpenAiCall,
   onSelectProperty
 }) => {
-  // Smartly sync showcase poster with selected category & area subcategory
   const featuredList = useMemo(() => {
     const filtered = PROPERTIES_DATA.filter((p) => {
       if (selectedCategory !== 'all' && p.category !== selectedCategory) return false;
@@ -83,115 +69,48 @@ export const Hero: React.FC<HeroProps> = ({
   };
 
   return (
-    <section className="relative bg-gradient-to-b from-slate-950 via-slate-900/95 to-slate-950 text-white pt-6 pb-10 sm:pt-8 sm:pb-14 overflow-hidden border-b border-amber-500/10">
-      {/* Subtle Ambient Sandstone Glow */}
-      <div className="absolute -top-24 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-orange-600/10 rounded-full blur-3xl pointer-events-none" />
-
+    <section className="relative bg-gradient-to-b from-slate-950 via-slate-900/95 to-slate-950 text-white pt-5 pb-8 sm:pt-8 sm:pb-12 overflow-hidden border-b border-amber-500/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-          {/* LEFT COLUMN: Crisp Heading + Search Property by Area + Trust Metrics */}
-          <div className="lg:col-span-7 space-y-5">
-            {/* Location Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-semibold tracking-wider uppercase">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-              <span>Jaipur • Ajmer Road • Hirapura • Mahindra SEZ Corridor</span>
-            </div>
-
-            {/* Crisp 2-Line Luxury Headline */}
-            <h1 className="font-serif text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-tight text-white leading-[1.15]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+          {/* LEFT COLUMN: Straight Headline + Clean Search by Area */}
+          <div className="lg:col-span-7 space-y-4">
+            <h1 className="font-serif text-2xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-white leading-[1.15]">
               Verified Properties &{' '}
               <span className="bg-gradient-to-r from-[#ffe8ab] via-[#df9b58] to-[#c86446] bg-clip-text text-transparent">
-                Prime Estates in Jaipur.
+                Farmhouse Plots in Jaipur.
               </span>
             </h1>
 
-            {/* Concise 1-Line Value Subhead */}
-            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-xl">
-              Direct verified deals across Ajmer Road, Mahindra SEZ & Hirapura —{' '}
-              <span className="text-amber-200 font-semibold">Transparent Registry & Loan Assistance.</span>
+            <p className="text-slate-300 text-xs sm:text-sm max-w-lg">
+              Direct verified deals across Hirapura, Mahindra SEZ & Ajmer Road.
             </p>
 
-            {/* Search Property by Area Card (No Duplicate Category Bar!) */}
-            <div className="bg-slate-900/90 backdrop-blur-xl rounded-2xl p-4 sm:p-5 shadow-2xl border border-amber-500/25 space-y-3.5">
-              {/* Card Header */}
-              <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 border-b border-slate-800/80">
-                <div className="flex items-center gap-2">
-                  <Compass className="w-4 h-4 text-amber-400" />
-                  <h2 className="font-sans text-xs sm:text-sm font-bold text-white tracking-wide uppercase">
-                    Search Property by Area
-                  </h2>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">
-                    {CATEGORY_LABELS[selectedCategory]}
-                  </span>
-                  {(selectedCategory !== 'all' || selectedSubCategory !== 'all' || selectedLocation !== 'all' || searchQuery) && (
-                    <button
-                      onClick={onResetFilters}
-                      className="text-[11px] font-semibold text-slate-400 hover:text-amber-300 underline cursor-pointer"
-                    >
-                      Reset
-                    </button>
-                  )}
-                </div>
+            {/* Straight & Minimal Search Property by Area Card */}
+            <div className="bg-slate-900/90 backdrop-blur-xl rounded-2xl p-3.5 sm:p-4 shadow-xl border border-amber-500/25 space-y-3">
+              <div className="flex items-center justify-between">
+                <h2 className="font-sans text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                  Search Property by Area
+                </h2>
+                {(selectedCategory !== 'all' || selectedSubCategory !== 'all' || selectedLocation !== 'all' || searchQuery) && (
+                  <button
+                    onClick={onResetFilters}
+                    className="text-[11px] font-semibold text-slate-400 hover:text-amber-300 underline cursor-pointer"
+                  >
+                    Reset
+                  </button>
+                )}
               </div>
 
-              {/* Area Subcategory Quick Selector */}
-              {availableSubCategories.length > 0 && (
-                <div className="space-y-1.5">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                    {selectedCategory === 'all'
-                      ? 'Popular Locations / Area Subcategories:'
-                      : `${CATEGORY_LABELS[selectedCategory]} — Area Subcategories:`}
-                  </div>
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    <button
-                      onClick={() => onSubCategoryChange('all')}
-                      className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer ${
-                        selectedSubCategory === 'all'
-                          ? 'bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950 shadow-sm'
-                          : 'bg-slate-950/80 text-slate-300 border border-slate-800 hover:border-amber-500/40 hover:text-white'
-                      }`}
-                    >
-                      All Areas
-                    </button>
-                    {availableSubCategories.map((sub) => (
-                      <button
-                        key={sub.name}
-                        onClick={() => onSubCategoryChange(sub.name)}
-                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer flex items-center gap-1.5 ${
-                          selectedSubCategory === sub.name
-                            ? 'bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950 shadow-sm'
-                            : 'bg-slate-950/80 text-slate-300 border border-slate-800 hover:border-amber-500/40 hover:text-white'
-                        }`}
-                      >
-                        <MapPin className={`w-3 h-3 ${selectedSubCategory === sub.name ? 'text-slate-950' : 'text-amber-400'}`} />
-                        <span>{sub.name}</span>
-                        <span
-                          className={`text-[10px] px-1.5 rounded-full ${
-                            selectedSubCategory === sub.name
-                              ? 'bg-slate-950/20 text-slate-950'
-                              : 'bg-slate-800 text-amber-400'
-                          }`}
-                        >
-                          {sub.count}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Search Input & Area Dropdown Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-12 gap-2.5 pt-1">
+              {/* Clean Search Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
                 <div className="sm:col-span-5 relative">
                   <Search className="absolute left-3 top-3 w-4 h-4 text-amber-400/80" />
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => onSearchChange(e.target.value)}
-                    placeholder="Area, project, 100ft, SEZ..."
+                    placeholder="Enter area or project..."
                     className="w-full bg-slate-950 border border-slate-700/80 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-amber-500 transition"
                   />
                 </div>
@@ -203,7 +122,7 @@ export const Hero: React.FC<HeroProps> = ({
                     onChange={(e) => onLocationChange(e.target.value)}
                     className="w-full bg-slate-950 border border-slate-700/80 rounded-xl pl-9 pr-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-500 transition cursor-pointer appearance-none"
                   >
-                    <option value="all">All Jaipur Areas</option>
+                    <option value="all">Select Area</option>
                     {availableSubCategories.map((sub) => (
                       <option key={sub.name} value={sub.name.split(' ')[0]}>
                         {sub.name}
@@ -214,51 +133,59 @@ export const Hero: React.FC<HeroProps> = ({
 
                 <button
                   onClick={scrollToListings}
-                  className="sm:col-span-3 py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-[#df9b58] to-[#c86446] hover:brightness-110 text-slate-950 font-extrabold text-xs shadow-lg shadow-amber-950/50 transition cursor-pointer flex items-center justify-center gap-1"
+                  className="sm:col-span-3 py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-[#df9b58] to-[#c86446] hover:brightness-110 text-slate-950 font-extrabold text-xs shadow-lg transition cursor-pointer flex items-center justify-center gap-1"
                 >
-                  <span>Search Area</span>
+                  <span>Search</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </button>
               </div>
+
+              {/* Direct Area Subcategory Pills */}
+              {availableSubCategories.length > 0 && (
+                <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+                  {availableSubCategories.map((sub) => (
+                    <button
+                      key={sub.name}
+                      onClick={() =>
+                        onSubCategoryChange(selectedSubCategory === sub.name ? 'all' : sub.name)
+                      }
+                      className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer flex items-center gap-1 ${
+                        selectedSubCategory === sub.name
+                          ? 'bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950'
+                          : 'bg-slate-950/80 text-slate-300 border border-slate-800 hover:border-amber-500/40'
+                      }`}
+                    >
+                      <span>{sub.name}</span>
+                      <span className="text-[10px] opacity-75">({sub.count})</span>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* Compact Trust Strip & AI Voice Trigger */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-              <div className="flex flex-wrap items-center gap-4 text-[11px] font-semibold text-slate-300">
-                <span className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-amber-400" />
-                  Verified Legal Registry
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Landmark className="w-4 h-4 text-amber-400" />
-                  Up to 70% Loan Assistance
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-amber-400" />
-                  Direct & Transparent Deals
-                </span>
-              </div>
-
-              <button
-                onClick={onOpenAiCall}
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 font-bold text-[11px] border border-amber-500/30 hover:border-amber-400 transition cursor-pointer"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-spin" />
-                <span>AI Advisor Call</span>
-                <span className="bg-amber-400 text-slate-950 text-[9px] font-extrabold px-1.5 py-0.5 rounded">
-                  FREE
-                </span>
-              </button>
+            {/* Crisp 3-Point Trust Strip (No Duplicate AI Button!) */}
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] font-semibold text-slate-300 pt-1">
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-amber-400" />
+                Verified Registry
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Landmark className="w-4 h-4 text-amber-400" />
+                Up to 70% Loan
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-amber-400" />
+                Direct Deals
+              </span>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Luxury Featured Property Visual Showcase */}
+          {/* RIGHT COLUMN: Featured Brochure Poster Card */}
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden bg-slate-900 border border-amber-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.6)] group">
-              {/* Showcase Image */}
               <div
                 onClick={() => onSelectProperty(currentFeatured)}
-                className="relative h-[340px] sm:h-[390px] overflow-hidden cursor-pointer"
+                className="relative h-[300px] sm:h-[360px] overflow-hidden cursor-pointer"
               >
                 <img
                   src={currentFeatured.heroPoster || currentFeatured.images[0]}
@@ -267,7 +194,6 @@ export const Hero: React.FC<HeroProps> = ({
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#120906] via-[#120906]/40 to-transparent" />
 
-                {/* Top Overlay Bar: Slide Arrows only if multiple featured items */}
                 {featuredList.length > 1 && (
                   <div className="absolute top-3.5 right-3.5 flex items-center gap-1.5">
                     <button
@@ -293,21 +219,17 @@ export const Hero: React.FC<HeroProps> = ({
                   </div>
                 )}
 
-                {/* Bottom Overlay Info */}
-                <div className="media-overlay-dark absolute bottom-0 left-0 right-0 p-4 sm:p-5 space-y-2">
+                <div className="media-overlay-dark absolute bottom-0 left-0 right-0 p-4 sm:p-5 space-y-1.5">
                   <div className="flex items-center justify-between text-[11px] text-amber-300 font-semibold">
                     <span className="uppercase tracking-wider">{currentFeatured.approvalStatus}</span>
-                    <span>{currentFeatured.areaSize} {currentFeatured.areaSizeUnit}</span>
+                    <span>
+                      {currentFeatured.areaSize} {currentFeatured.areaSizeUnit}
+                    </span>
                   </div>
 
                   <h2 className="font-serif text-base sm:text-xl font-bold text-white leading-snug line-clamp-2">
                     {currentFeatured.title}
                   </h2>
-
-                  <p className="text-[11px] text-slate-300 flex items-center gap-1">
-                    <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                    <span className="truncate">{currentFeatured.subLocation}</span>
-                  </p>
 
                   <div className="pt-2 flex items-center justify-between border-t border-amber-500/20">
                     <div>
@@ -333,10 +255,9 @@ export const Hero: React.FC<HeroProps> = ({
                 </div>
               </div>
 
-              {/* Slide Progress Dots */}
               <div className="bg-[#140c09] px-4 py-2 flex items-center justify-between border-t border-amber-500/15">
                 <span className="text-[10px] text-slate-400 font-medium">
-                  Verified Inventory Showcase ({slideIndex + 1}/{featuredList.length})
+                  Featured Project ({slideIndex + 1}/{featuredList.length})
                 </span>
                 <div className="flex items-center gap-1.5">
                   {featuredList.map((item, idx) => (

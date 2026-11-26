@@ -15,7 +15,7 @@ import { ThemeSelectorModal } from './components/ThemeSelectorModal';
 import { PROPERTIES_DATA } from './data/properties';
 import type { Property, PropertyCategory } from './types/property';
 import type { BlogArticle } from './data/blogs';
-import { Sparkles, Building, MapPin } from 'lucide-react';
+import { Building, MapPin } from 'lucide-react';
 
 export function App() {
   const [activeCategory, setActiveCategory] = useState<PropertyCategory | 'all'>('all');
@@ -166,24 +166,19 @@ export function App() {
             selectedLocation={selectedLocation}
             onLocationChange={setSelectedLocation}
             onResetFilters={handleResetFilters}
-            onOpenAiCall={triggerAiCall}
             onSelectProperty={(p) => openPropertyFullPage(p)}
           />
 
           {/* Main Property Listings Section */}
           <main id="properties" className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
             {/* Listings Header & Filter Counter */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 sm:pb-5 mb-4 border-b border-slate-800/80 gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-4 border-b border-slate-800/80 gap-3">
               <div>
-                <div className="flex items-center gap-1.5 text-xs font-bold text-amber-400 uppercase tracking-widest">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Verified Inventory (Jaipur • Ajmer Road Corridor)</span>
-                </div>
-                <h2 className="text-xl sm:text-3xl font-black text-white mt-1">
-                  Available Properties & Plotted Schemes
+                <h2 className="text-xl sm:text-3xl font-black text-white">
+                  Available Properties
                 </h2>
                 <p className="text-xs text-slate-400 mt-1">
-                  Showing {filteredProperties.length} verified deals grouped by area & location
+                  Showing {filteredProperties.length} verified {filteredProperties.length === 1 ? 'property' : 'properties'}
                 </p>
               </div>
 

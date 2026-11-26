@@ -249,19 +249,79 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="lg:hidden flex items-center gap-2">
             <button
               onClick={openThemeModal}
-              className="p-2.5 rounded-xl bg-slate-900 text-amber-400 border border-slate-800 cursor-pointer"
+              className="p-2 rounded-xl bg-slate-900 text-amber-400 border border-slate-800 cursor-pointer"
               title="Select Theme"
             >
-              <Palette className="w-5 h-5" />
+              <Palette className="w-4 h-4" />
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-800 cursor-pointer"
+              className="p-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-800 cursor-pointer"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
+      </div>
+
+      {/* Mobile & Tablet Visible Category Strip (Always visible without opening menu) */}
+      <div className="lg:hidden border-t border-slate-800/80 bg-slate-950/95">
+        <div className="px-3 py-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+          {navCategories.map((item) => {
+            const subs = categorySubMap[item.id] || [];
+            const isActive = activeCategory === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => onSelectCategory(item.id, 'all', subs.length === 0)}
+                className={`px-3 py-1.5 rounded-full text-[11px] font-bold whitespace-nowrap transition cursor-pointer shrink-0 border ${
+                  isActive
+                    ? 'bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950 border-amber-400 shadow-sm'
+                    : 'bg-slate-900 text-slate-300 border-slate-800'
+                }`}
+              >
+                {item.label}
+              </button>
+            );
+          })}
+          <button
+            onClick={onOpenInsights}
+            className="px-3 py-1.5 rounded-full text-[11px] font-bold whitespace-nowrap bg-slate-900 text-amber-300 border border-slate-800 cursor-pointer shrink-0"
+          >
+            Guides
+          </button>
+        </div>
+
+        {/* Show Area Subcategory chips directly on mobile when a category with areas (like Farmhouses) is tapped */}
+        {activeCategory !== 'all' && (categorySubMap[activeCategory] || []).length > 0 && (
+          <div className="px-3 pb-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+            <span className="text-[10px] font-bold uppercase text-amber-400 shrink-0 mr-1">Area:</span>
+            <button
+              onClick={() => onSelectCategory(activeCategory, 'all', true)}
+              className={`px-2.5 py-1 rounded-lg text-[10px] font-bold whitespace-nowrap cursor-pointer shrink-0 ${
+                activeSubCategory === 'all'
+                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
+                  : 'bg-slate-900 text-slate-400 border border-slate-800'
+              }`}
+            >
+              All
+            </button>
+            {(categorySubMap[activeCategory] || []).map((sub) => (
+              <button
+                key={sub.name}
+                onClick={() => onSelectCategory(activeCategory, sub.name, true)}
+                className={`px-2.5 py-1 rounded-lg text-[10px] font-bold whitespace-nowrap cursor-pointer shrink-0 flex items-center gap-1 ${
+                  activeSubCategory === sub.name
+                    ? 'bg-amber-500 text-slate-950'
+                    : 'bg-slate-900 text-slate-200 border border-slate-800'
+                }`}
+              >
+                <MapPin className="w-3 h-3 text-amber-400 shrink-0" />
+                <span>{sub.name}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Mobile Drawer */}
