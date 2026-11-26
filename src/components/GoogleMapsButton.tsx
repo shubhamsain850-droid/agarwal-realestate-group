@@ -50,7 +50,8 @@ export const GoogleMapsButton: React.FC<GoogleMapsButtonProps> = ({
         <span className="whitespace-nowrap">
           {compact ? (
             <>
-              <span className="font-extrabold text-[#1a73e8]">Google</span> Maps Pin
+              <span className="font-extrabold text-[#1a73e8]">Google</span>{' '}
+              {label === 'Open Google Maps Location' ? 'Maps Pin' : label}
             </>
           ) : (
             <>

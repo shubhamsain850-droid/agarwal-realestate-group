@@ -480,11 +480,16 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({ property
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 Schedule your personalized visit to inspect plot boundaries, road width, and registry documentation directly with our senior property advisor.
               </p>
-              <div className="pt-1 flex flex-wrap gap-3 text-xs text-slate-300">
+              <div className="pt-1 flex flex-wrap items-center gap-3 text-xs text-slate-300">
                 <span className="flex items-center gap-1.5">
                   <Phone className="w-3.5 h-3.5 text-amber-400" />
                   +91 98290 XXXXX
                 </span>
+                <GoogleMapsButton
+                  url="https://maps.app.goo.gl/it2rKAKRhp2kzAx29?g_st=awb"
+                  label="Office Pin"
+                  compact
+                />
               </div>
             </div>
 

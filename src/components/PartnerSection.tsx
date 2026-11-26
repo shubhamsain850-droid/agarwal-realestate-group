@@ -50,7 +50,7 @@ export const PartnerSection: React.FC<PartnerSectionProps> = ({ onClose }) => {
           <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
           <h4 className="text-lg font-bold text-white">Partner Application Received!</h4>
           <p className="text-xs text-slate-300 max-w-md mx-auto">
-            Thank you {landDetails.name}! Ajarwal Real Estate Group's senior acquisition head will connect with you within 24 hours for a strategic review at our Bhankrota office.
+            Thank you {landDetails.name}! Ajarwal Real Estate Group's senior acquisition head will connect with you within 24 hours for a strategic review at our Head Office.
           </p>
         </div>
       ) : (

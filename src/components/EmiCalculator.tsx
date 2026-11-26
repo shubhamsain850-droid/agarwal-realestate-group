@@ -42,7 +42,7 @@ export const EmiCalculator: React.FC<EmiCalculatorProps> = ({ onClose }) => {
           </div>
           <div>
             <h3 className="text-xl font-bold text-white">Bank Loan & EMI Calculator</h3>
-            <p className="text-xs text-slate-400">SBI, HDFC, ICICI Bank Housing Loan Calculator (Bhankrota Projects)</p>
+            <p className="text-xs text-slate-400">SBI, HDFC, ICICI & Partner Housing Finance Calculator</p>
           </div>
         </div>
         {onClose && (

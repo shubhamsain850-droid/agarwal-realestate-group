@@ -61,7 +61,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="hidden sm:inline">Jaipur Real Estate Corridor • Ajmer Road & Mahindra SEZ • Verified Inventory</span>
           </div>
           <div className="flex items-center gap-4 text-slate-300 text-[11px] shrink-0">
-            <span className="hidden md:inline">Office: Bhankrota Chauraha, Jaipur</span>
+            <a
+              href="https://maps.app.goo.gl/it2rKAKRhp2kzAx29?g_st=awb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center gap-1 text-amber-200 hover:text-amber-300 transition underline decoration-amber-400/40"
+              title="Open Head Office Location in Google Maps"
+            >
+              <MapPin className="w-3 h-3 text-amber-400" />
+              <span>Head Office (Google Maps)</span>
+            </a>
             <a
               href="tel:+919829000000"
               className="flex items-center gap-1 text-amber-400 font-bold hover:underline"
@@ -226,7 +235,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             <a
-              href="https://wa.me/919829000000?text=Hello%20Ajarwal%20Real%20Estate%20Group!%20I%20am%20interested%20in%20verified%20properties%20in%20Bhankrota%2C%20Ajmer%20Road."
+              href="https://wa.me/919829000000?text=Hello%20Ajarwal%20Real%20Estate%20Group!%20I%20am%20interested%20in%20verified%20properties%20in%20Jaipur."
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-amber-500 via-[#df9b58] to-[#c86446] hover:brightness-110 shadow-md shadow-amber-950/60 transition"

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Phone, MapPin, Mail, ShieldCheck } from 'lucide-react';
 import type { PropertyCategory } from '../types/property';
+import { GoogleMapsButton } from './GoogleMapsButton';
 
 interface FooterProps {
   onSelectCategory: (cat: PropertyCategory | 'all') => void;
@@ -87,17 +88,22 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
             <div className="space-y-3 text-slate-400">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                <span>Ajarwal Real Estate Group, Main Ajmer Road, Bhankrota Chauraha, Jaipur, Rajasthan - 302026</span>
+                <span>Ajarwal Real Estate Group, Jaipur, Rajasthan</span>
               </div>
+              <GoogleMapsButton
+                url="https://maps.app.goo.gl/it2rKAKRhp2kzAx29?g_st=awb"
+                label="Head Office Pin"
+                className="w-full"
+              />
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
+                <Phone className="w-4 h-4 text-amber-400 shrink-0" />
                 <span>Helpline: +91 98290 XXXXX</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-sky-400 shrink-0" />
+                <Mail className="w-4 h-4 text-amber-400 shrink-0" />
                 <span>Email: contact@ajarwalrealestategroup.com</span>
               </div>
-              <div className="pt-2 text-[11px] text-slate-500">
+              <div className="pt-1 text-[11px] text-slate-500">
                 Office Hours: Monday – Sunday (9:00 AM – 8:00 PM)
               </div>
             </div>
@@ -107,10 +113,10 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
         {/* Bottom Disclaimer */}
         <div className="mt-8 pt-8 border-t border-slate-900 text-center text-slate-500 space-y-2 text-[11px]">
           <p>
-            Disclaimer: All property dimensions, rates, and specifications on this portal are verified against Jaipur Development Authority (JDA) and Rajasthan RERA records. Buyers are advised to inspect physical patta documents prior to final registration.
+            Disclaimer: All property dimensions, rates, and legal details on this portal are shared transparently based on project records. Buyers are advised to inspect physical title documents prior to final registration.
           </p>
           <p>
-            © {new Date().getFullYear()} Ajarwal Real Estate Group. All Rights Reserved. Crafted with dedication for Bhankrota & Jaipur Growth.
+            © {new Date().getFullYear()} Ajarwal Real Estate Group. All Rights Reserved. Serving Jaipur Real Estate Growth.
           </p>
         </div>
       </div>

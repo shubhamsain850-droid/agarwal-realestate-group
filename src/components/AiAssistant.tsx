@@ -190,7 +190,7 @@ export const AiAssistant: React.FC = () => {
                     </span>
                   </div>
                   <p className="text-[10px] sm:text-xs text-slate-400 truncate max-w-[180px] sm:max-w-none">
-                    Ajarwal Group • Bhankrota Specialist
+                    Ajarwal Group • Jaipur Real Estate
                   </p>
                 </div>
               </div>
@@ -380,7 +380,7 @@ export const AiAssistant: React.FC = () => {
             {/* Footer Trust Note */}
             <div className="bg-slate-950 py-2 px-3 text-center text-[10px] text-slate-500 border-t border-slate-800/80 flex items-center justify-center gap-1">
               <CheckCircle2 className="w-3 h-3 text-emerald-500" />
-              <span>Ajarwal Group • 100% Verified Legal Titles • Bhankrota</span>
+              <span>Ajarwal Group • Verified Properties • Jaipur</span>
             </div>
           </div>
         </div>
