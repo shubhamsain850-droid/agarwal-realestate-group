@@ -56,6 +56,15 @@ export const ThemeSelectorModal: React.FC = () => {
                 {/* Left Info */}
                 <div className="space-y-1 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
+                    <span
+                      className={`text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full border ${
+                        theme.mode === 'Light'
+                          ? 'bg-sky-500/15 text-sky-300 border-sky-400/30'
+                          : 'bg-slate-800 text-slate-300 border-slate-700'
+                      }`}
+                    >
+                      {theme.mode}
+                    </span>
                     <h4 className="font-bold text-white text-sm sm:text-base">{theme.name}</h4>
                     <span className="text-xs text-amber-400 font-medium">({theme.hindiName})</span>
                     {isSelected && (
