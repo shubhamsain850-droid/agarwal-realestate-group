@@ -180,8 +180,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Full-Width Edge-to-Edge Category Navigation Bar Below Logo & WhatsApp */}
       <div className="category-bar-wrapper category-mobile-strip w-full border-t border-slate-800/80 bg-slate-950/95">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2">
-          <nav className="category-bar flex items-center justify-start lg:justify-center gap-1.5 sm:gap-2 overflow-x-auto lg:overflow-visible no-scrollbar">
+        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+          <nav className="category-bar flex items-center justify-start lg:justify-center gap-2 overflow-x-auto lg:overflow-visible no-scrollbar py-2.5 px-1.5 sm:px-1">
             {navCategories.map((item) => {
               const subs = categorySubMap[item.id] || [];
               const hasSubs = subs.length > 0;
@@ -196,7 +196,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onMouseLeave={() => setOpenDropdown(null)}
                 >
                   <button
-                    onClick={() => {
+                    onClick={(e) => {
+                      if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+                        e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                      }
                       onSelectCategory(item.id, 'all', subs.length === 0);
                       if (hasSubs) {
                         setOpenDropdown(isDropdownOpen ? null : item.id);
