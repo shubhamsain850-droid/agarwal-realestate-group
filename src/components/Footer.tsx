@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, MapPin, Mail, ShieldCheck } from 'lucide-react';
+import { Phone, MapPin, Mail, ShieldCheck, Clock, ArrowUpRight } from 'lucide-react';
 import type { PropertyCategory } from '../types/property';
 import { GoogleMapsButton } from './GoogleMapsButton';
 
@@ -9,11 +9,11 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
   return (
-    <footer className="bg-slate-950 text-slate-300 border-t border-slate-800 text-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer className="bg-slate-950 text-slate-300 border-t-2 border-amber-500/30 text-xs">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 sm:pb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-start">
           {/* Brand Info with Official Logo */}
-          <div className="space-y-4">
+          <div className="lg:col-span-3 space-y-4">
             <div className="flex items-center gap-3">
               <img
                 src="/logo-emblem-sandstone.jpg"
@@ -27,23 +27,23 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
             </div>
 
             <p className="text-slate-400 leading-relaxed text-xs">
-              Ajarwal Real Estate Group — Trusted property advisory for Jaipur's Ajmer Road, Mahindra SEZ, and Hirapura corridor. 
+              Ajarwal Real Estate Group — Trusted property advisory for Jaipur's Ajmer Road, Mahindra SEZ, and Hirapura corridor.
               Verified farmhouse estates, plotted land, and transparent registry & loan support.
             </p>
 
-            <div className="flex items-center gap-2 text-amber-400 font-semibold">
-              <ShieldCheck className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/25 text-amber-400 font-semibold">
+              <ShieldCheck className="w-4 h-4 shrink-0" />
               <span>Verified Documentation & Transparent Deals</span>
             </div>
           </div>
 
           {/* Core Categories */}
-          <div>
+          <div className="lg:col-span-2">
             <h4 className="font-bold text-white text-sm mb-3 uppercase tracking-wider">Property Categories</h4>
             <ul className="space-y-2">
               <li>
-                <button onClick={() => onSelectCategory('farmhouse')} className="hover:text-amber-400 transition cursor-pointer">
-                  Weekend Farmhouses (Hirapura / SEZ)
+                <button onClick={() => onSelectCategory('farmhouse')} className="hover:text-amber-400 transition cursor-pointer flex items-center gap-1">
+                  <span>Weekend Farmhouses (Hirapura / SEZ)</span>
                 </button>
               </li>
               <li>
@@ -75,52 +75,94 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
           </div>
 
           {/* Key Locations */}
-          <div>
+          <div className="lg:col-span-3">
             <h4 className="font-bold text-white text-sm mb-3 uppercase tracking-wider">Coverage Areas</h4>
             <ul className="space-y-2 text-slate-400">
-              <li>Hirapura (Near Mahindra SEZ)</li>
-              <li>Ajay Rajpura – Hirapura Belt</li>
-              <li>Mahindra World City Corridor</li>
-              <li>Diggi – Renwal Road Stretch</li>
-              <li>Muhana & Jaipur Ring Road</li>
-              <li>Ajmer Road (NH-48) Corridor</li>
+              <li className="flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span>Hirapura (Near Mahindra SEZ)</span>
+              </li>
+              <li className="flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span>Ajay Rajpura – Hirapura Belt</span>
+              </li>
+              <li className="flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span>Mahindra World City Corridor</span>
+              </li>
+              <li className="flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span>Diggi – Renwal Road Stretch</span>
+              </li>
+              <li className="flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span>Muhana & Jaipur Ring Road</span>
+              </li>
+              <li className="flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span>Ajmer Road (NH-48) Corridor</span>
+              </li>
             </ul>
           </div>
 
-          {/* Office Address & Helpline */}
-          <div>
-            <h4 className="font-bold text-white text-sm mb-3 uppercase tracking-wider">Head Office & Contact</h4>
-            <div className="space-y-3 text-slate-400">
-              <div className="flex items-start gap-2">
+          {/* Highlighted Head Office & Contact Card */}
+          <div className="lg:col-span-4">
+            <div className="footer-office-card bg-slate-900 border border-amber-500/35 rounded-2xl p-5 shadow-xl space-y-3.5">
+              <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-slate-800">
+                <h4 className="font-bold text-white text-sm uppercase tracking-wider flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>Head Office & Contact</span>
+                </h4>
+                <span className="footer-office-badge px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/35 text-amber-300 text-[10px] font-bold uppercase tracking-wider">
+                  Open Daily
+                </span>
+              </div>
+
+              <div className="flex items-start gap-2.5 text-slate-200 font-medium">
                 <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                 <span>Ajarwal Real Estate Group, Jaipur, Rajasthan</span>
               </div>
+
               <GoogleMapsButton
                 url="https://maps.app.goo.gl/it2rKAKRhp2kzAx29?g_st=awb"
                 label="Head Office Pin"
-                className="w-full"
+                className="w-full footer-maps-btn"
               />
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>Helpline: +91 98290 XXXXX</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>Email: contact@ajarwalrealestategroup.com</span>
-              </div>
-              <div className="pt-1 text-[11px] text-slate-500">
-                Office Hours: Monday – Sunday (9:00 AM – 8:00 PM)
+
+              <div className="grid grid-cols-1 gap-2 pt-1">
+                <div className="footer-contact-row flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-slate-950/70 border border-slate-800 text-slate-300">
+                  <span className="flex items-center gap-2">
+                    <Phone className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <span>Helpline: <strong className="text-white">+91 98290 XXXXX</strong></span>
+                  </span>
+                </div>
+
+                <a
+                  href="mailto:contact@ajarwalrealestategroup.com"
+                  className="footer-contact-row flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-slate-950/70 border border-slate-800 text-slate-300 hover:border-amber-400/50 transition"
+                >
+                  <span className="flex items-center gap-2 min-w-0">
+                    <Mail className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <span className="truncate">contact@ajarwalrealestategroup.com</span>
+                  </span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                </a>
+
+                <div className="footer-contact-row flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-950/70 border border-slate-800 text-slate-400 text-[11px]">
+                  <Clock className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <span>Office Hours: Monday – Sunday (9:00 AM – 8:00 PM)</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Bottom Disclaimer */}
-        <div className="mt-8 pt-8 border-t border-slate-900 text-center text-slate-500 space-y-2 text-[11px]">
+        <div className="mt-10 pt-6 border-t border-slate-800 text-center text-slate-500 space-y-2 text-[11px] max-w-4xl mx-auto">
           <p>
             Disclaimer: All property dimensions, rates, and legal details on this portal are shared transparently based on project records. Buyers are advised to inspect physical title documents prior to final registration.
           </p>
-          <p>
+          <p className="font-semibold">
             © {new Date().getFullYear()} Ajarwal Real Estate Group. All Rights Reserved. Serving Jaipur Real Estate Growth.
           </p>
         </div>

@@ -53,22 +53,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md border-b border-slate-800 text-white shadow-xl">
-      {/* Top Head Office Bar */}
-      <div className="top-office-bar bg-[#140b07] py-1 px-3 sm:px-6 text-[11px] sm:text-xs border-b border-amber-500/20">
-        <div className="max-w-7xl mx-auto flex items-center justify-center">
-          <a
-            href="https://maps.app.goo.gl/it2rKAKRhp2kzAx29?g_st=awb"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-amber-200 hover:text-amber-300 font-semibold transition underline decoration-amber-400/40"
-            title="Open Head Office Location in Google Maps"
-          >
-            <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-            <span>Head Office</span>
-          </a>
-        </div>
-      </div>
-
       {/* Main Logo & WhatsApp Row */}
       <div className="header-brand-row w-full transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">

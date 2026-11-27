@@ -40,7 +40,7 @@ export const BlogReaderPage: React.FC<BlogReaderPageProps> = ({
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 pb-24 lg:pb-16">
       {/* Sticky Top Return Strip */}
-      <div className="sticky top-[132px] sm:top-[152px] lg:top-[110px] z-30 bg-[#140c09]/95 backdrop-blur-xl border-b border-amber-500/25 shadow-xl">
+      <div className="sticky top-[116px] sm:top-[138px] z-30 bg-[#140c09]/95 backdrop-blur-xl border-b border-amber-500/25 shadow-xl">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
           <button
             onClick={onBack}
