@@ -172,7 +172,7 @@ export const AiAssistant: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-200">
           <div className="relative w-full max-w-lg bg-slate-900 text-slate-100 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-700 overflow-hidden flex flex-col max-h-[90vh] sm:max-h-[85vh]">
             {/* Modal Header */}
-            <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-emerald-950 p-3.5 sm:p-4 border-b border-slate-800 flex items-center justify-between">
+            <div className="bg-slate-950 p-3.5 sm:p-4 border-b border-slate-800 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <div className="relative">
                   <img

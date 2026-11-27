@@ -10,7 +10,7 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
   return (
     <footer className="bg-slate-950 text-slate-300 border-t-2 border-amber-500/30 text-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 sm:pb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 sm:pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-start">
           {/* Brand Info with Official Logo */}
           <div className="lg:col-span-3 space-y-4">
@@ -42,32 +42,32 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
             <h4 className="font-bold text-white text-sm mb-3 uppercase tracking-wider">Property Categories</h4>
             <ul className="space-y-2">
               <li>
-                <button onClick={() => onSelectCategory('farmhouse')} className="hover:text-amber-400 transition cursor-pointer flex items-center gap-1">
-                  <span>Weekend Farmhouses (Hirapura / SEZ)</span>
+                <button onClick={() => onSelectCategory('farmhouse')} className="text-left block w-full hover:text-amber-400 transition cursor-pointer">
+                  Weekend Farmhouses (Hirapura / SEZ)
                 </button>
               </li>
               <li>
-                <button onClick={() => onSelectCategory('plot')} className="hover:text-amber-400 transition cursor-pointer">
+                <button onClick={() => onSelectCategory('plot')} className="text-left block w-full hover:text-amber-400 transition cursor-pointer">
                   Plots (Upcoming)
                 </button>
               </li>
               <li>
-                <button onClick={() => onSelectCategory('villa')} className="hover:text-amber-400 transition cursor-pointer">
+                <button onClick={() => onSelectCategory('villa')} className="text-left block w-full hover:text-amber-400 transition cursor-pointer">
                   Luxury Villas (Upcoming)
                 </button>
               </li>
               <li>
-                <button onClick={() => onSelectCategory('commercial')} className="hover:text-amber-400 transition cursor-pointer">
+                <button onClick={() => onSelectCategory('commercial')} className="text-left block w-full hover:text-amber-400 transition cursor-pointer">
                   Commercial Plots (Upcoming)
                 </button>
               </li>
               <li>
-                <button onClick={() => onSelectCategory('land')} className="hover:text-amber-400 transition cursor-pointer">
+                <button onClick={() => onSelectCategory('land')} className="text-left block w-full hover:text-amber-400 transition cursor-pointer">
                   90A (Upcoming)
                 </button>
               </li>
               <li>
-                <button onClick={() => onSelectCategory('hotel-resort')} className="hover:text-amber-400 transition cursor-pointer">
+                <button onClick={() => onSelectCategory('hotel-resort')} className="text-left block w-full hover:text-amber-400 transition cursor-pointer">
                   Hotel & Resort (Upcoming)
                 </button>
               </li>
@@ -158,7 +158,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
         </div>
 
         {/* Bottom Disclaimer */}
-        <div className="mt-10 pt-6 border-t border-slate-800 text-center text-slate-500 space-y-2 text-[11px] max-w-4xl mx-auto">
+        <div className="mt-10 pt-6 border-t border-slate-800 text-center text-slate-500 space-y-2 text-[11px] max-w-4xl mx-auto px-2 sm:px-28">
           <p>
             Disclaimer: All property dimensions, rates, and legal details on this portal are shared transparently based on project records. Buyers are advised to inspect physical title documents prior to final registration.
           </p>

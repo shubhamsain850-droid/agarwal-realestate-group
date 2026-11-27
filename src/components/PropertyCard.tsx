@@ -49,15 +49,15 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+        <div className="media-scrim-dark absolute inset-0" />
 
         {/* Top Badges */}
-        <div className="absolute top-3 left-3 flex flex-wrap items-center gap-1.5">
-          <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full border backdrop-blur-md uppercase tracking-wider ${getBadgeColor(property.category)}`}>
+        <div className="media-overlay-dark absolute top-3 left-3 flex flex-wrap items-center gap-1.5">
+          <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full border bg-[#071636]/90 backdrop-blur-md uppercase tracking-wider ${getBadgeColor(property.category)}`}>
             {property.categoryLabel}
           </span>
-          <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 flex items-center gap-1 backdrop-blur-md">
-            <ShieldCheck className="w-3 h-3 text-emerald-400" />
+          <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#071636]/90 text-white border border-amber-400/45 flex items-center gap-1 backdrop-blur-md">
+            <ShieldCheck className="w-3 h-3 text-amber-400" />
             {property.approvalStatus}
           </span>
         </div>

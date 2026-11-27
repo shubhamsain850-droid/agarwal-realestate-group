@@ -242,7 +242,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({ property
                     }`}
                   >
                     <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
-                    <div className="absolute bottom-0 left-0 right-0 bg-black/65 px-2 py-1 text-[10px] text-white font-medium truncate">
+                    <div className="media-overlay-dark absolute bottom-0 left-0 right-0 bg-black/75 px-2 py-1 text-[10px] text-white font-medium truncate">
                       Site Photo {idx + 1}
                     </div>
                   </button>
@@ -264,7 +264,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({ property
                       <source src={vid.url} type="video/mp4" />
                     </video>
                   ) : (
-                    <div className="relative aspect-video bg-[#140c09] flex flex-col items-center justify-center p-6 text-center">
+                    <div className="media-overlay-dark relative aspect-video bg-[#140c09] flex flex-col items-center justify-center p-6 text-center">
                       <img
                         src={property.images[idx + 1] || property.images[0]}
                         alt={vid.title}

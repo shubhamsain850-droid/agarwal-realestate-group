@@ -964,8 +964,27 @@
   [data-theme="beige-royal-walnut"],
   [data-theme="beige-obsidian-gold"],
   [data-theme="beige-navy-gold"]
-) .media-overlay-dark .bg-\[\#140c09\]\/85 {
+) .media-overlay-dark :is(.bg-\[\#140c09\]\/85, .bg-slate-900\/90, .bg-\[\#071636\]\/90) {
   background-color: var(--lt-overlay-bg) !important;
+  border-color: rgba(201, 154, 59, 0.45) !important;
+  color: #ffffff !important;
+}
+
+:is(
+  [data-theme="royal-white-blue-gold"],
+  [data-theme="champagne-marble"],
+  [data-theme="sage-sandstone-light"],
+  [data-theme="pearl-slate-teal"],
+  [data-theme="clean-ivory"],
+  [data-theme="beige-royal-walnut"],
+  [data-theme="beige-obsidian-gold"],
+  [data-theme="beige-navy-gold"]
+) :is(.bg-emerald-600.text-white, .bg-red-600.text-white) {
+  color: #ffffff !important;
+}
+
+.media-scrim-dark {
+  background: linear-gradient(to top, rgba(7, 15, 32, 0.92) 0%, rgba(7, 15, 32, 0.35) 50%, transparent 100%) !important;
 }
 
 /* Beige Royal Walnut: Premium Royal Blue category buttons with Full Gold Highlight on click/active */
@@ -1247,7 +1266,7 @@
 }
 
 [data-theme="beige-navy-gold"] .footer-office-card .text-slate-400 {
-  color: #93c5fd !important;
+  color: #cbd5e1 !important;
 }
 
 [data-theme="beige-navy-gold"] .footer-office-card :is(.text-amber-400, .text-amber-300) {

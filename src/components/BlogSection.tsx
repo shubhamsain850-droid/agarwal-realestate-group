@@ -46,8 +46,8 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ onSelectBlog }) => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-slate-950/70 via-transparent to-transparent" />
-                <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#140c09]/90 border border-amber-500/40 text-amber-300 text-[10px] font-bold uppercase tracking-wider">
+                <div className="media-scrim-dark absolute inset-0 opacity-75" />
+                <span className="media-overlay-dark absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#140c09]/90 border border-amber-500/40 text-amber-300 text-[10px] font-bold uppercase tracking-wider">
                   {blog.category}
                 </span>
               </div>

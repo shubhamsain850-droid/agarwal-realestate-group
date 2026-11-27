@@ -4,6 +4,7 @@ import {
   MapPin,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
   ArrowUpRight
 } from 'lucide-react';
 import type { Property, PropertyCategory } from '../types/property';
@@ -98,11 +99,11 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
 
             <div className="sm:col-span-4 relative">
-              <MapPin className="absolute left-3.5 top-3 w-4 h-4 text-amber-400/80" />
+              <MapPin className="absolute left-3.5 top-3 w-4 h-4 text-amber-400/80 pointer-events-none" />
               <select
                 value={selectedLocation}
                 onChange={(e) => onLocationChange(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-700/80 rounded-xl pl-10 pr-3 py-2.5 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-amber-500 transition cursor-pointer appearance-none"
+                className="w-full bg-slate-950 border border-slate-700/80 rounded-xl pl-10 pr-9 py-2.5 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-amber-500 transition cursor-pointer appearance-none"
               >
                 <option value="all">Select Area</option>
                 {availableSubCategories.map((sub) => (
@@ -111,6 +112,7 @@ export const Hero: React.FC<HeroProps> = ({
                   </option>
                 ))}
               </select>
+              <ChevronDown className="absolute right-3.5 top-3 w-4 h-4 text-amber-400/80 pointer-events-none" />
             </div>
 
             <button
