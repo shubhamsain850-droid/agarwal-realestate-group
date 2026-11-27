@@ -13,20 +13,11 @@ import { Footer } from './components/Footer';
 import { MobileBottomBar } from './components/MobileBottomBar';
 import { ThemeSelectorModal } from './components/ThemeSelectorModal';
 import { PROPERTIES_DATA } from './data/properties';
-import { PROJECT_CITIES, type ProjectCity, type Property, type PropertyCategory } from './types/property';
+import type { Property, PropertyCategory } from './types/property';
 import type { BlogArticle } from './data/blogs';
 import { Building, MapPin } from 'lucide-react';
 
-const getInitialCityFromUrl = (): ProjectCity | 'all' => {
-  if (typeof window === 'undefined') return 'all';
-  const param = new URLSearchParams(window.location.search).get('city')?.toLowerCase();
-  if (param === 'jaipur') return 'Jaipur';
-  if (param === 'mumbai') return 'Mumbai';
-  return 'all';
-};
-
 export function App() {
-  const [activeCity, setActiveCity] = useState<ProjectCity | 'all'>(getInitialCityFromUrl);
   const [activeCategory, setActiveCategory] = useState<PropertyCategory | 'all'>('all');
   const [activeSubCategory, setActiveSubCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -64,37 +55,17 @@ export function App() {
     setTimeout(() => scrollToSection('insights'), 60);
   };
 
-  const handleCityChange = (city: ProjectCity | 'all') => {
-    setSelectedProperty(null);
-    setSelectedBlog(null);
-    setActiveCity(city);
-    setActiveSubCategory('all');
-    setSelectedLocation('all');
-    if (typeof window !== 'undefined') {
-      const url = new URL(window.location.href);
-      if (city === 'all') {
-        url.searchParams.delete('city');
-      } else {
-        url.searchParams.set('city', city.toLowerCase());
-      }
-      window.history.replaceState({}, '', url.toString());
-    }
-  };
-
   const handleResetFilters = () => {
-    handleCityChange('all');
     setActiveCategory('all');
     setActiveSubCategory('all');
     setSelectedLocation('all');
     setSearchQuery('');
   };
 
-  // Location / Area Subcategories for the active city & category
+  // Location / Area Subcategories for the active category
   const availableSubCategories = useMemo(() => {
     const matchingCategoryProps = PROPERTIES_DATA.filter(
-      (prop) =>
-        (activeCity === 'all' || prop.city === activeCity) &&
-        (activeCategory === 'all' || prop.category === activeCategory)
+      (prop) => activeCategory === 'all' || prop.category === activeCategory
     );
     const counts = new Map<string, number>();
     matchingCategoryProps.forEach((prop) => {
@@ -103,15 +74,11 @@ export function App() {
       }
     });
     return Array.from(counts.entries()).map(([name, count]) => ({ name, count }));
-  }, [activeCity, activeCategory]);
+  }, [activeCategory]);
 
   // Filtered properties
   const filteredProperties = useMemo(() => {
     return PROPERTIES_DATA.filter((prop) => {
-      // City match
-      if (activeCity !== 'all' && prop.city !== activeCity) {
-        return false;
-      }
       // Category match
       if (activeCategory !== 'all' && prop.category !== activeCategory) {
         return false;
@@ -128,18 +95,17 @@ export function App() {
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase();
         const matchesTitle = prop.title.toLowerCase().includes(query);
-        const matchesCity = prop.city.toLowerCase().includes(query);
         const matchesSub = prop.subLocation.toLowerCase().includes(query);
         const matchesSubCat = (prop.subCategory || '').toLowerCase().includes(query);
         const matchesDesc = prop.description.toLowerCase().includes(query);
         const matchesHighlights = prop.highlights.some((h) => h.toLowerCase().includes(query));
-        if (!matchesTitle && !matchesCity && !matchesSub && !matchesSubCat && !matchesDesc && !matchesHighlights) {
+        if (!matchesTitle && !matchesSub && !matchesSubCat && !matchesDesc && !matchesHighlights) {
           return false;
         }
       }
       return true;
     });
-  }, [activeCity, activeCategory, activeSubCategory, selectedLocation, searchQuery]);
+  }, [activeCategory, activeSubCategory, selectedLocation, searchQuery]);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -162,7 +128,6 @@ export function App() {
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-slate-950 pb-16 lg:pb-0 transition-colors duration-300">
       {/* Navigation */}
       <Navbar
-        activeCity={activeCity}
         activeCategory={activeCategory}
         activeSubCategory={activeSubCategory}
         onSelectCategory={handleCategoryChange}
@@ -187,8 +152,6 @@ export function App() {
         <>
           {/* Hero Section */}
           <Hero
-            activeCity={activeCity}
-            onCityChange={handleCityChange}
             searchQuery={searchQuery}
             onSearchChange={setSearchQuery}
             selectedCategory={activeCategory}
@@ -208,36 +171,18 @@ export function App() {
 
           {/* Main Property Listings Section */}
           <main id="properties" className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
-            {/* Listings Header & City Switcher */}
+            {/* Listings Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-4 border-b border-slate-800/80 gap-3">
               <div>
                 <h2 className="text-xl sm:text-3xl font-black text-white">
-                  {activeCity === 'all' ? 'Available Properties' : `${activeCity} Projects`}
+                  Available Properties
                 </h2>
                 <p className="text-xs text-slate-400 mt-1">
                   Showing {filteredProperties.length} verified {filteredProperties.length === 1 ? 'property' : 'properties'}
-                  {activeCity !== 'all' ? ` in ${activeCity}` : ''}
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2">
-                {/* City Filter Pills */}
-                <div className="flex items-center gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800">
-                  {PROJECT_CITIES.map((cityItem) => (
-                    <button
-                      key={cityItem.id}
-                      onClick={() => handleCityChange(cityItem.id)}
-                      className={`px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
-                        activeCity === cityItem.id
-                          ? 'bg-amber-500 text-slate-950 shadow-sm'
-                          : 'text-slate-300 hover:text-white'
-                      }`}
-                    >
-                      {cityItem.label}
-                    </button>
-                  ))}
-                </div>
-
+              <div className="flex items-center gap-2">
                 <button
                   onClick={handleResetFilters}
                   className="px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-semibold bg-slate-900 active:bg-slate-800 text-slate-300 border border-slate-800 transition cursor-pointer"
@@ -305,21 +250,17 @@ export function App() {
               <div className="bg-slate-900 rounded-3xl p-8 sm:p-12 text-center border border-amber-500/20 max-w-xl mx-auto">
                 <Building className="w-10 h-10 text-amber-400 mx-auto mb-3" />
                 <h3 className="text-base sm:text-lg font-bold text-white">
-                  {activeCity !== 'all'
-                    ? `${activeCity} Projects — Onboarding Soon`
-                    : 'New Verified Projects Coming Soon'}
+                  New Verified Projects Coming Soon
                 </h3>
                 <p className="text-xs text-slate-400 mt-1.5 mb-5 leading-relaxed">
-                  {activeCity !== 'all'
-                    ? `${activeCity} listings are kept completely separate from other cities. Verified ${activeCity} projects are currently being onboarded — view live Jaipur estates or list a ${activeCity} property.`
-                    : 'Verified deals for this category are currently being onboarded. Explore our live Weekend Farms project in Hirapura (Near Mahindra SEZ) or list your property with us.'}
+                  Verified deals for this category are currently being onboarded. Explore our live Weekend Farms project in Hirapura (Near Mahindra SEZ) or list your property with us.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3">
                   <button
-                    onClick={() => handleCityChange('Jaipur')}
+                    onClick={handleResetFilters}
                     className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950 font-extrabold text-xs transition cursor-pointer"
                   >
-                    View Jaipur Live Projects
+                    View Live Projects
                   </button>
                   <button
                     onClick={() => setShowPartnerModal(true)}

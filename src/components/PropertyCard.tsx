@@ -83,12 +83,9 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
       {/* Card Content Body */}
       <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
         <div>
-          {/* City Badge + Area Subcategory & Location Pin */}
+          {/* Area Subcategory & Location Pin */}
           <div className="flex items-center justify-between gap-2 mb-1.5">
             <div className="flex items-center gap-1.5 text-xs text-amber-400 font-semibold min-w-0">
-              <span className="px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-[10px] font-bold uppercase tracking-wider shrink-0">
-                {property.city}
-              </span>
               <MapPin className="w-3.5 h-3.5 shrink-0" />
               <span className="truncate">{property.subCategory || property.location}</span>
             </div>

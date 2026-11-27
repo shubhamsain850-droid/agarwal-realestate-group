@@ -4,16 +4,12 @@ import {
   MapPin,
   ChevronLeft,
   ChevronRight,
-  ArrowUpRight,
-  Building2,
-  MessageCircle
+  ArrowUpRight
 } from 'lucide-react';
-import { PROJECT_CITIES, type ProjectCity, type Property, type PropertyCategory } from '../types/property';
+import type { Property, PropertyCategory } from '../types/property';
 import { PROPERTIES_DATA } from '../data/properties';
 
 interface HeroProps {
-  activeCity: ProjectCity | 'all';
-  onCityChange: (city: ProjectCity | 'all') => void;
   searchQuery: string;
   onSearchChange: (query: string) => void;
   selectedCategory: PropertyCategory | 'all';
@@ -27,8 +23,6 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({
-  activeCity,
-  onCityChange,
   searchQuery,
   onSearchChange,
   selectedCategory,
@@ -40,26 +34,21 @@ export const Hero: React.FC<HeroProps> = ({
   onResetFilters,
   onSelectProperty
 }) => {
-  const cityProps = useMemo(() => {
-    return PROPERTIES_DATA.filter((p) => activeCity === 'all' || p.city === activeCity);
-  }, [activeCity]);
-
   const featuredList = useMemo(() => {
-    if (cityProps.length === 0) return [];
-    const filtered = cityProps.filter((p) => {
+    const filtered = PROPERTIES_DATA.filter((p) => {
       if (selectedCategory !== 'all' && p.category !== selectedCategory) return false;
       if (selectedSubCategory !== 'all' && p.subCategory !== selectedSubCategory) return false;
       return true;
     });
     if (filtered.length > 0) return filtered;
-    return cityProps.filter((p) => p.featured);
-  }, [cityProps, selectedCategory, selectedSubCategory]);
+    return PROPERTIES_DATA.filter((p) => p.featured);
+  }, [selectedCategory, selectedSubCategory]);
 
   const [slideIndex, setSlideIndex] = useState(0);
 
   useEffect(() => {
     setSlideIndex(0);
-  }, [activeCity, selectedCategory, selectedSubCategory]);
+  }, [selectedCategory, selectedSubCategory]);
 
   useEffect(() => {
     if (featuredList.length <= 1) return;
@@ -69,7 +58,7 @@ export const Hero: React.FC<HeroProps> = ({
     return () => clearInterval(timer);
   }, [featuredList.length]);
 
-  const currentFeatured = featuredList[slideIndex] || null;
+  const currentFeatured = featuredList[slideIndex] || PROPERTIES_DATA[0];
 
   const scrollToListings = () => {
     const el = document.getElementById('properties');
@@ -79,53 +68,21 @@ export const Hero: React.FC<HeroProps> = ({
   return (
     <section className="relative bg-gradient-to-b from-slate-950 via-slate-900/95 to-slate-950 text-white pt-5 pb-6 sm:pt-6 sm:pb-8 overflow-hidden border-b border-amber-500/15">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-5">
-        {/* Full-Width Balanced Search Available Property by Area Bar + City Filter */}
+        {/* Full-Width Balanced Search Property by Area Bar */}
         <div className="bg-slate-900/90 backdrop-blur-xl rounded-2xl p-4 sm:p-5 shadow-lg border border-amber-500/25 space-y-3">
-          <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center justify-between">
             <h1 className="font-sans text-xs sm:text-sm font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
               <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
               <span>Search Property by Area</span>
             </h1>
-
-            {/* City Switcher Pills: All Cities / Jaipur / Mumbai */}
-            <div className="flex flex-wrap items-center gap-1.5">
-              {PROJECT_CITIES.map((cityItem) => {
-                const count =
-                  cityItem.id === 'all'
-                    ? PROPERTIES_DATA.length
-                    : PROPERTIES_DATA.filter((p) => p.city === cityItem.id).length;
-                const isSelected = activeCity === cityItem.id;
-                return (
-                  <button
-                    key={cityItem.id}
-                    onClick={() => onCityChange(cityItem.id)}
-                    className={`px-3 py-1 rounded-full text-[11px] font-bold transition cursor-pointer flex items-center gap-1.5 border ${
-                      isSelected
-                        ? 'bg-amber-500 text-slate-950 border-amber-400 shadow-sm'
-                        : 'bg-slate-950 text-slate-300 border-slate-800 hover:border-amber-500/40'
-                    }`}
-                  >
-                    <span>{cityItem.label}</span>
-                    <span
-                      className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                        isSelected ? 'bg-slate-950/20 text-slate-950 font-extrabold' : 'bg-slate-800 text-amber-400'
-                      }`}
-                    >
-                      {count}
-                    </span>
-                  </button>
-                );
-              })}
-
-              {(activeCity !== 'all' || selectedCategory !== 'all' || selectedSubCategory !== 'all' || selectedLocation !== 'all' || searchQuery) && (
-                <button
-                  onClick={onResetFilters}
-                  className="ml-1 text-[11px] font-semibold text-slate-400 hover:text-amber-300 underline cursor-pointer"
-                >
-                  Reset
-                </button>
-              )}
-            </div>
+            {(selectedCategory !== 'all' || selectedSubCategory !== 'all' || selectedLocation !== 'all' || searchQuery) && (
+              <button
+                onClick={onResetFilters}
+                className="text-[11px] font-semibold text-slate-400 hover:text-amber-300 underline cursor-pointer"
+              >
+                Reset
+              </button>
+            )}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-12 gap-2.5 sm:gap-3">
@@ -167,7 +124,6 @@ export const Hero: React.FC<HeroProps> = ({
         </div>
 
         {/* Wide Horizontal Featured Project Showcase Card */}
-        {currentFeatured ? (
         <div className="rounded-3xl overflow-hidden bg-slate-900 border border-amber-500/30 shadow-xl grid grid-cols-1 lg:grid-cols-12 group">
           {/* Left: Clean Un-obstructed Showcase Poster */}
           <div
@@ -284,39 +240,6 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
           </div>
         </div>
-        ) : (
-        <div className="rounded-3xl bg-slate-900 border border-amber-500/30 shadow-xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5">
-          <div className="space-y-2 text-center sm:text-left">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30 text-[11px] font-bold uppercase tracking-wider">
-              <Building2 className="w-3.5 h-3.5" />
-              <span>{activeCity} Real Estate Desk</span>
-            </div>
-            <h2 className="font-serif text-xl sm:text-2xl font-bold text-white">
-              {activeCity} Verified Projects — Launching Soon
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-400 max-w-xl">
-              {activeCity} inventory is separated from Jaipur listings and currently under verification. Request direct alerts or switch to live Jaipur projects.
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-2.5 shrink-0">
-            <button
-              onClick={() => onCityChange('Jaipur')}
-              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-[#df9b58] to-[#c86446] text-slate-950 font-extrabold text-xs shadow-lg cursor-pointer"
-            >
-              View Jaipur Live Projects
-            </button>
-            <a
-              href={`https://wa.me/919829000000?text=${encodeURIComponent(`Hello Ajarwal Real Estate Group! Please share upcoming verified project updates for ${activeCity}.`)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/30 font-bold text-xs flex items-center gap-1.5"
-            >
-              <MessageCircle className="w-3.5 h-3.5" />
-              <span>{activeCity} Inquiry</span>
-            </a>
-          </div>
-        </div>
-        )}
       </div>
     </section>
   );

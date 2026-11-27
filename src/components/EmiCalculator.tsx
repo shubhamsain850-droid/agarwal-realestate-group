@@ -7,8 +7,29 @@ interface EmiCalculatorProps {
 
 export const EmiCalculator: React.FC<EmiCalculatorProps> = ({ onClose }) => {
   const [loanAmount, setLoanAmount] = useState<number>(3500000); // 35 Lakhs default
+  const [loanInput, setLoanInput] = useState<string>('3500000');
   const [interestRate, setInterestRate] = useState<number>(8.5); // 8.5% default SBI home loan
   const [tenureYears, setTenureYears] = useState<number>(15); // 15 years
+
+  const handleLoanSliderChange = (val: number) => {
+    setLoanAmount(val);
+    setLoanInput(String(val));
+  };
+
+  const handleLoanInputChange = (raw: string) => {
+    const cleaned = raw.replace(/[^0-9]/g, '');
+    setLoanInput(cleaned);
+    if (!cleaned) {
+      setLoanAmount(0);
+      return;
+    }
+    const parsed = Math.min(500000000, Number(cleaned));
+    setLoanAmount(parsed);
+  };
+
+  const handleLoanInputBlur = () => {
+    setLoanInput(String(loanAmount));
+  };
 
   // Calculate EMI
   const monthlyRate = interestRate / 12 / 100;
@@ -58,25 +79,42 @@ export const EmiCalculator: React.FC<EmiCalculatorProps> = ({ onClose }) => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Sliders Section */}
         <div className="lg:col-span-7 space-y-6">
-          {/* Loan Amount Slider */}
+          {/* Loan Amount Slider + Custom Input */}
           <div>
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
               <label className="text-xs font-semibold text-slate-300">Loan Amount</label>
-              <span className="text-base font-extrabold text-amber-400">{formatCurrency(loanAmount)}</span>
+              <div className="flex items-center gap-2">
+                <div className="relative flex items-center">
+                  <span className="absolute left-2.5 text-xs font-bold text-amber-400 pointer-events-none">₹</span>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    value={loanInput}
+                    onChange={(e) => handleLoanInputChange(e.target.value)}
+                    onBlur={handleLoanInputBlur}
+                    placeholder="Enter custom amount"
+                    aria-label="Custom Loan Amount in INR"
+                    className="emi-custom-input w-36 sm:w-40 bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl pl-6 pr-2.5 py-1.5 text-xs sm:text-sm font-extrabold text-amber-400 text-right focus:outline-none transition"
+                  />
+                </div>
+                <span className="text-xs sm:text-sm font-extrabold text-amber-400 hidden sm:inline">
+                  ({formatCurrency(loanAmount)})
+                </span>
+              </div>
             </div>
             <input
               type="range"
-              min="500000"
-              max="15000000"
-              step="100000"
-              value={loanAmount}
-              onChange={(e) => setLoanAmount(Number(e.target.value))}
+              min="100000"
+              max="20000000"
+              step="10000"
+              value={Math.min(Math.max(loanAmount, 100000), 20000000)}
+              onChange={(e) => handleLoanSliderChange(Number(e.target.value))}
               className="w-full accent-emerald-500 h-2 bg-slate-800 rounded-lg cursor-pointer"
             />
             <div className="flex justify-between text-[10px] text-slate-500 mt-1">
-              <span>₹5 Lakh</span>
-              <span>₹75 Lakh</span>
-              <span>₹1.5 Crore</span>
+              <span>₹1 Lakh</span>
+              <span>₹1 Crore</span>
+              <span>₹2 Crore (or type custom above)</span>
             </div>
           </div>
 

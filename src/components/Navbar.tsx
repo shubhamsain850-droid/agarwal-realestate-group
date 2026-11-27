@@ -1,11 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { MessageCircle, Menu, X, Palette, ChevronDown, MapPin } from 'lucide-react';
-import type { ProjectCity, PropertyCategory } from '../types/property';
+import type { PropertyCategory } from '../types/property';
 import { useRealEstateTheme } from '../context/ThemeContext';
 import { PROPERTIES_DATA } from '../data/properties';
 
 interface NavbarProps {
-  activeCity: ProjectCity | 'all';
   activeCategory: PropertyCategory | 'all';
   activeSubCategory: string;
   onSelectCategory: (cat: PropertyCategory | 'all', subCategory?: string, shouldScroll?: boolean) => void;
@@ -15,7 +14,6 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  activeCity,
   activeCategory,
   activeSubCategory,
   onSelectCategory,
@@ -37,15 +35,13 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'hotel-resort', label: 'Hotel & Resort' }
   ];
 
-  // Dynamically map area subcategories per category from real properties (scoped by activeCity)
+  // Dynamically map area subcategories per category from real properties
   const categorySubMap = useMemo(() => {
     const map: Record<string, { name: string; count: number }[]> = {};
     navCategories.forEach((cat) => {
       if (cat.id === 'all') return;
       const counts = new Map<string, number>();
-      PROPERTIES_DATA.filter(
-        (p) => (activeCity === 'all' || p.city === activeCity) && p.category === cat.id
-      ).forEach((p) => {
+      PROPERTIES_DATA.filter((p) => p.category === cat.id).forEach((p) => {
         if (p.subCategory) {
           counts.set(p.subCategory, (counts.get(p.subCategory) || 0) + 1);
         }
@@ -53,7 +49,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       map[cat.id] = Array.from(counts.entries()).map(([name, count]) => ({ name, count }));
     });
     return map;
-  }, [activeCity]);
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md border-b border-slate-800 text-white shadow-xl">
