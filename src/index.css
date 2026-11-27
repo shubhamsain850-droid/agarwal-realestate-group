@@ -943,13 +943,19 @@
   background-color: var(--lt-overlay-bg) !important;
 }
 
-/* Beige Royal Walnut: Premium Royal Blue category buttons with crisp white text */
+/* Beige Royal Walnut: Premium Royal Blue category buttons with Full Gold Highlight on click/active */
 [data-theme="beige-royal-walnut"] button.category-btn {
   background: linear-gradient(135deg, #172e6e 0%, #1e40af 100%) !important;
   background-image: linear-gradient(135deg, #172e6e 0%, #1e40af 100%) !important;
   color: #ffffff !important;
   border: 1px solid rgba(59, 130, 246, 0.45) !important;
   box-shadow: 0 2px 8px rgba(30, 58, 138, 0.18);
+}
+
+[data-theme="beige-royal-walnut"] button.category-btn,
+[data-theme="beige-royal-walnut"] button.category-btn span,
+[data-theme="beige-royal-walnut"] button.category-btn svg {
+  color: #ffffff !important;
 }
 
 [data-theme="beige-royal-walnut"] button.category-btn:hover {
@@ -959,22 +965,23 @@
   border-color: rgba(201, 154, 59, 0.75) !important;
 }
 
-[data-theme="beige-royal-walnut"] button.category-btn.category-btn-active {
-  background: linear-gradient(135deg, #1e40af 0%, #2563eb 60%, #1d4ed8 100%) !important;
-  background-image: linear-gradient(135deg, #1e40af 0%, #2563eb 60%, #1d4ed8 100%) !important;
-  color: #ffffff !important;
-  border: 1.5px solid #c99a3b !important;
-  box-shadow: 0 4px 14px rgba(30, 64, 175, 0.35), 0 0 0 1px rgba(201, 154, 59, 0.4) !important;
-  font-weight: 700 !important;
+[data-theme="beige-royal-walnut"] button.category-btn.category-btn-active,
+[data-theme="beige-royal-walnut"] button.category-btn:active {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  background-image: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  color: #0f2557 !important;
+  border: 2px solid #0f2557 !important;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.4), 0 0 0 3px rgba(245, 158, 11, 0.45) !important;
+  font-weight: 800 !important;
 }
 
-[data-theme="beige-royal-walnut"] button.category-btn,
-[data-theme="beige-royal-walnut"] button.category-btn span,
-[data-theme="beige-royal-walnut"] button.category-btn svg {
-  color: #ffffff !important;
+[data-theme="beige-royal-walnut"] button.category-btn:is(.category-btn-active, :active) span,
+[data-theme="beige-royal-walnut"] button.category-btn:is(.category-btn-active, :active) svg {
+  color: #0f2557 !important;
+  font-weight: 800 !important;
 }
 
-/* Beige Obsidian Gold & Beige Navy Gold: Full-width Dark Beige Nav Strip + Solid Black Bold White Category Boxes */
+/* Beige Obsidian Gold & Beige Navy Gold: Full-width Dark Beige Nav Strip + Solid Black Unselected + Full Gold Highlight on Click/Active */
 :is([data-theme="beige-obsidian-gold"], [data-theme="beige-navy-gold"]) .top-office-bar a,
 :is([data-theme="beige-obsidian-gold"], [data-theme="beige-navy-gold"]) .top-office-bar svg {
   color: #14110f !important;
@@ -1001,29 +1008,7 @@
   font-weight: 700 !important;
   border: 1px solid #2b2b2b !important;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22) !important;
-  transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.18s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
-}
-
-:is([data-theme="beige-obsidian-gold"], [data-theme="beige-navy-gold"]) button.category-btn:hover {
-  transform: translateY(-1.5px);
-  background: #1c1c1c !important;
-  border-color: #c99a3b !important;
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(201, 154, 59, 0.45) !important;
-}
-
-:is([data-theme="beige-obsidian-gold"], [data-theme="beige-navy-gold"]) button.category-btn.category-btn-active {
-  background: #000000 !important;
-  color: #ffffff !important;
-  font-weight: 800 !important;
-  border: 1.5px solid #c99a3b !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), 0 0 0 2px rgba(201, 154, 59, 0.45) !important;
-}
-
-:is([data-theme="beige-obsidian-gold"], [data-theme="beige-navy-gold"]) button.category-btn:active {
-  transform: scale(0.93) translateY(1px) !important;
-  background: #2b2118 !important;
-  border-color: #f3c878 !important;
-  box-shadow: 0 0 0 3px rgba(201, 154, 59, 0.6), inset 0 2px 6px rgba(0, 0, 0, 0.65) !important;
+  transition: transform 0.14s cubic-bezier(0.22, 1, 0.36, 1), background 0.16s ease, box-shadow 0.18s ease, border-color 0.16s ease !important;
 }
 
 :is([data-theme="beige-obsidian-gold"], [data-theme="beige-navy-gold"]) button.category-btn,
@@ -1031,6 +1016,62 @@
 :is([data-theme="beige-obsidian-gold"], [data-theme="beige-navy-gold"]) button.category-btn svg {
   color: #ffffff !important;
   font-weight: 700 !important;
+}
+
+:is([data-theme="beige-obsidian-gold"], [data-theme="beige-navy-gold"]) button.category-btn:hover {
+  transform: translateY(-1.5px);
+  background: #1f1f1f !important;
+  border-color: #f59e0b !important;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(245, 158, 11, 0.5) !important;
+}
+
+:is([data-theme="beige-obsidian-gold"], [data-theme="beige-navy-gold"]) button.category-btn.category-btn-active {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  background-image: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  color: #071636 !important;
+  font-weight: 800 !important;
+  border: 2px solid #071636 !important;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.42), 0 0 0 2px rgba(251, 191, 36, 0.55) !important;
+}
+
+:is([data-theme="beige-obsidian-gold"], [data-theme="beige-navy-gold"]) button.category-btn:active {
+  transform: scale(0.95) !important;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+  background-image: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+  color: #071636 !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.6), 0 6px 18px rgba(217, 119, 6, 0.45) !important;
+}
+
+:is([data-theme="beige-obsidian-gold"], [data-theme="beige-navy-gold"]) button.category-btn:is(.category-btn-active, :active),
+:is([data-theme="beige-obsidian-gold"], [data-theme="beige-navy-gold"]) button.category-btn:is(.category-btn-active, :active) span,
+:is([data-theme="beige-obsidian-gold"], [data-theme="beige-navy-gold"]) button.category-btn:is(.category-btn-active, :active) svg {
+  color: #071636 !important;
+  font-weight: 800 !important;
+}
+
+/* Standard Light Themes: Full Highlight on Category Click */
+:is(
+  [data-theme="royal-white-blue-gold"],
+  [data-theme="champagne-marble"],
+  [data-theme="sage-sandstone-light"],
+  [data-theme="pearl-slate-teal"],
+  [data-theme="clean-ivory"]
+) button.category-btn:is(.category-btn-active, :active) {
+  background-image: var(--lt-btn-grad) !important;
+  color: #ffffff !important;
+  border-color: var(--lt-accent) !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18), 0 0 0 2px var(--lt-gold-border) !important;
+}
+
+:is(
+  [data-theme="royal-white-blue-gold"],
+  [data-theme="champagne-marble"],
+  [data-theme="sage-sandstone-light"],
+  [data-theme="pearl-slate-teal"],
+  [data-theme="clean-ivory"]
+) button.category-btn:is(.category-btn-active, :active) :is(span, svg) {
+  color: #ffffff !important;
 }
 
 /* Beige Navy Gold Exclusive: Dark Blue Logo/Name/WhatsApp Header Row + Dark Blue EMI Calculator */

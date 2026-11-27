@@ -335,11 +335,6 @@ export function App() {
             <div id="calculator" className="mt-12 sm:mt-16">
               <EmiCalculator />
             </div>
-
-            {/* Inline Partner Section */}
-            <div id="partners" className="mt-12 sm:mt-16">
-              <PartnerSection />
-            </div>
           </main>
 
           {/* Local Area Growth & Investment Guide */}

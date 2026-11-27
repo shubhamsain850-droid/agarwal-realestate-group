@@ -204,9 +204,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                         setOpenDropdown(null);
                       }
                     }}
-                    className={`category-btn px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-1 border ${
+                    className={`category-btn px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold whitespace-nowrap transition-all duration-150 active:scale-95 active:bg-amber-400 active:text-slate-950 active:border-amber-300 cursor-pointer flex items-center gap-1 border ${
                       isActive
-                        ? 'category-btn-active bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-sm'
+                        ? 'category-btn-active bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 border-amber-300 font-extrabold shadow-lg shadow-amber-500/25 ring-2 ring-amber-400/50'
                         : 'bg-slate-900/80 text-slate-200 border-slate-800 hover:text-white hover:bg-slate-900'
                     }`}
                   >
@@ -214,7 +214,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                     {hasSubs && (
                       <ChevronDown
                         className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                          isDropdownOpen ? 'rotate-180 text-amber-400' : 'opacity-80'
+                          isDropdownOpen
+                            ? isActive
+                              ? 'rotate-180'
+                              : 'rotate-180 text-amber-400'
+                            : 'opacity-80'
                         }`}
                       />
                     )}
@@ -323,9 +327,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onSelectCategory(item.id, 'all', true);
                   setMobileMenuOpen(false);
                 }}
-                className={`category-btn p-2.5 rounded-xl text-xs font-semibold text-left transition cursor-pointer ${
+                className={`category-btn p-2.5 rounded-xl text-xs font-semibold text-left transition active:scale-95 active:bg-amber-400 active:text-slate-950 cursor-pointer ${
                   activeCategory === item.id
-                    ? 'category-btn-active bg-amber-500 text-slate-950 font-bold'
+                    ? 'category-btn-active bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 font-extrabold ring-2 ring-amber-400/50'
                     : 'bg-slate-800/80 text-slate-300'
                 }`}
               >
