@@ -272,10 +272,6 @@ export function App() {
               </div>
             )}
 
-            {/* Inline EMI Calculator Anchor Section */}
-            <div id="calculator" className="mt-12 sm:mt-16">
-              <EmiCalculator />
-            </div>
           </main>
 
           {/* Local Area Growth & Investment Guide */}

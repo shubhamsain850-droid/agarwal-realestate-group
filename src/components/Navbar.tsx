@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { MessageCircle, Menu, X, Palette, ChevronDown, MapPin } from 'lucide-react';
+import { MessageCircle, Menu, X, Palette, ChevronDown, MapPin, Calculator } from 'lucide-react';
 import type { PropertyCategory } from '../types/property';
 import { useRealEstateTheme } from '../context/ThemeContext';
 import { PROPERTIES_DATA } from '../data/properties';
@@ -105,9 +105,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             <button
               onClick={onOpenCalculator}
-              className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-900/60 transition cursor-pointer"
+              className="header-emi-btn flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-extrabold text-amber-300 bg-amber-500/15 border border-amber-400/50 hover:bg-amber-500/25 shadow-sm transition cursor-pointer"
             >
-              EMI Calc
+              <Calculator className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+              <span>EMI Calc</span>
             </button>
 
             {/* Theme Selector Icon Button */}

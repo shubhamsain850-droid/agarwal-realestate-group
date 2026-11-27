@@ -1133,6 +1133,17 @@
   border-color: rgba(251, 191, 36, 0.45) !important;
 }
 
+[data-theme="beige-navy-gold"] .header-brand-row .header-emi-btn {
+  background-color: rgba(226, 180, 86, 0.16) !important;
+  color: #e2b456 !important;
+  border: 1.5px solid rgba(226, 180, 86, 0.65) !important;
+  box-shadow: 0 2px 10px rgba(201, 154, 59, 0.18) !important;
+}
+
+[data-theme="beige-navy-gold"] .header-brand-row .header-emi-btn:hover {
+  background-color: rgba(226, 180, 86, 0.26) !important;
+}
+
 [data-theme="beige-navy-gold"] .header-brand-row a.from-amber-500 {
   background-image: var(--lt-btn-grad) !important;
   color: var(--lt-btn-text) !important;
@@ -1203,6 +1214,17 @@
   background-color: #051029 !important;
   color: #e2b456 !important;
   border: 1.5px solid rgba(201, 154, 59, 0.55) !important;
+}
+
+[data-theme="beige-navy-gold"] .emi-calculator-card button.bg-slate-800 {
+  background-color: #102a5c !important;
+  color: #e2b456 !important;
+  border: 1px solid rgba(201, 154, 59, 0.55) !important;
+}
+
+[data-theme="beige-navy-gold"] .emi-calculator-card button.bg-slate-800:hover {
+  background-color: #163775 !important;
+  color: #ffffff !important;
 }
 
 [data-theme="beige-navy-gold"] .emi-calculator-card a.from-emerald-600 {
