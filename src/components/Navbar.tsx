@@ -1,10 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import { Phone, MessageCircle, Menu, X, Palette, ChevronDown, MapPin } from 'lucide-react';
-import type { PropertyCategory } from '../types/property';
+import { MessageCircle, Menu, X, Palette, ChevronDown, MapPin } from 'lucide-react';
+import type { ProjectCity, PropertyCategory } from '../types/property';
 import { useRealEstateTheme } from '../context/ThemeContext';
 import { PROPERTIES_DATA } from '../data/properties';
 
 interface NavbarProps {
+  activeCity: ProjectCity | 'all';
   activeCategory: PropertyCategory | 'all';
   activeSubCategory: string;
   onSelectCategory: (cat: PropertyCategory | 'all', subCategory?: string, shouldScroll?: boolean) => void;
@@ -14,6 +15,7 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
+  activeCity,
   activeCategory,
   activeSubCategory,
   onSelectCategory,
@@ -27,20 +29,23 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const navCategories: { id: PropertyCategory | 'all'; label: string }[] = [
     { id: 'all', label: 'All Properties' },
-    { id: 'plot', label: 'JDA Plots' },
+    { id: 'plot', label: 'Plots' },
     { id: 'villa', label: 'Luxury Villas' },
     { id: 'farmhouse', label: 'Farmhouses' },
     { id: 'commercial', label: 'Commercial' },
-    { id: 'land', label: 'Big Land / 90A' }
+    { id: 'land', label: '90A' },
+    { id: 'hotel-resort', label: 'Hotel & Resort' }
   ];
 
-  // Dynamically map area subcategories per category from real properties
+  // Dynamically map area subcategories per category from real properties (scoped by activeCity)
   const categorySubMap = useMemo(() => {
     const map: Record<string, { name: string; count: number }[]> = {};
     navCategories.forEach((cat) => {
       if (cat.id === 'all') return;
       const counts = new Map<string, number>();
-      PROPERTIES_DATA.filter((p) => p.category === cat.id).forEach((p) => {
+      PROPERTIES_DATA.filter(
+        (p) => (activeCity === 'all' || p.city === activeCity) && p.category === cat.id
+      ).forEach((p) => {
         if (p.subCategory) {
           counts.set(p.subCategory, (counts.get(p.subCategory) || 0) + 1);
         }
@@ -48,42 +53,30 @@ export const Navbar: React.FC<NavbarProps> = ({
       map[cat.id] = Array.from(counts.entries()).map(([name, count]) => ({ name, count }));
     });
     return map;
-  }, []);
+  }, [activeCity]);
 
   return (
     <header className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md border-b border-slate-800 text-white shadow-xl">
-      {/* Top Notification Bar - Slim single-line on Mobile */}
-      <div className="bg-[#140b07] py-1 sm:py-1.5 px-3 sm:px-4 text-[11px] sm:text-xs border-b border-amber-500/20">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
-          <div className="flex items-center gap-1.5 text-amber-200/90 font-medium truncate">
-            <span className="flex h-2 w-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
-            <span className="sm:hidden truncate">Jaipur • Ajmer Rd & Mahindra SEZ</span>
-            <span className="hidden sm:inline">Jaipur Real Estate Corridor • Ajmer Road & Mahindra SEZ • Verified Inventory</span>
-          </div>
-          <div className="flex items-center gap-4 text-slate-300 text-[11px] shrink-0">
-            <a
-              href="https://maps.app.goo.gl/it2rKAKRhp2kzAx29?g_st=awb"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-1 text-amber-200 hover:text-amber-300 transition underline decoration-amber-400/40"
-              title="Open Head Office Location in Google Maps"
-            >
-              <MapPin className="w-3 h-3 text-amber-400" />
-              <span>Head Office (Google Maps)</span>
-            </a>
-            <a
-              href="tel:+919829000000"
-              className="flex items-center gap-1 text-amber-400 font-bold hover:underline"
-            >
-              <Phone className="w-3 h-3" /> +91 98290 XXXXX
-            </a>
-          </div>
+      {/* Top Head Office Bar */}
+      <div className="top-office-bar bg-[#140b07] py-1 px-3 sm:px-6 text-[11px] sm:text-xs border-b border-amber-500/20">
+        <div className="max-w-7xl mx-auto flex items-center justify-center">
+          <a
+            href="https://maps.app.goo.gl/it2rKAKRhp2kzAx29?g_st=awb"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-amber-200 hover:text-amber-300 font-semibold transition underline decoration-amber-400/40"
+            title="Open Head Office Location in Google Maps"
+          >
+            <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            <span>Head Office</span>
+          </a>
         </div>
       </div>
 
-      {/* Main Navbar */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
+      {/* Main Logo & WhatsApp Row */}
+      <div className="header-brand-row w-full transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
           {/* Logo & Brand Identity */}
           <div
             onClick={() => onSelectCategory('all', 'all', false)}
@@ -106,48 +99,130 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </div>
 
-          {/* Desktop Navigation Links with Area Subcategory Dropdowns */}
-          <nav className="hidden lg:flex items-center gap-1">
+          {/* Desktop Action Buttons & Utility Links */}
+          <div className="hidden sm:flex items-center gap-2.5 shrink-0">
+            <button
+              onClick={onOpenInsights}
+              className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-900/60 transition cursor-pointer"
+            >
+              Guides
+            </button>
+            <button
+              onClick={onOpenCalculator}
+              className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-900/60 transition cursor-pointer"
+            >
+              EMI Calc
+            </button>
+
+            {/* Theme Selector Icon Button */}
+            <button
+              onClick={openThemeModal}
+              className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 hover:border-amber-400/60 text-amber-400 transition cursor-pointer"
+              title="Change Website Theme"
+            >
+              <Palette className="w-4 h-4" />
+            </button>
+
+            <button
+              onClick={onOpenPartnerModal}
+              className="px-3 py-2 rounded-xl text-xs font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 transition cursor-pointer"
+            >
+              Partner Desk
+            </button>
+
+            <a
+              href="https://wa.me/919829000000?text=Hello%20Ajarwal%20Real%20Estate%20Group!%20I%20am%20interested%20in%20verified%20properties%20in%20Jaipur."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-amber-500 via-[#df9b58] to-[#c86446] hover:brightness-110 shadow-md shadow-amber-950/60 transition"
+            >
+              <MessageCircle className="w-4 h-4 text-slate-950" />
+              <span>WhatsApp</span>
+            </a>
+          </div>
+
+          {/* Mobile Actions (WhatsApp + Theme + Menu) */}
+          <div className="sm:hidden flex items-center gap-1.5">
+            <a
+              href="https://wa.me/919829000000?text=Hello%20Ajarwal%20Real%20Estate%20Group!%20I%20am%20interested%20in%20verified%20properties%20in%20Jaipur."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-[11px] font-bold text-slate-950 bg-gradient-to-r from-amber-500 via-[#df9b58] to-[#c86446]"
+            >
+              <MessageCircle className="w-3.5 h-3.5 text-slate-950" />
+              <span>WhatsApp</span>
+            </a>
+            <button
+              onClick={openThemeModal}
+              className="p-2 rounded-xl bg-slate-900 text-amber-400 border border-slate-800 cursor-pointer"
+              title="Select Theme"
+            >
+              <Palette className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-800 cursor-pointer"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+          <div className="hidden sm:flex lg:hidden items-center gap-2">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-800 cursor-pointer"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      {/* Full-Width Edge-to-Edge Category Navigation Bar Below Logo & WhatsApp */}
+      <div className="category-bar-wrapper category-mobile-strip w-full border-t border-slate-800/80 bg-slate-950/95">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2">
+          <nav className="category-bar flex items-center justify-start lg:justify-center gap-1.5 sm:gap-2 overflow-x-auto lg:overflow-visible no-scrollbar">
             {navCategories.map((item) => {
               const subs = categorySubMap[item.id] || [];
               const hasSubs = subs.length > 0;
               const isDropdownOpen = openDropdown === item.id;
+              const isActive = activeCategory === item.id;
 
               return (
                 <div
                   key={item.id}
-                  className="relative"
+                  className="relative shrink-0"
                   onMouseEnter={() => hasSubs && setOpenDropdown(item.id)}
                   onMouseLeave={() => setOpenDropdown(null)}
                 >
                   <button
                     onClick={() => {
-                      onSelectCategory(item.id, 'all', false);
+                      onSelectCategory(item.id, 'all', subs.length === 0);
                       if (hasSubs) {
                         setOpenDropdown(isDropdownOpen ? null : item.id);
                       } else {
                         setOpenDropdown(null);
                       }
                     }}
-                    className={`px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center gap-1 ${
-                      activeCategory === item.id
-                        ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold shadow-sm'
-                        : 'text-slate-300 hover:text-white hover:bg-slate-900/60'
+                    className={`category-btn px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-[11px] sm:text-xs font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-1 border ${
+                      isActive
+                        ? 'category-btn-active bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-sm'
+                        : 'bg-slate-900/80 text-slate-200 border-slate-800 hover:text-white hover:bg-slate-900'
                     }`}
                   >
                     <span>{item.label}</span>
                     {hasSubs && (
                       <ChevronDown
                         className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                          isDropdownOpen ? 'rotate-180 text-amber-400' : 'opacity-70'
+                          isDropdownOpen ? 'rotate-180 text-amber-400' : 'opacity-80'
                         }`}
                       />
                     )}
                   </button>
 
-                  {/* Area Subcategory Dropdown */}
+                  {/* Area Subcategory Dropdown (Desktop) */}
                   {hasSubs && isDropdownOpen && (
-                    <div className="absolute left-0 top-full pt-1.5 w-64 z-50">
+                    <div className="hidden lg:block absolute left-0 top-full pt-1.5 w-64 z-50">
                       <div className="bg-[#180e09] border border-amber-500/35 rounded-2xl shadow-2xl p-2 space-y-1 backdrop-blur-xl">
                         <div className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-amber-400/80 border-b border-amber-500/15 mb-1">
                           Select {item.label} Area
@@ -202,99 +277,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
               );
             })}
-            <button
-              onClick={onOpenInsights}
-              className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-900/60 transition cursor-pointer"
-            >
-              Guides
-            </button>
-            <button
-              onClick={onOpenCalculator}
-              className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-amber-400 hover:bg-slate-900/60 transition cursor-pointer"
-            >
-              EMI Calc
-            </button>
           </nav>
-
-          {/* Action Buttons & Theme Selector */}
-          <div className="hidden sm:flex items-center gap-2.5 shrink-0">
-            {/* Theme Selector Icon Button */}
-            <button
-              onClick={openThemeModal}
-              className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 hover:border-amber-400/60 text-amber-400 transition cursor-pointer"
-              title="Change Website Theme"
-            >
-              <Palette className="w-4 h-4" />
-            </button>
-
-            <button
-              onClick={onOpenPartnerModal}
-              className="px-3 py-2 rounded-xl text-xs font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 transition cursor-pointer"
-            >
-              Partner Desk
-            </button>
-
-            <a
-              href="https://wa.me/919829000000?text=Hello%20Ajarwal%20Real%20Estate%20Group!%20I%20am%20interested%20in%20verified%20properties%20in%20Jaipur."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-amber-500 via-[#df9b58] to-[#c86446] hover:brightness-110 shadow-md shadow-amber-950/60 transition"
-            >
-              <MessageCircle className="w-4 h-4 text-slate-950" />
-              <span>WhatsApp</span>
-            </a>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center gap-2">
-            <button
-              onClick={openThemeModal}
-              className="p-2 rounded-xl bg-slate-900 text-amber-400 border border-slate-800 cursor-pointer"
-              title="Select Theme"
-            >
-              <Palette className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-800 cursor-pointer"
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile & Tablet Visible Category Strip (Always visible without opening menu) */}
-      <div className="lg:hidden border-t border-slate-800/80 bg-slate-950/95">
-        <div className="px-3 py-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-          {navCategories.map((item) => {
-            const subs = categorySubMap[item.id] || [];
-            const isActive = activeCategory === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => onSelectCategory(item.id, 'all', subs.length === 0)}
-                className={`px-3 py-1.5 rounded-full text-[11px] font-bold whitespace-nowrap transition cursor-pointer shrink-0 border ${
-                  isActive
-                    ? 'bg-gradient-to-r from-amber-500 to-[#df9b58] text-slate-950 border-amber-400 shadow-sm'
-                    : 'bg-slate-900 text-slate-300 border-slate-800'
-                }`}
-              >
-                {item.label}
-              </button>
-            );
-          })}
-          <button
-            onClick={onOpenInsights}
-            className="px-3 py-1.5 rounded-full text-[11px] font-bold whitespace-nowrap bg-slate-900 text-amber-300 border border-slate-800 cursor-pointer shrink-0"
-          >
-            Guides
-          </button>
         </div>
 
         {/* Show Area Subcategory chips directly on mobile when a category with areas (like Farmhouses) is tapped */}
         {activeCategory !== 'all' && (categorySubMap[activeCategory] || []).length > 0 && (
-          <div className="px-3 pb-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+          <div className="lg:hidden px-3 pb-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
             <span className="text-[10px] font-bold uppercase text-amber-400 shrink-0 mr-1">Area:</span>
             <button
               onClick={() => onSelectCategory(activeCategory, 'all', true)}
@@ -327,7 +315,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-slate-900 border-b border-slate-800 px-4 py-4 space-y-2 animate-in slide-in-from-top duration-200">
-          <div className="grid grid-cols-2 gap-2 mb-3">
+          <div className="category-drawer-grid grid grid-cols-2 gap-2 mb-3">
             {navCategories.map((item) => (
               <button
                 key={item.id}
@@ -335,9 +323,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onSelectCategory(item.id, 'all', true);
                   setMobileMenuOpen(false);
                 }}
-                className={`p-2.5 rounded-xl text-xs font-semibold text-left transition cursor-pointer ${
+                className={`category-btn p-2.5 rounded-xl text-xs font-semibold text-left transition cursor-pointer ${
                   activeCategory === item.id
-                    ? 'bg-amber-500 text-slate-950 font-bold'
+                    ? 'category-btn-active bg-amber-500 text-slate-950 font-bold'
                     : 'bg-slate-800/80 text-slate-300'
                 }`}
               >

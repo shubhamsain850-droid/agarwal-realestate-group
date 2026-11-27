@@ -140,6 +140,7 @@ export const PartnerSection: React.FC<PartnerSectionProps> = ({ onClose }) => {
                 <option value="90A Converted Land">90A Converted Commercial/Residential</option>
                 <option value="Agriculture Land">Agricultural Land</option>
                 <option value="Gated Villa Project">Villa Project</option>
+                <option value="Hotel & Resort">Hotel & Resort Project</option>
               </select>
             </div>
 

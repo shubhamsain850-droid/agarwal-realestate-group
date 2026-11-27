@@ -7,7 +7,11 @@ export type RealEstateTheme =
   | 'clean-ivory'
   | 'emerald-gold'
   | 'corporate-blue'
-  | 'midnight-gold';
+  | 'midnight-gold'
+  | 'beige-royal-walnut'
+  | 'jaipur-sandstone-beige-nav'
+  | 'beige-obsidian-gold'
+  | 'beige-navy-gold';
 
 export interface ThemeConfig {
   id: RealEstateTheme;
@@ -159,6 +163,66 @@ export const REAL_ESTATE_THEMES: ThemeConfig[] = [
       primary: '#eab308',
       accent: '#f59e0b',
       text: '#ffffff'
+    }
+  },
+  {
+    id: 'beige-royal-walnut',
+    name: 'Beige Cream, Royal Blue & Walnut Gold',
+    hindiName: 'Beige • Premium Blue • Walnut Gold',
+    mode: 'Light',
+    tagline: 'Warm Beige Canvas, Premium Royal Blue Categories & Walnut Gold CTAs',
+    bestFor: 'Plots, 90A Land, Hotel & Resort & Luxury Daylight Viewing',
+    palette: {
+      bg: '#efe5d0',
+      card: '#fffcf6',
+      primary: '#1e40af',
+      accent: '#78350f',
+      text: '#2d1a10'
+    }
+  },
+  {
+    id: 'jaipur-sandstone-beige-nav',
+    name: 'Amber Sandstone • Beige Category Bar',
+    hindiName: 'Amber Sandstone + Beige Category Strip',
+    mode: 'Dark',
+    tagline: 'Amber Sandstone & Terracotta with Beige Category Backdrop & Crisp White Boxes',
+    bestFor: 'Heritage Luxury Estates, Prominent Dark Category Boxes on Beige Strip',
+    palette: {
+      bg: '#140c09',
+      card: '#1f130e',
+      primary: '#df9b58',
+      accent: '#efe5d0',
+      text: '#fff5f0'
+    }
+  },
+  {
+    id: 'beige-obsidian-gold',
+    name: 'Beige Cream • Dark Beige Bar & Jet Black',
+    hindiName: 'Beige + Dark Beige Bar + Black Bold Nav',
+    mode: 'Light',
+    tagline: 'All-Beige Luxury Canvas with Full-Width Dark Beige Strip & Bold Jet Black Categories',
+    bestFor: 'Modern Luxury Showcase, Bold High-Contrast Category Navigation',
+    palette: {
+      bg: '#f3ead8',
+      card: '#fbf6ec',
+      primary: '#0d0d0d',
+      accent: '#cdb894',
+      text: '#14110f'
+    }
+  },
+  {
+    id: 'beige-navy-gold',
+    name: 'Beige Cream • Dark Blue Header & EMI',
+    hindiName: 'Beige + Dark Blue Header & EMI',
+    mode: 'Light',
+    tagline: 'Warm Beige Canvas with Dark Blue Logo Row, Jet Black Categories & Dark Blue EMI Calculator',
+    bestFor: 'High-Trust Brand Header, Clean Beige Reading & Focused EMI Loan Desk',
+    palette: {
+      bg: '#f3ead8',
+      card: '#fbf6ec',
+      primary: '#0b1f44',
+      accent: '#c99a3b',
+      text: '#14110f'
     }
   }
 ];

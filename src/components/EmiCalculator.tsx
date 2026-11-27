@@ -34,10 +34,10 @@ export const EmiCalculator: React.FC<EmiCalculatorProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-2xl">
-      <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+    <div className="emi-calculator-card bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-2xl transition-colors duration-300">
+      <div className="emi-header flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-emerald-500/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
+          <div className="emi-icon-box p-3 bg-emerald-500/20 text-emerald-400 rounded-2xl border border-emerald-500/30">
             <Calculator className="w-6 h-6" />
           </div>
           <div>
@@ -126,7 +126,7 @@ export const EmiCalculator: React.FC<EmiCalculatorProps> = ({ onClose }) => {
         </div>
 
         {/* EMI Result Summary Card */}
-        <div className="lg:col-span-5 bg-slate-950 p-6 rounded-3xl border border-slate-800 flex flex-col justify-between">
+        <div className="emi-result-card lg:col-span-5 bg-slate-950 p-6 rounded-3xl border border-slate-800 flex flex-col justify-between">
           <div>
             <div className="text-xs text-slate-400 uppercase tracking-widest font-bold">Monthly EMI Amount</div>
             <div className="text-3xl sm:text-4xl font-black text-amber-400 mt-1">

@@ -3,6 +3,7 @@ import type { Property } from '../types/property';
 export const PROPERTIES_DATA: Property[] = [
   {
     id: 'prop-farmhouse-hirapura-weekend-farms',
+    city: 'Jaipur',
     title: 'Weekend Farms — Gated Farmhouse Plots Near Mahindra SEZ',
     category: 'farmhouse',
     categoryLabel: 'Weekend Farmhouse',

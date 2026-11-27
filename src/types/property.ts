@@ -1,7 +1,16 @@
-export type PropertyCategory = 'plot' | 'villa' | 'farmhouse' | 'commercial' | 'land';
+export type ProjectCity = 'Jaipur' | 'Mumbai';
+
+export const PROJECT_CITIES: { id: ProjectCity | 'all'; label: string }[] = [
+  { id: 'all', label: 'All Cities' },
+  { id: 'Jaipur', label: 'Jaipur' },
+  { id: 'Mumbai', label: 'Mumbai' }
+];
+
+export type PropertyCategory = 'plot' | 'villa' | 'farmhouse' | 'commercial' | 'land' | 'hotel-resort';
 
 export interface Property {
   id: string;
+  city: ProjectCity;
   title: string;
   category: PropertyCategory;
   categoryLabel: string;

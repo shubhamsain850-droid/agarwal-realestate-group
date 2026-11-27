@@ -48,7 +48,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
               </li>
               <li>
                 <button onClick={() => onSelectCategory('plot')} className="hover:text-amber-400 transition cursor-pointer">
-                  Residential Plots (Upcoming)
+                  Plots (Upcoming)
                 </button>
               </li>
               <li>
@@ -63,7 +63,12 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
               </li>
               <li>
                 <button onClick={() => onSelectCategory('land')} className="hover:text-amber-400 transition cursor-pointer">
-                  Large Land Parcels (Upcoming)
+                  90A (Upcoming)
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onSelectCategory('hotel-resort')} className="hover:text-amber-400 transition cursor-pointer">
+                  Hotel & Resort (Upcoming)
                 </button>
               </li>
             </ul>
